@@ -1,18 +1,14 @@
-var tilejson = {
-  tilejson: '1.0.0',
-  scheme: 'xyz',
-  tiles: ['http://a.tiles.mapbox.com/v3/onlyjsmith.wildspot-map/{z}/{x}/{y}.png']
-};
 
-var url = 'http://a.tiles.mapbox.com/v3/onlyjsmith.wildspot-map.jsonp';
-// Alias com.modestmaps to mm. This isn't necessary -
-// just nice for shorter code.
-var mm = com.modestmaps;
+wax.tilejson('http://a.tiles.mapbox.com/v3/onlyjsmith.wildspot-map.jsonp',
+    function(tilejson) {
+        var sitesURL = 'http://craigmills.cartodb.com/tiles/sites/{z}/{x}/{y}.png',
+            sites = new L.TileLayer(sitesURL);
+        
+        var map = new L.Map('map')
+          .addLayer(new wax.leaf.connector(tilejson))
+          .addLayer(sites)
+          .setView(new L.LatLng(-12.6, 26), 5);
+        });       
+                
 
-wax.tilejson(url, 
-  function(tilejson) {
-    var m = new mm.Map('map', new wax.mm.connector(tilejson));
 
-    wax.mm.zoomer(m, tilejson).appendTo(m.parent);
-    m.setCenterZoom(new mm.Location(-12.6, 26), 5);
-  });
