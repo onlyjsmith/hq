@@ -1,7 +1,7 @@
-== Added stuff here
+# Added stuff here
 Didn't want to delete everything in the default README - there's some interesting stuff here!
 
-= Getting this up and running
+## Getting this up and running
 
 Need to enable PostGIS on both `hq_dev` and `hq_test` (so need to run the following for *each*).
 
@@ -9,7 +9,7 @@ Need to enable PostGIS on both `hq_dev` and `hq_test` (so need to run the follow
 `psql -d hq_dev -f /usr/local/Cellar/postgresql/9.1.2/share/postgresql/contrib/postgis-2.0/spatial_ref_sys.sql`
 
 
-== Welcome to Rails
+# Welcome to Rails
 
 Rails is a web-application framework that includes everything needed to create
 database-backed web applications according to the Model-View-Control pattern.
