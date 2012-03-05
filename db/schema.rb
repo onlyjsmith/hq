@@ -11,26 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120305194004) do
+ActiveRecord::Schema.define(:version => 20120305191949) do
 
   create_table "drives", :force => true do |t|
     t.string   "route"
-    t.float    "duration_hrs"
+    t.float    "duration_hr"
     t.float    "distance_km"
     t.string   "description"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "locations", :force => true do |t|
     t.string   "name"
-    t.string   "centre_point"
-    t.string   "polygon"
     t.float    "radius_km"
     t.float    "distance_from_centre_point_km"
     t.string   "direction"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                                                             :null => false
+    t.datetime "updated_at",                                                             :null => false
+    t.spatial  "centre_point",                  :limit => {:srid=>0, :type=>"point"}
+    t.spatial  "polygon",                       :limit => {:srid=>0, :type=>"geometry"}
   end
 
   create_table "sightings", :force => true do |t|
@@ -41,10 +41,10 @@ ActiveRecord::Schema.define(:version => 20120305194004) do
     t.string   "description"
     t.integer  "user_id"
     t.string   "submission_point"
+    t.datetime "record_time"
+    t.integer  "time_window_hr"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
-    t.datetime "record_time"
-    t.integer  "time_window_hrs"
   end
 
   create_table "species", :force => true do |t|
