@@ -2,14 +2,14 @@
 
 one:
   route: MyString
-  duration_hrs: 1.5
+  duration_hr: 1.5
   distance_km: 1.5
   description: MyString
   trip_id: 1
 
 two:
   route: MyString
-  duration_hrs: 1.5
+  duration_hr: 1.5
   distance_km: 1.5
   description: MyString
   trip_id: 1

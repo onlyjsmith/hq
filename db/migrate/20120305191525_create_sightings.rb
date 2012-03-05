@@ -8,6 +8,8 @@ class CreateSightings < ActiveRecord::Migration
       t.string :description
       t.integer :user_id
       t.string :submission_point
+      t.datetime :record_time
+      t.integer :time_window_hr
 
       t.timestamps
     end
