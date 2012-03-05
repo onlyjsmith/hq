@@ -18,8 +18,12 @@ group :assets do
   # gem 'therubyracer'
 
   gem 'uglifier', '>= 1.0.3'
-end
+end    
 
+group :development do
+  gem 'irbtools-more'
+end
+  
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
