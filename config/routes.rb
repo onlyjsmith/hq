@@ -1,4 +1,10 @@
 Hq::Application.routes.draw do
+  get "sightings/index"
+
+  get "sightings/new"
+
+  get "sightings/edit"
+
   get "home/index"
 
   get "home/map"

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  centre_point: MyString
+  polygon: MyString
+  radius_km: 1.5
+  distance_from_centre_point_km: 1.5
+  direction: MyString
+
+two:
+  name: MyString
+  centre_point: MyString
+  polygon: MyString
+  radius_km: 1.5
+  distance_from_centre_point_km: 1.5
+  direction: MyString
