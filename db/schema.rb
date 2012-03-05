@@ -11,16 +11,53 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120305082014) do
+ActiveRecord::Schema.define(:version => 20120305191949) do
+
+  create_table "drives", :force => true do |t|
+    t.string   "route"
+    t.float    "duration_hrs"
+    t.float    "distance_km"
+    t.string   "description"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "locations", :force => true do |t|
+    t.string   "name"
+    t.string   "centre_point"
+    t.string   "polygon"
+    t.float    "radius_km"
+    t.float    "distance_from_centre_point_km"
+    t.string   "direction"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
 
   create_table "sightings", :force => true do |t|
-    t.string   "what"
-    t.string   "where"
-    t.string   "when"
-    t.string   "how"
-    t.string   "who"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "species_id"
+    t.integer  "tribe_id"
+    t.integer  "location_id"
+    t.integer  "drive_id"
+    t.string   "description"
+    t.integer  "user_id"
+    t.string   "submission_point"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  create_table "species", :force => true do |t|
+    t.string   "common_name"
+    t.string   "binomial"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "tribes", :force => true do |t|
+    t.string   "name"
+    t.integer  "location_id"
+    t.integer  "species_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
 end

@@ -1,15 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  what: MyString
-  where: MyString
-  when: MyString
-  how: MyString
-  who: MyString
+  species_id: 1
+  tribe_id: 1
+  location_id: 1
+  drive_id: 1
+  description: MyString
+  user_id: 1
+  submission_point: MyString
 
 two:
-  what: MyString
-  where: MyString
-  when: MyString
-  how: MyString
-  who: MyString
+  species_id: 1
+  tribe_id: 1
+  location_id: 1
+  drive_id: 1
+  description: MyString
+  user_id: 1
+  submission_point: MyString
