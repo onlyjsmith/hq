@@ -7,6 +7,9 @@ development:
   adapter: postgis
   database: hq_dev
   user: postgres
+  schema_search_path: "public,postgis"
+  script_dir: /usr/local/Cellar/postgresql/9.1.2/share/postgresql/contrib/postgis-2.0/
+  port: 5432
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -15,7 +18,11 @@ test:
   adapter: postgis
   database: hq_test
   user: postgres
-
+  user: postgres
+  schema_search_path: "public,postgis"
+  script_dir: /usr/local/Cellar/postgresql/9.1.2/share/postgresql/contrib/postgis-2.0/
+  port: 5432
+  
 production:
   adapter: postgis
   database: hq
