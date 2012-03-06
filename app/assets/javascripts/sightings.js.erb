@@ -1,0 +1,14 @@
+$('.tabs').button();   
+
+wax.tilejson('http://a.tiles.mapbox.com/v3/onlyjsmith.wildspot-map.jsonp',
+    function(tilejson) {
+        // var sitesURL = 'http://craigmills.cartodb.com/tiles/sites/{z}/{x}/{y}.png',
+        var sitesURL = 'https://craigmills.cartodb.com/tiles/sites/{z}/{x}/{y}.png?cache_buster=0&sql=SELECT%20*%20FROM%20sites%0AWHERE%20company%20IS%20NOT%20null'
+            sites = new L.TileLayer(sitesURL);
+        
+        var map = new L.Map('map')
+          .addLayer(new wax.leaf.connector(tilejson))
+          .addLayer(sites)
+          .setView(new L.LatLng(-12.6, 26), 5);
+        });
+        

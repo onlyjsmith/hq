@@ -1,5 +1,7 @@
 class SightingsController < ApplicationController
   def index
+    @camp = Camp.first
+    @drive_count = Drive.count
     @sightings = Sighting.all
   end
 

@@ -1,9 +1,11 @@
 Hq::Application.routes.draw do
-  get "sightings/index"
-
-  get "sightings/new"
-
-  get "sightings/edit"
+  resources :sightings
+  
+  # get "sightings/index"
+  # 
+  # get "sightings/new"
+  # 
+  # get "sightings/edit"
 
   get "home/index"
 
