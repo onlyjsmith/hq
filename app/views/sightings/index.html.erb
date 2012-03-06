@@ -67,7 +67,13 @@
         <tbody>
           <% @sightings.each do |s| %>
           <tr>
-            <td><%= s.description %></td>
+            <td>
+              <a href="#"><%= @user %></a> reported
+              <a href='#'><%= s.species.common_name %></a> from
+              <a href='#'><%= s.tribe.try(:name) || "no tribe" %></a> near
+              <a href='#'><%= s.location.name %></a> about 
+              <a href='#'><%= distance_of_time_in_words(Time.now, s.record_time) %></a> ago
+            </td>
             <td><a href="#" class="btn btn-mini btn-warning">Details</a></td>
           </tr>
           <% end %>
