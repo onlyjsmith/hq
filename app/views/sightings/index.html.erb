@@ -1,2 +1,72 @@
-<h1>Sightings#index</h1>
-<p>Find me in app/views/sightings/index.html.erb</p>
+<div class="navbar">
+  <!-- Nothing but space up here. Nasty -->
+</div>
+
+<div class="container sightings_book">
+  <div class="page-header">
+    <h1>Sightings for <%= @camp.name %></h1>
+  </div>
+  <div class="row">
+    <div class="span8">
+      <div class="btn-group" data-toggle="buttons-radio">
+        <a class="btn" href="#">Today</a>
+        <a class="btn" href="#">7 days</a>
+        <a class="btn" href="#">30 days</a>
+        <a class="btn" href="#">Year</a>
+        <a class="btn" href="#">Custom</a>
+      </div>
+    </div>
+    <div class="span4">
+      <!-- <i class="icon-plus-sign"></i> -->
+      <a href="#" class="btn btn-success">+ Add new sighting</a>
+    </div>
+  </div>  
+  
+  <div class="row">
+    <div class="span12">
+      <div class="row">
+        <div class="span6">
+          <h2>Map</h2>
+          <div id="map" style="height: 250px; border: 1px solid">
+            <!-- <p>Wow - what an interesting map</p> -->
+          </div>
+        </div>
+        <div class="span6">
+          <div class="row">
+            <div class="span3">
+              <h2>Stats</h2>
+              <h3><%= @drive_count %> drives (550km, 34hrs)</h3>
+              <h3><%= @sightings.count %> sightings (19 rare)</h3>
+            </div>
+            <div class="span3">
+              <h2>Chart</h2>
+              <p>A great place for a chart. If only we had one...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span12">
+      <h2>Entries</h2>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Entry</th>
+            <th>Details (edit/delete)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @sightings.each do |s| %>
+          <tr>
+            <td><%= s.description %></td>
+            <td><a href="#" class="btn btn-mini btn-warning">Details</a></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>  
+
