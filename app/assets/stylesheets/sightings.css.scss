@@ -1,3 +1,14 @@
 // Place all the styles related to the sightings controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.sightings_book {
+ background: #b8b185;
+ border: 1px solid #625f48; 
+ padding: 5px; 
+ -moz-border-radius: 3px;
+ border-radius: 3px;
+ -moz-box-shadow: 0 0 10px #888;
+ -webkit-box-shadow: 0 0 10px#888;
+ box-shadow: 0 0 10px #888;
+ }
