@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120305191949) do
+ActiveRecord::Schema.define(:version => 20120306183615) do
 
   create_table "drives", :force => true do |t|
     t.string   "route"
@@ -24,13 +24,9 @@ ActiveRecord::Schema.define(:version => 20120305191949) do
 
   create_table "locations", :force => true do |t|
     t.string   "name"
-    t.float    "radius_km"
-    t.float    "distance_from_centre_point_km"
-    t.string   "direction"
-    t.datetime "created_at",                                                             :null => false
-    t.datetime "updated_at",                                                             :null => false
-    t.spatial  "centre_point",                  :limit => {:srid=>0, :type=>"point"}
-    t.spatial  "polygon",                       :limit => {:srid=>0, :type=>"geometry"}
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
+    t.spatial  "polygon",    :limit => {:srid=>0, :type=>"geometry"}
   end
 
   create_table "sightings", :force => true do |t|
