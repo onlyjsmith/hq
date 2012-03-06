@@ -18,7 +18,7 @@
     </div>
     <div class="span4">
       <!-- <i class="icon-plus-sign"></i> -->
-      <a href="#" class="btn">+ Add new sighting</a>
+      <a href="#" class="btn btn-success">+ Add new sighting</a>
     </div>
   </div>  
   
@@ -40,7 +40,7 @@
             </div>
             <div class="span3">
               <h2>Chart</h2>
-              <p>Great place for a chart</p>
+              <p>A great place for a chart. If only we had one...</p>
             </div>
           </div>
         </div>
@@ -61,7 +61,7 @@
           <% @sightings.each do |s| %>
           <tr>
             <td><%= s.description %></td>
-            <td><a href="#">Details ></a></td>
+            <td><a href="#" class="btn btn-mini btn-warning">Details ></a></td>
           </tr>
           <% end %>
         </tbody>
