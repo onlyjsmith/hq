@@ -58,14 +58,12 @@
           </tr>
         </thead>
         <tbody>
+          <% @sightings.each do |s| %>
           <tr>
-            <td>Three lions from Duma tribe, near Old Tree yesterday</td>
+            <td><%= s.description %></td>
             <td><a href="#">Details ></a></td>
           </tr>
-          <tr>
-            <td>Dead rabbit under a tyre</td>
-            <td><a href="#">Details ></a></td>
-          </tr>
+          <% end %>
         </tbody>
       </table>
     </div>
