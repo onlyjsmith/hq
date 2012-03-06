@@ -1,5 +1,6 @@
 class SightingsController < ApplicationController
   def index
+    @camp_name = "Bumma Camp"
     @sightings = Sighting.all
   end
 
