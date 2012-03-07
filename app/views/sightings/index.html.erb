@@ -11,11 +11,11 @@
       <div class="row">
         <div class="span6">
           <div class="btn-group" data-toggle="buttons-radio">
-            <a class="btn" href="#">Today</a>
-            <a class="btn" href="#">7 days</a>
-            <a class="btn" href="#">30 days</a>
-            <a class="btn" href="#">Year</a>
-            <a class="btn" href="#">Custom</a>
+            <%= link_to "Today", "sightings.json", :remote => true, :class => 'btn' %>
+            <%= link_to "7 days", "sightings.json", :remote => true, :class => 'btn' %>
+            <%= link_to "30 days", "sightings.json", :remote => true, :class => 'btn' %>
+            <%= link_to "Year", "sightings.json", :remote => true, :class => 'btn' %>
+            <%= link_to "Custom", "sightings.json", :remote => true, :class => 'btn' %>
           </div>
         </div>
         <div class="span3">
@@ -57,28 +57,7 @@
   <div class="row">
     <div class="span12">
       <h2>Entries</h2>
-      <table class="table table-bordered table-striped">
-        <thead>
-          <tr>
-            <th>Entry</th>
-            <th>Details (edit/delete)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @sightings.each do |s| %>
-          <tr>
-            <td>
-              <a href="#"><%= @user %></a> reported
-              <a href='#'><%= s.species.common_name %></a> from
-              <a href='#'><%= s.tribe.try(:name) || "no tribe" %></a> near
-              <a href='#'><%= s.location.name %></a> about 
-              <a href='#'><%= distance_of_time_in_words(Time.now, s.record_time) %></a> ago
-            </td>
-            <td><a href="#" class="btn btn-mini btn-warning">Details</a></td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <%= render :partial => 'entry_table' %>
     </div>
   </div>
 </div>  
