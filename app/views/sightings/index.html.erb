@@ -40,15 +40,19 @@
         </div>
         <div class="span6">
           <div class="row">
-            <div class="span3">
-              <h2>Stats</h2>
-              <h3><%= @drive_count %> drives (550km, 34hrs)</h3>
-              <h3><%= @sightings.count %> sightings (19 rare)</h3>
+            <div class="span6">
+              <div class="row">
+                <h2>Stats</h2>
+                <h3><%= @drive_count %> drives (550km, 34hrs)</h3>
+                <h3><%= @sightings.count %> sightings (19 rare)</h3>
+              </div>
             </div>
-            <div class="span3">
-              <h2>Species history</h2>
-              <%= high_chart("my_id", @h) %>
-              <p>Interesting chart showing some good stats</p>
+            <div class="span6">
+              <div class="row"> 
+                <h2>Species history</h2>
+                <%= high_chart("my_id", @h) %>
+                <p>Interesting chart showing some good stats</p>
+              </div>
             </div>
           </div>
         </div>
