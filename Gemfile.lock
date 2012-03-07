@@ -173,7 +173,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   irbtools-more
   jquery-rails
-  lazy_high_charts
+  lazy_high_charts (~> 1.1.5)
   pg
   rails (= 3.2.1)
   sass-rails (~> 3.2.3)
