@@ -9,13 +9,13 @@ gem 'pg'
 gem 'activerecord-postgis-adapter'
 gem 'simple_form'
 gem 'lazy_high_charts', '~> 1.1.5'
+gem 'haml'
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer'
 
