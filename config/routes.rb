@@ -1,6 +1,6 @@
 Hq::Application.routes.draw do
   resources :sightings
-  
+  resources :locations
   # get "sightings/index"
   # 
   # get "sightings/new"
