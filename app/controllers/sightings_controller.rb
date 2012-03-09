@@ -6,10 +6,10 @@ class SightingsController < ApplicationController
     @sightings = Sighting.all
     
     @h = LazyHighCharts::HighChart.new('graph') do |f|
-        f.options[:chart][:defaultSeriesType] = "area"
-        # f.options[:chart][:height] = "200px"
-        # f.options[:chart][:width] = "100px"
-        f.options[:title][:text] = nil
+        f.options[:chart] = {:height => 200, :width => 400, :defaultSeriesType =>  "area" }
+        f.options[:yAxis][:max] = 20
+        f.options[:title][:text] = nil 
+        f.options[:legend] = {:floating => true, :verticalAlign => 'top'}
         f.series(:name=>'Lion', :color => '#b1ad73', :data=>[3, 20, 3, 5, 4, 10, 12, 5,6,7,7,10,9,9])
         f.series(:name=>'Tiger', :color => '#6b8665', :data=> [1, 3, 4, 3, 3, 5, 4,7,8,8,9,9,0,0,9] )
       end

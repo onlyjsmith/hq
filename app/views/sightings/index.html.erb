@@ -4,14 +4,14 @@
 
 <div class="container sightings_book">
   <div class="page-header">
-    <h1>Sightings for <%= @camp.name %></h1>
+    <h1>Sightings for <%= link_to "#{@camp.name}", "#" %></h1>
   </div>
   <div class="row">
     <div class="span12">
       <div class="row">
         <div class="span6">
           <div class="btn-group" data-toggle="buttons-radio">
-            <%= link_to "Today", "sightings.json", :remote => true, :class => 'btn' %>
+            <%= link_to "Today", "sightings.json", :remote => true, :id => '1', :class => 'btn' %>
             <%= link_to "7 days", "sightings.json", :remote => true, :class => 'btn' %>
             <%= link_to "30 days", "sightings.json", :remote => true, :class => 'btn' %>
             <%= link_to "Year", "sightings.json", :remote => true, :class => 'btn' %>
@@ -31,38 +31,38 @@
   
   <div class="row">
     <div class="span12">
+      <h2>Entries</h2>
+      <%= render :partial => 'entry_table' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span12">
       <div class="row">
-        <div class="span6">
+        <div id="map_here" class="span6">
           <h2>Map</h2>
           <div id="map-sightings-index" style="height: 250px; border: 1px solid">
             <!-- <p>Wow - what an interesting map</p> -->
           </div>
         </div>
-        <div class="span6">
+        <div id="stats_chart" class="span6">
           <div class="row">
-            <div class="span6">
-              <div class="row">
-                <h2>Stats</h2>
-                <h3><%= @drive_count %> drives (550km, 34hrs)</h3>
-                <h3><%= @sightings.count %> sightings (19 rare)</h3>
-              </div>
+            <div id="stats" class="span6">
+              <h2>Stats</h2>
+              <h3><%= @drive_count %> drives (550km, 34hrs)</h3>
+              <h3><%= @sightings.count %> sightings (19 rare)</h3>
             </div>
-            <div class="span6">
-              <div class="row"> 
-                <h2>Species history</h2>
-                <%= high_chart("my_id", @h) %>
-                <p>Interesting chart showing some good stats</p>
-              </div>
+            <div id="chart" class="span6">
+              <!-- <div class="row"> 
+                <div class="span6"> -->
+                  <h2>Species history</h2>
+                  <%= high_chart("my_id", @h) %>
+                  <!-- <p>Interesting chart showing some good stats</p> -->
+                <!-- </div>
+              </div> -->
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="span12">
-      <h2>Entries</h2>
-      <%= render :partial => 'entry_table' %>
     </div>
   </div>
 </div>  
