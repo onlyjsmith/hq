@@ -2,6 +2,11 @@
 
 <%= @location.name %>
 <%= @location.polygon %>
+ 
+<a href="#" class="btn btn-success" id="draw_poly">Draw</a>
+<div id="map_canvas" style="height: 400px; width: 600px">
+  Mappy
+</div>
 
 <%= link_to "Edit this", edit_location_path(@location) %>
 <%= link_to "All locations", locations_path %>
