@@ -10,6 +10,9 @@ gem 'activerecord-postgis-adapter'
 gem 'simple_form'
 gem 'lazy_high_charts', '~> 1.1.5'
 
+
+gem 'ruby-debug19', :require => 'ruby-debug'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
