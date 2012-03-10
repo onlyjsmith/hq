@@ -14,3 +14,4 @@ locations = Location.create([{name: 'End of the garden'},{name: 'Other side of t
 Drive.create(duration_hr: 3, distance_km: 15, description: 'Round and round')                
 Camp.create(name: 'Wonderland Camp', company_id: 1)
 Company.create(name: 'Wildplaces')
+User.create({:email=> 'jonathan@peoplesized.com', :password=>'egg', :password_confirmation=>'egg'}).save(:validate=> false)
