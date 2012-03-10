@@ -12,7 +12,7 @@
         <a href="#"><%= location.name %></a>
       </td>
       <td>
-        <a href="#" class="btn btn-mini btn-warning">Details</a>
+        <%= link_to "Details", edit_location_path(location), :class => "btn btn-mini btn-warning" %>
       </td>
     </tr>
     <% end %>
