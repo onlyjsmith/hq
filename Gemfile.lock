@@ -32,6 +32,7 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     alias (0.2.2)
+    archive-tar-minitar (0.5.2)
     arel (3.0.2)
     awesome_print (1.0.2)
     bond (0.4.1)
@@ -48,6 +49,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.2.0)
+    columnize (0.3.6)
     drx (0.4.5)
     erubis (2.7.0)
     every_day_irb (1.2.0)
@@ -93,6 +95,8 @@ GEM
     json (1.6.5)
     lazy_high_charts (1.1.5)
       bundler (~> 1.0)
+    linecache19 (0.5.12)
+      ruby_core_source (>= 0.1.4)
     looksee (1.0.3)
     mail (2.4.1)
       i18n (>= 0.4.0)
@@ -137,6 +141,16 @@ GEM
       activerecord (>= 3.0.3)
       arel (>= 2.0.6)
       rgeo (>= 0.3.4)
+    ruby-debug-base19 (0.11.25)
+      columnize (>= 0.3.1)
+      linecache19 (>= 0.5.11)
+      ruby_core_source (>= 0.1.4)
+    ruby-debug19 (0.11.6)
+      columnize (>= 0.3.1)
+      linecache19 (>= 0.5.11)
+      ruby-debug-base19 (>= 0.11.19)
+    ruby_core_source (0.1.5)
+      archive-tar-minitar (>= 0.5.2)
     ruby_gntp (0.3.4)
     sass (3.1.15)
     sass-rails (3.2.4)
@@ -176,6 +190,7 @@ DEPENDENCIES
   lazy_high_charts (~> 1.1.5)
   pg
   rails (= 3.2.1)
+  ruby-debug19
   sass-rails (~> 3.2.3)
   simple_form
   uglifier (>= 1.0.3)
