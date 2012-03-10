@@ -13,3 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+                       
+
+var update_entries = function(data){
+  console.log (data);
+};
