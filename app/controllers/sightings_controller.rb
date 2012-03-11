@@ -51,4 +51,16 @@ class SightingsController < ApplicationController
   def edit
     @sighting = Sighting.find(params[:id])
   end
+  
+  def update
+    @sighting = Sighting.find(params[:id])
+
+    respond_to do |format|
+      if @sighting.update_attributes(params[:sighting])
+        format.html { redirect_to @sighting, notice: 'Sighting was successfully updated.' }
+      else
+        format.html { render action: "edit" }
+      end
+    end
+  end
 end
