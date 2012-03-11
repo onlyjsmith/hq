@@ -9,7 +9,7 @@
     <% @locations.each do |location| %>
     <tr>
       <td>
-        <a href="#"><%= location.name %></a>
+        <%= link_to location.name, edit_location_path(location) %>
       </td>
       <td>
         <%= link_to "Details", edit_location_path(location), :class => "btn btn-mini btn-warning" %>
