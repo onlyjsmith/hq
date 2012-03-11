@@ -2,9 +2,9 @@ class SightingsController < ApplicationController
   def index
     @user = "Bob"
     @camp = Camp.first
-    @drive_count = Drive.count
-    @sightings = Sighting.all
-    
+    @sightings = Sighting.search(params[:search])
+    @drive_count = @sightings.map{|x| x.drive}.uniq.count
+
     @h = LazyHighCharts::HighChart.new('graph') do |f|
       f.options[:chart] = {:height => 200, :width => 400, :defaultSeriesType =>  "area" }
       f.options[:yAxis][:max] = 20
@@ -16,7 +16,8 @@ class SightingsController < ApplicationController
     
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @sightings }
+      # format.json { render json: @sightings }
+      format.js
     end
   end
 
@@ -63,4 +64,13 @@ class SightingsController < ApplicationController
       end
     end
   end
+  
+  # def search
+  #   puts params
+  #   @sightings = Sighting.duration(params[:duration])
+  #   respond_to do |format|
+  #     format.html { render :partial => 'entries' }
+  #     format.json { render json: @sightings }
+  #   end
+  # end
 end

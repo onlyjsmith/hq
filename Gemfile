@@ -16,6 +16,9 @@ gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 gem 'chronic'
 # gem 'cartodb-rb-client', :git => 'git://github.com/decioferreira/cartodb-rb-client.git'
 
+
+gem 'ruby-debug19', :require => 'ruby-debug'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

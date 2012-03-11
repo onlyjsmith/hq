@@ -15,3 +15,8 @@
 //= require jquery_ujs
 //= require underscore
 //= require_tree .
+                       
+
+var update_entries = function(data){
+  console.log (data);
+};
