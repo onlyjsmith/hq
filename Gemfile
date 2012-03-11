@@ -14,6 +14,7 @@ gem 'ruby-debug19', :require => 'ruby-debug'
 gem 'underscore-rails'
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 gem 'chronic'
+gem 'rails3-jquery-autocomplete'
 # gem 'cartodb-rb-client', :git => 'git://github.com/decioferreira/cartodb-rb-client.git'
 
 
