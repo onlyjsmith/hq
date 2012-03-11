@@ -13,10 +13,7 @@
 //= require global
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require underscore
-//= require_tree .
-                       
-
-var update_entries = function(data){
-  console.log (data);
-};
+//= require autocomplete-rails
+//= require_tree .  
