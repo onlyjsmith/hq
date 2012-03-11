@@ -3,7 +3,9 @@ Hq::Application.routes.draw do
 
   devise_for :users
 
-  resources :sightings 
+  resources :sightings do
+    get :autocomplete_species_common_name, :on => :collection
+  end
   # resources :sightings do
   #   collection do
   #     get 'search'

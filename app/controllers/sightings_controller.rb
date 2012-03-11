@@ -1,4 +1,6 @@
 class SightingsController < ApplicationController
+  autocomplete :species, :common_name
+  
   def index
     @user = "Bob"
     @camp = Camp.first
