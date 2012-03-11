@@ -1,13 +1,19 @@
 <%= simple_form_for @sighting do |f| -%>
-  <%= f.input :species_id, :collection => @species %>
-  <%= f.text_field :tribe %>
-  <%= f.text_field :location %>
-  <%= f.text_field :drive %>
-  <%= f.text_field :description %>
-  <%= f.text_field :user_id %>
-  <%= f.text_field :submission_point %>
-  <%= f.text_field :record_time %>
-  <%= f.text_field :time_window_hr %>
-  <%= f.text_field :camp_id %>
+  <%= f.collection_select :species_id, Species.all, :id, :common_name %>
+  <%= f.collection_select :tribe_id, Tribe.all, :id, :name %>
+
+  <%= f.label :location, "Location" %>
+  <%= f.collection_select :location_id, Location.all, :id, :name %>
+
+  <%= f.label :drive, "Drive" %>
+  <%= f.collection_select :drive_id, Drive.all, :id, :description %>
+
+  <%= f.input :description, :as => :text, :input_html => { :cols => 50, :rows => 2 } %>
+
+  <%= f.input :user_id %>
+  <%= f.input :submission_point, :collection => ['Mobile', 'HQ'] %>
+  <%= f.input :record_time %>
+  <%= f.input :time_window_hr %>
+  <%= f.input :camp_id %>
   <%= f.submit "Save", :disable_with => 'Saving...' %>
 <% end -%>       
