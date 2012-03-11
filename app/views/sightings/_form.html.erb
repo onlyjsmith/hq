@@ -1,33 +1,13 @@
-<%= form_for @sighting do |f| -%>
-  <%= f.label :species, "Attribute" %>
-  <%= f.text_field :species %>
-  
-  <%= f.label :tribe, "Tribe" %>
+<%= simple_form_for @sighting do |f| -%>
+  <%= f.input :species_id, :collection => @species %>
   <%= f.text_field :tribe %>
-  
-  <%= f.label :location, "Location" %>
   <%= f.text_field :location %>
-  
-  <%= f.label :drive, "Drive" %>
   <%= f.text_field :drive %>
-  
-  <%= f.label :description, "Description" %>
   <%= f.text_field :description %>
-  
-  <%= f.label :user_id, "User Id" %>
   <%= f.text_field :user_id %>
-  
-  <%= f.label :submission_point, "Submission Point" %>
   <%= f.text_field :submission_point %>
-  
-  <%= f.label :record_time, "Record Time" %>
   <%= f.text_field :record_time %>
-  
-  <%= f.label :time_window_hr, "Time Window Hr" %>
   <%= f.text_field :time_window_hr %>
-  
-  <%= f.label :camp_id, "Camp Id" %>
   <%= f.text_field :camp_id %>
-  
   <%= f.submit "Save", :disable_with => 'Saving...' %>
 <% end -%>       
