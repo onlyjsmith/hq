@@ -4,7 +4,7 @@ wax.tilejson('http://a.tiles.mapbox.com/v3/onlyjsmith.wildspot-map.jsonp',
         var sitesURL = 'http://craigmills.cartodb.com/tiles/sites/{z}/{x}/{y}.png',
             sites = new L.TileLayer(sitesURL);
         
-        var map = new L.Map('map')
+        var map = new L.Map('map-sightings-index')
           .addLayer(new wax.leaf.connector(tilejson))
           .addLayer(sites)
           .setView(new L.LatLng(-12.6, 26), 5);
