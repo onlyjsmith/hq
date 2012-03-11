@@ -24,8 +24,23 @@
 <div class="navbar">
   <!-- Nothing but space up here. Nasty -->
 </div>
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <%= link_to "WildSpot HQ - beta", root_path, :class => 'brand' %> 
+      <div class="nav-collapse">
+        <ul class="nav">
+          <li><%= link_to "Sightings", sightings_path %></li>
+          <li><%= link_to "Locations", locations_path %></li>
+        </ul>
+        <%= link_to "+ Add new sighting", new_sighting_path, :class => 'navbar-text pull-right' %>
+      </div>
+    </div>
+  </div>
+</div>
 
 <%= yield %>
+
 
 
 </body>
