@@ -31,7 +31,24 @@ class SightingsController < ApplicationController
   def new
     @sighting = Sighting.new
   end
+  
+  def create
+    @sighting = Sighting.new(params[:sighting])
+    
+    respond_to do |wants|
+      if @sighting.save
+        flash[:notice] = 'Sighting was successfully created.'
+        wants.html { redirect_to(@sighting) }
+        wants.xml { render :xml => @sighting, :status => :created, :location => @sighting }
+      else
+        wants.html { render :action => "new" }
+        wants.xml { render :xml => @sighting.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+  
 
   def edit
+    @sighting = Sighting.find(params[:id])
   end
 end
