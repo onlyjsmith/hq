@@ -11,10 +11,9 @@
       <div class="row">
         <div class="span6">
           <div class="btn-group" data-toggle="buttons-radio">
-            <%= link_to "Today", "#", :remote => true, :id => "today", 'data-duration' => 1, :class => 'btn change_date' %>
-            <%= link_to "7 days", "#", :remote => true, 'data-duration' => 7, :class => 'btn change_date' %>
-            <%= link_to "30 days", "#", :remote => true, 'data-duration' => 30, :class => 'btn change_date' %>
-            <%= link_to "Custom", "#", :remote => true, 'data-duration' => 0, :class => 'btn change_date' %>
+            <%= link_to "Today", {:url => sightings_path, :search => 1}, :remote => true, :class => 'btn change_date' %>
+            <%= link_to "7 days", {:url => sightings_path, :search => 7}, :remote => true, :class => 'btn change_date' %>
+            <%= link_to "30 days", {:url => sightings_path, :search => 30}, :remote => true, :class => 'btn change_date' %>
           </div>
         </div>
         <div class="span3">

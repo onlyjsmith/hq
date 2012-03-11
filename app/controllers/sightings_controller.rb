@@ -35,4 +35,13 @@ class SightingsController < ApplicationController
 
   def edit
   end
+  
+  # def search
+  #   puts params
+  #   @sightings = Sighting.duration(params[:duration])
+  #   respond_to do |format|
+  #     format.html { render :partial => 'entries' }
+  #     format.json { render json: @sightings }
+  #   end
+  # end
 end

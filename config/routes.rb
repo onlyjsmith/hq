@@ -1,5 +1,11 @@
 Hq::Application.routes.draw do
-  resources :sightings
+  resources :sightings 
+  # resources :sightings do
+  #   collection do
+  #     get 'search'
+  #   end
+  # end
+
   resources :locations
   # get "sightings/index"
   # 
