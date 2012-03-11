@@ -1,0 +1,24 @@
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Entry</th>
+      <th>Details (edit/delete)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sightings.each do |sighting| %>
+    <tr>
+      <td>
+        <a href="#"><%= @user %></a> reported
+        <a href='#'><%= sighting.species.common_name %></a> from
+        <a href='#'><%= sighting.tribe.try(:name) || "no tribe" %></a> near
+        <%= link_to sighting.location.name, location_path(sighting.location.id) %> about 
+        <a href='#'><%= distance_of_time_in_words(Time.now, sighting.record_time) %></a> ago
+      </td>
+      <td>
+        <%= link_to "Details + Edit", edit_sighting_path(sighting), :class => 'btn btn-warning' %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
