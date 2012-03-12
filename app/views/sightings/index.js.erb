@@ -1,1 +1,2 @@
+// Looks like it's an odd place for this file, but it needs to not be in the ASSETS PIPELINE, or 'render' fails
 $("#entries").html("<%= escape_javascript(render(:partial => 'entries', :locals => {:sightings => @sightings})) %>");
