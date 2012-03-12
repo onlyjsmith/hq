@@ -1,2 +1,19 @@
-<h1>Tribes#index</h1>
-<p>Find me in app/views/tribes/index.html.erb</p>
+<div class="container">
+  <div class="page-header">
+    <div class="row">
+      <div class="span9">
+        <h1>All Tribes <small>Species groups, family groups, prides, packs, etc</small></h1>
+        
+      </div>
+      <div class="span3">
+        <%= link_to "Add new one", new_tribe_path, :class => 'btn btn-success' %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span9">
+      <%= render :partial => 'table' %>
+    </div>
+  </div>
+</div>
+

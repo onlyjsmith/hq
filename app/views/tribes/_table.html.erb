@@ -1,0 +1,28 @@
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Species</th>
+      <th>Location</th>
+      <th>Details (edit/delete)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tribes.each do |tribe| %>
+    <tr>
+      <td>
+        <%= link_to tribe.name %>
+      </td>
+      <td>
+        <%= link_to "#{tribe.species.common_name} (#{tribe.species.binomial})", "#" %>
+      </td>
+      <td>
+        <%= link_to tribe.location.name, "#" %>
+      </td>
+      <td>
+        <%= link_to "Details", edit_tribe_path(tribe), :class => "btn btn-mini btn-warning" %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
