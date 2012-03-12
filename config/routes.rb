@@ -13,6 +13,8 @@ Hq::Application.routes.draw do
   # end
 
   resources :locations
+  
+  resources :tribes
   # get "sightings/index"
   # 
   # get "sightings/new"
