@@ -81,6 +81,7 @@ GEM
     fancy_irb (0.7.2)
       paint (>= 0.8.1)
       unicode-display_width (>= 0.1.1)
+    flickraw (0.9.5)
     g (1.6.0)
       ruby_gntp
     haml (3.1.4)
@@ -226,6 +227,7 @@ DEPENDENCIES
   chronic
   coffee-rails (~> 3.2.1)
   devise
+  flickraw
   irbtools-more
   jquery-rails
   lazy_high_charts (~> 1.1.5)
