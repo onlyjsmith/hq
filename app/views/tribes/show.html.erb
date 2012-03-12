@@ -5,7 +5,9 @@
     <%= @tribe.species.common_name %> 
     <em>(<%= @tribe.species.binomial %>)</em>
     lives at "<%= @tribe.location.name %>"
-    </p>
+  </p>
+  <h3>Little picture</h3>
+  <%= image_tag @tribe.species.first_photo_url, :title => "First picture we could find", :class => "class" %>
 
   <div id="map_canvas" style="height: 400px; width: 600px">
     <h3>Mappy of where this tribe lives</h3>
