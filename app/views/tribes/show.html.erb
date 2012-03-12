@@ -1,2 +1,16 @@
-<h1>Tribes#show</h1>
-<p>Find me in app/views/tribes/show.html.erb</p>
+<div class='container'>
+  <h1><%= @tribe.name %></h1>
+
+  <p>
+    <%= @tribe.species.common_name %> 
+    <em>(<%= @tribe.species.binomial %>)</em>
+    lives at "<%= @tribe.location.name %>"
+    </p>
+
+  <div id="map_canvas" style="height: 400px; width: 600px">
+    <h3>Mappy of where this tribe lives</h3>
+  </div>
+
+  <%= link_to "Edit this", edit_tribe_path(@tribe) %> |
+  <%= link_to "All tribes", tribes_path %>  
+</div>

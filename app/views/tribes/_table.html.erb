@@ -11,13 +11,13 @@
     <% @tribes.each do |tribe| %>
     <tr>
       <td>
-        <%= link_to tribe.name %>
+        <%= link_to tribe.name, tribe_path(tribe) %>
       </td>
       <td>
         <%= link_to "#{tribe.species.common_name} (#{tribe.species.binomial})", "#" %>
       </td>
       <td>
-        <%= link_to tribe.location.name, "#" %>
+        <%= link_to tribe.location.name, location_path(tribe.location) %>
       </td>
       <td>
         <%= link_to "Details", edit_tribe_path(tribe), :class => "btn btn-mini btn-warning" %>
