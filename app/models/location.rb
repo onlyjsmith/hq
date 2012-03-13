@@ -31,6 +31,7 @@ class Location < ActiveRecord::Base
     key = SecureRandom.hex(50)
     #update or insert geom into cartodb then make the value null
     
+    
     #check hex is there already then update or insert accordingly
     q = "INSERT INTO locations (hex, the_geom) VALUES ('#{key}', ST_SetSRID(ST_GeomFromGeoJSON('#{self.polygon}'), 4326));"
     puts q
