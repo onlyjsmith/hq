@@ -15,6 +15,18 @@ GIT
       remotipart (~> 1.0)
       sass-rails (~> 3.1)
 
+GIT
+  remote: git@github.com:craigmmills/cartodb-rb-client.git
+  revision: ddb3f0c4cb5278f6aa056256445560cb26e75b46
+  specs:
+    cartodb-rb-client (0.2.0)
+      mime-types (>= 1.16)
+      oauth (= 0.4.5)
+      pg (= 0.13.2)
+      rgeo (= 0.3.6)
+      rgeo-geojson (= 0.2.1)
+      typhoeus (= 0.2.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -137,6 +149,7 @@ GEM
     methodfinder (1.2.5)
     mime-types (1.17.2)
     multi_json (1.1.0)
+    oauth (0.4.5)
     ori (0.1.0)
     orm_adapter (0.0.6)
     paint (0.8.4)
@@ -178,6 +191,8 @@ GEM
       activerecord (>= 3.0.3)
       arel (>= 2.0.6)
       rgeo (>= 0.3.4)
+    rgeo-geojson (0.2.1)
+      rgeo (>= 0.2.8)
     ruby-debug-base19 (0.11.25)
       columnize (>= 0.3.1)
       linecache19 (>= 0.5.11)
@@ -208,6 +223,9 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
+    typhoeus (0.2.4)
+      mime-types
+      mime-types
     tzinfo (0.3.32)
     uglifier (1.2.3)
       execjs (>= 0.3.0)
@@ -224,6 +242,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-postgis-adapter
+  cartodb-rb-client!
   chronic
   coffee-rails (~> 3.2.1)
   devise
