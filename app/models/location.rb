@@ -10,4 +10,15 @@ class Location < ActiveRecord::Base
       find(:all)
     end
   end
+  
+  
+  def geom
+    
+    result = CartoDB::Connection.query "SELECT the_geom FROM locations where loc_id = #{self.id}", :page => 1
+    result[:rows][0][:the_geom].as_json
+    
+  end
+  
+  
+  
 end
