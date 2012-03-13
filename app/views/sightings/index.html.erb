@@ -33,6 +33,15 @@
     </div>
   </div>
   <div class="row">
+    <div class="span12" id="entries">
+      <h2>Pics of recent species</h2>
+      <% @sightings.each do |sighting| %> 
+        <!-- TODO: Definitely not the way to get or display these images, but works for now -->
+        <%= image_tag sighting.species.first_photo_url, :title => "First picture we could find", :class => "class", :style => "max-height:70px;" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
     <div class="span12">
       <div class="row">
         <div id="map_here" class="span6">
