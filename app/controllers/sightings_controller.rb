@@ -70,16 +70,16 @@ class SightingsController < ApplicationController
   def getcsv
     sightings = Sighting.all
     csv_string = CSV.generate do |csv| 
-          csv << %w(When What Where)
-          sightings.each do |s|
-            csv << [s.record_time, s.species.common_name, s.location.name]
-          end
-        end
-        send_data csv_string, :type => "text/plain", 
-         :filename=>"sightings.csv",
-         :disposition => 'attachment'
-
+      # TODO - move this 'view' stuff out of controller
+      csv << %w(When What Where)
+      sightings.each do |s|
+        csv << [s.record_time, s.species.common_name, s.location.name]
+      end
     end
+    send_data csv_string, :type => "text/plain", 
+     :filename=>"sightings.csv",
+     :disposition => 'attachment'
+  end
 
   
   # def search
