@@ -1,8 +1,12 @@
+require 'SecureRandom'
+
 class Location < ActiveRecord::Base
   has_many :sightings
   has_many :tribes
   has_many :camps
   
+  before_save :update_geom_to_cartodb
+
   def self.search(search)
     if search
       find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
@@ -14,11 +18,28 @@ class Location < ActiveRecord::Base
   
   def geom
     
-    result = CartoDB::Connection.query "SELECT the_geom FROM locations where loc_id = #{self.id}", :page => 1
+    result = CartoDB::Connection.query "SELECT the_geom FROM locations where hex = '#{self.hex}'", :page => 1
     result[:rows][0][:the_geom].as_json
     
   end
   
+  
+  protected
+  def update_geom_to_cartodb
+    
+    #create unique token to match two systems:
+    key = SecureRandom.hex(50)
+    #update or insert geom into cartodb then make the value null
+    
+    #check hex is there already then update or insert accordingly
+    q = "INSERT INTO locations (hex, the_geom) VALUES ('#{key}', ST_SetSRID(ST_GeomFromGeoJSON('#{self.polygon}'), 4326));"
+    puts q
+    
+    CartoDB::Connection.query q
+    self.polygon = nil
+    self.hex = key
+    
+  end
   
   
 end
