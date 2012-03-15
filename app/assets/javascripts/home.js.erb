@@ -1,3 +1,38 @@
+$.widget( "custom.catcomplete", $.ui.autocomplete, {
+	_renderMenu: function( ul, items ) {
+		var self = this,
+			currentCategory = "";
+		$.each( items, function( index, item ) {
+			if ( item.category != currentCategory ) {
+				ul.append( "<li class='ui-autocomplete-category'>" + item.category + "</li>" );
+				currentCategory = item.category;
+			}
+			self._renderItem( ul, item );
+		});
+	}
+});
+
+$(function() {
+	var data = [
+		{ label: "anders", category: "" },
+		{ label: "andreas", category: "" },
+		{ label: "antal", category: "" },
+		{ label: "annhhx10", category: "Products" },
+		{ label: "annk K12", category: "Products" },
+		{ label: "annttop C13", category: "Products" },
+		{ label: "anders andersson", category: "People" },
+		{ label: "andreas andersson", category: "People" },
+		{ label: "andreas johnson", category: "People" }
+	];
+	
+	$( "#search" ).catcomplete({
+		delay: 0,
+		source: data
+	});
+});
+
+
+
 // TODO - combine this with sightings map to avoid leaflet errors
 wax.tilejson('http://a.tiles.mapbox.com/v3/onlyjsmith.wildspot-map.jsonp',
     function(tilejson) {
