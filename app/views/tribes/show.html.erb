@@ -7,7 +7,7 @@
     lives at "<%= @tribe.location.name %>"
   </p>
   <h3>Little picture</h3>
-  <%= image_tag @tribe.species.get_photo_url, :title => "First picture we could find", :class => "class" %>
+  <%= image_tag @tribe.species.get_photo_url, :title => "First picture we could find of #{@tribe.species.common_name}", :class => "class" %>
 
   <div id="map_canvas" style="height: 400px; width: 600px">
     <h3>Mappy of where this tribe lives</h3>
