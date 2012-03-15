@@ -5,7 +5,9 @@ class HomeController < ApplicationController
   def map
   end
   
-  def time
-    @response = TimeParse.parse(params[:time_input])
+  def tester
+    # @response = TimeParse.parse(params[:time_input]) 
+    
+    
   end
 end
