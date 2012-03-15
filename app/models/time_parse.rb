@@ -14,7 +14,7 @@ class TimeParse
       # expands abbreviations
       input_scan = input_scan.split(' ').map{|x| abbr[x].nil? ? x : abbr[x]}.join(' ')
       
-      parsed = Chronic.parse input_scan
+      parsed = Chronic.parse(input_scan, :context => :past)
 
       return "Input of #{input} --> converted to #{parsed}"
       
