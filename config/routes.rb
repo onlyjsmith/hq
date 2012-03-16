@@ -24,6 +24,7 @@ Hq::Application.routes.draw do
   # 
   # get "sightings/edit"
 
+  get "home/auto_search"
   get "home/tester"
   get "home/index"
   get "home/map"

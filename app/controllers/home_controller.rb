@@ -7,11 +7,15 @@ class HomeController < ApplicationController
   
   def tester
     @response = TimeParse.parse(params[:time_input]) 
-    @search_response = Home.search('l')
+  end
+  
+  def auto_search
+    @search_response = Home.search(params[:term])
     # debugger
     respond_to do |format|
-      format.html
       format.json {
+        # debugger
+        Rails.logger.debug { "response to json is #{@search_response.to_json}" }
         render :json => @search_response.to_json
       }
     end
