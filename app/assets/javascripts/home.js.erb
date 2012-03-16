@@ -14,7 +14,7 @@ $.widget( "custom.catcomplete", $.ui.autocomplete, {
 
 $(function() {
   // var data = $.getJSON("/home/auto_search.json",{term: "a"});
-  var data = [{label: "leopard", category: "species"},{label: "elephant", category: "species"},{label: "leonard's pool", category: "place"},{label: "elephant hill", category: "place"}]
+  var data = [{label: "leopard", category: "species"},{label: "elephant", category: "species"},{label: "leonard's pool", category: "place"},{label: "elephant hill", category: "place"}];
 
   // var data = [
   //  { label: "anders", category: "Eggs" },
@@ -26,11 +26,14 @@ $(function() {
   //  { label: "anders andersson", category: "People" },
   //  { label: "andreas andersson", category: "People" },
   //  { label: "andreas johnson", category: "People" }
-  // ];
+  // ]; 
 	
-	$( "#search" ).catcomplete({
+	$("#search").catcomplete({
 		delay: 0,
-		source: data
+    source: data,
+    // source: function(term){
+    //   $.getJSON("/home/auto_search.json",{term: term});
+    // };
 	});
 });
 
