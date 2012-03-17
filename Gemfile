@@ -10,7 +10,7 @@ gem 'activerecord-postgis-adapter'
 gem 'simple_form'
 gem 'lazy_high_charts', '~> 1.1.5'
 # gem 'haml'
-# gem 'ruby-debug19', :require => 'ruby-debug'
+gem 'ruby-debug19', :require => 'ruby-debug'
 gem 'underscore-rails'
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 gem 'chronic'
@@ -32,9 +32,9 @@ group :assets do
 end    
 
 group :development do
-  # gem 'irbtools-more'
-  # gem 'ruby-debug19', :require => 'ruby-debug'
-  
+  gem 'irbtools-more'
+  gem 'ruby-debug19', :require => 'ruby-debug'
+  gem 'seed_dumper'
 end
   
 gem 'jquery-rails'
