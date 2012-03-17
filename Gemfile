@@ -32,8 +32,8 @@ group :assets do
 end    
 
 group :development do
-  gem 'irbtools-more'
-  gem 'ruby-debug19', :require => 'ruby-debug'
+  # gem 'irbtools-more'
+  # gem 'ruby-debug19', :require => 'ruby-debug'
   
 end
   
