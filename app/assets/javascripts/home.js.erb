@@ -1,11 +1,59 @@
+$.widget( "custom.catcomplete", $.ui.autocomplete, {
+	_renderMenu: function( ul, items ) {
+		var self = this,
+			currentCategory = "";
+		$.each( items, function( index, item ) {
+			if ( item.category != currentCategory ) {
+				ul.append( "<li class='ui-autocomplete-category'>" + item.category + "</li>" );
+				currentCategory = item.category;
+			}
+			self._renderItem( ul, item );
+		});
+	}
+});
+
+$(function() {
+  // var data = $.getJSON("/home/auto_search.json",{term: "a"}).responseText;
+  // var data = [{label: "leopard", category: "species"},{label: "elephant", category: "species"},{label: "leonard's pool", category: "place"},{label: "elephant hill", category: "place"}];
+
+
+  // var data = [
+  //  { label: "anders", category: "Eggs" },
+  //  { label: "andreas", category: "Eggs" },
+  //  { label: "antal", category: "Eggs" },
+  //  { label: "annhhx10", category: "Products" },
+  //  { label: "annk K12", category: "Products" },
+  //  { label: "annttop C13", category: "Products" },
+  //  { label: "anders andersson", category: "People" },
+  //  { label: "andreas andersson", category: "People" },
+  //  { label: "andreas johnson", category: "People" }
+  // ]; 
+	
+	$("#search").catcomplete({
+		delay: 0,
+    // source: data
+    source: "/home/auto_search.json",
+    select: function(event, ui) {
+      $("#"+ui.item.category).append("<li>"+ui.item.value+"</li");
+      // this.value = "";
+      // alert(ui.item.value)
+    },
+    close: function(event, ui) {
+      this.value = "";
+    }
+	});
+});
+
+
+
 // TODO - combine this with sightings map to avoid leaflet errors
-wax.tilejson('http://a.tiles.mapbox.com/v3/onlyjsmith.wildspot-map.jsonp',
-    function(tilejson) {
-        var sitesURL = 'http://craigmills.cartodb.com/tiles/sites/{z}/{x}/{y}.png',
-            sites = new L.TileLayer(sitesURL);
-        
-        var map = new L.Map('map-landing-page')
-          .addLayer(new wax.leaf.connector(tilejson))
-          .addLayer(sites)
-          .setView(new L.LatLng(-12.6, 26), 5);
-        });
+// wax.tilejson('http://a.tiles.mapbox.com/v3/onlyjsmith.wildspot-map.jsonp',
+//     function(tilejson) {
+//         var sitesURL = 'http://craigmills.cartodb.com/tiles/sites/{z}/{x}/{y}.png',
+//             sites = new L.TileLayer(sitesURL);
+//         
+//         var map = new L.Map('map-landing-page')
+//           .addLayer(new wax.leaf.connector(tilejson))
+//           .addLayer(sites)
+//           .setView(new L.LatLng(-12.6, 26), 5);
+//         });
