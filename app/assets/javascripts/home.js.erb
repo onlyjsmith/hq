@@ -32,20 +32,28 @@ $(function() {
 	$("#search").catcomplete({
 		delay: 0,
     // source: data
-    source: "/home/auto_search.json"
+    source: "/home/auto_search.json",
+    select: function(event, ui) {
+      $("#"+ui.item.category).append("<li>"+ui.item.value+"</li");
+      // this.value = "";
+      // alert(ui.item.value)
+    },
+    close: function(event, ui) {
+      this.value = "";
+    }
 	});
 });
 
 
 
 // TODO - combine this with sightings map to avoid leaflet errors
-wax.tilejson('http://a.tiles.mapbox.com/v3/onlyjsmith.wildspot-map.jsonp',
-    function(tilejson) {
-        var sitesURL = 'http://craigmills.cartodb.com/tiles/sites/{z}/{x}/{y}.png',
-            sites = new L.TileLayer(sitesURL);
-        
-        var map = new L.Map('map-landing-page')
-          .addLayer(new wax.leaf.connector(tilejson))
-          .addLayer(sites)
-          .setView(new L.LatLng(-12.6, 26), 5);
-        });
+// wax.tilejson('http://a.tiles.mapbox.com/v3/onlyjsmith.wildspot-map.jsonp',
+//     function(tilejson) {
+//         var sitesURL = 'http://craigmills.cartodb.com/tiles/sites/{z}/{x}/{y}.png',
+//             sites = new L.TileLayer(sitesURL);
+//         
+//         var map = new L.Map('map-landing-page')
+//           .addLayer(new wax.leaf.connector(tilejson))
+//           .addLayer(sites)
+//           .setView(new L.LatLng(-12.6, 26), 5);
+//         });

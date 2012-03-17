@@ -10,7 +10,8 @@ class Home
         response.push result_hash
       end
     end
-    
+    time_hash = {:label => "#{(TimeParse.parse(term))}", :category => 'time'}
+    response.push time_hash
     # debugger
     response
   end
