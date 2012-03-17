@@ -15,8 +15,8 @@ class HomeController < ApplicationController
     respond_to do |format|
       format.json {
         # debugger
-        Rails.logger.debug { "response to json is #{@search_response.to_json}" }
-        render :json => @search_response.to_json
+        # Rails.logger.debug { "response to json is #{@search_response.to_json}" }
+        render :json => @search_response.as_json
       }
     end
   end

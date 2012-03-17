@@ -13,8 +13,9 @@ $.widget( "custom.catcomplete", $.ui.autocomplete, {
 });
 
 $(function() {
-  // var data = $.getJSON("/home/auto_search.json",{term: "a"});
-  var data = [{label: "leopard", category: "species"},{label: "elephant", category: "species"},{label: "leonard's pool", category: "place"},{label: "elephant hill", category: "place"}];
+  // var data = $.getJSON("/home/auto_search.json",{term: "a"}).responseText;
+  // var data = [{label: "leopard", category: "species"},{label: "elephant", category: "species"},{label: "leonard's pool", category: "place"},{label: "elephant hill", category: "place"}];
+
 
   // var data = [
   //  { label: "anders", category: "Eggs" },
@@ -30,10 +31,8 @@ $(function() {
 	
 	$("#search").catcomplete({
 		delay: 0,
-    source: data,
-    // source: function(term){
-    //   $.getJSON("/home/auto_search.json",{term: term});
-    // };
+    // source: data
+    source: "/home/auto_search.json"
 	});
 });
 
