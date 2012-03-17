@@ -1,0 +1,5 @@
+Photo.create(:id => 44, :url => "http://farm4.staticflickr.com/3272/3103490954_4ea4fe5ffe_m.jpg", :imageable_id => 2, :imageable_type => 0)
+Photo.create(:id => 45, :url => "http://farm5.staticflickr.com/4134/4929201434_56074060a8_m.jpg", :imageable_id => 3, :imageable_type => 0)
+Photo.create(:id => 46, :url => "http://farm4.staticflickr.com/3609/3385334129_9ac670d131_m.jpg", :imageable_id => 4, :imageable_type => 0)
+Photo.create(:id => 47, :url => "http://farm8.staticflickr.com/7024/6709414735_f12a0fcc20_m.jpg", :imageable_id => 5, :imageable_type => 0)
+Photo.create(:id => 48, :url => "http://farm3.staticflickr.com/2071/2048143444_fb846df337_m.jpg", :imageable_id => 1, :imageable_type => 0)

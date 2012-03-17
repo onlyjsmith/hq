@@ -1,0 +1,5 @@
+Species.create(:id => 2, :common_name => "leopard", :binomial => "panthera pardus")
+Species.create(:id => 3, :common_name => "dog", :binomial => "dogus maximus")
+Species.create(:id => 4, :common_name => "elephant", :binomial => "loxodonta africana")
+Species.create(:id => 5, :common_name => "sitatunga", :binomial => "tragelaphus spekeii")
+Species.create(:id => 1, :common_name => "lion", :binomial => "panthera leo")
