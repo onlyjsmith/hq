@@ -24,8 +24,9 @@ Hq::Application.routes.draw do
   # 
   # get "sightings/edit"
 
+  get "home/auto_search"
+  get "home/tester"
   get "home/index"
-  get "home/time"
   get "home/map"
   # The priority is based upon order of creation:
   # first created -> highest priority.

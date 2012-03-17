@@ -57,6 +57,32 @@ p {
   -moz-box-shadow: 0 0 10px #888;
   -webkit-box-shadow: 0 0 10px#888;
   box-shadow: 0 0 10px #888;
+}
 
+.ui-autocomplete-category {
+	font-weight: bold; 
+	font: 120% "Lucida Grande", "Trebuchet MS", Verdana, sans-serif;
+	color:pink;
+	padding: .2em .4em;
+	margin: .8em 0 .2em;
+	line-height: 1.5;
+} 
+
+.model_results {
+//  border: 1px solid grey;
+    background: #DDD;
+}
+
+
+.omni_enter {
+  font-size: 30px; 
+  font-family: 'Signika Negative', sans-serif;
+  width: 500px; 
+  height: 40px; 
+  padding: 10px;
+  border: none;
+  -moz-box-shadow: inset 0 0 5px #888;
+  -webkit-box-shadow: inset 0 0 5px#888;
+  box-shadow: inset 0 0 5px #888; 
   
-  }
+}

@@ -16,7 +16,8 @@ class TimeParse
       
       parsed = Chronic.parse(input_scan, :context => :past)
 
-      return "Input of #{input} --> converted to #{parsed}"
+      puts "Input of #{input} --> converted to #{parsed}"
+      parsed
       
     else
       "No input yet"
