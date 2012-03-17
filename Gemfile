@@ -19,7 +19,6 @@ gem 'flickraw'
 gem 'cartodb-rb-client', :git => 'git@github.com:craigmmills/cartodb-rb-client.git'
 
 
-gem 'ruby-debug19', :require => 'ruby-debug'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -34,6 +33,8 @@ end
 
 group :development do
   gem 'irbtools-more'
+  gem 'ruby-debug19', :require => 'ruby-debug'
+  
 end
   
 gem 'jquery-rails'
