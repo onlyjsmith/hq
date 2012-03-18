@@ -1,7 +1,7 @@
 class TimeParse
   def self.parse(input)
     unless input.blank?
-      abbr = {'wk'=>'week','wks' => 'week','w' => 'week','h' => 'hour','hr' => 'hour','hrs' => 'hour','d' => 'day', 'td' => 'today', 'yest' => 'yesterday', 'yes' => 'yesterday', 'ystr' => 'yesterday'}
+      abbr = {'wk'=>'week','wks' => 'week','w' => 'week','h' => 'hour','hr' => 'hour','hrs' => 'hour','d' => 'day', 't' => 'today', 'td' => 'today', 'yest' => 'yesterday', 'yes' => 'yesterday', 'ystr' => 'yesterday', 'y' => 'yesterday'}
       # Checks for '2d' or similar
       input_scan = input.scan(/[0-9]+[d,w,h,m,y]/)
       if input_scan.count == 0
