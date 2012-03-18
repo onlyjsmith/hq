@@ -8,7 +8,11 @@
   <p>
     <%= image_tag @species.get_photo_url, :title => "First picture we could find of #{@species.common_name}", :class => "class" %>
   </p>
-
   <%= link_to "Edit this", edit_species_path(@species) %> |
   <%= link_to "All species", species_index_path %>  
+  
+  <h3>Sightings of this species</h3>
+  <%= render :partial => 'entries', :locals => {:sightings => @species.sightings} %>
+    
+
 </div>
