@@ -1,5 +1,43 @@
 <div class="container">
   <h1>Add new sighting</h1>
-  <%= render :partial => 'form' %>
+  <div class="row">
+    <div class="span12">
+      <h2><small>Use this "OmniEnter" box to search for everything!</small></h2>
+      <input id="search" placeholder="" class="omni_enter"/>
+    </div>
+    <!-- <div class="span6">
+      <h2>Time stuff</h2>
+      <form action="tester" method="get" accept-charset="utf-8">
+        <input type="text" name="time_input" placeholder="Enter any description of time"> 
+        <p><input type="submit" value="Continue"></p>
+      </form>
+    </div> -->
+  </div>
+  <div class="row show-grid">
+    <div class="span3 model_results species">
+      <ul>
+        <h2>Species</h2>
+        <div id="species"></div>
+      </ul>
+    </div>
+    <div class="span3 model_results tribe">
+      <ul>
+        <h2>Tribe</h2>
+        <div id="tribe"></div>
+      </ul>
+    </div>
+    <div class="span3 model_results location">
+      <ul>
+        <h2>Location</h2>
+        <div id="location"></div>
+      </ul>
+    </div>
+    <div class="span3 model_results time">
+      <ul>
+        <h2>Time</h2>
+        <div id="time"></div>
+      </ul>
+    </div>
+  </div>
 </div>
 

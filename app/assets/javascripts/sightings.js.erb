@@ -7,9 +7,21 @@ $(document).ready(function(){
       function(data){update_entries(data)}
     );
   });
+  $("input:text:visible:first").focus();
+	$("#search").catcomplete({
+		delay: 0,
+    // source: data
+    source: "/home/auto_search.json",
+    select: function(event, ui) {
+      $("#"+ui.item.category).append("<li>"+ui.item.value+"</li");
+      // this.value = "";
+      // alert(ui.item.value)
+    },
+    close: function(event, ui) {
+      this.value = "";
+    }
+	});
 });
-
-
 
 
 
