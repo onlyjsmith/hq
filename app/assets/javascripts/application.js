@@ -18,6 +18,3 @@
 //= require autocomplete-rails
 //= require_tree .  
 
-var update_entries = function(data){
-  // console.log (data);
-};

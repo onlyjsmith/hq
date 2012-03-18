@@ -4,7 +4,7 @@ $(document).ready(function(){
     $.get(
       'sightings', 
       $.param({search: $(this).attr('data-duration')}),
-      function(data){update_entries(data)}
+      // function(data){update_entries(data)}
     );
   });
   $("input:text:visible:first").focus();
