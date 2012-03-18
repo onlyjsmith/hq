@@ -10,8 +10,13 @@
     <tr>
       <td>
         <a href="#"><%= @user %></a> reported
-        <a href='#'><%= sighting.species.common_name %></a> from
-        <a href='#'><%= sighting.tribe.try(:name) || "no tribe" %></a> near
+        <%= link_to sighting.species.common_name, species_path(sighting.species) %></a> from
+        <% if sighting.tribe.try(:name) %> 
+          <%= link_to sighting.tribe.name, tribe_path(sighting.tribe) %>
+        <% else %>
+          <%= "no tribe" %>
+        <% end %>
+        near
         <%= link_to sighting.location.name, location_path(sighting.location.id) %> about 
         <a href='#'><%= distance_of_time_in_words(Time.now, sighting.record_time) %></a> ago
       </td>

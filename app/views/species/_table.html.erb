@@ -1,0 +1,31 @@
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Common Name</th>
+      <th>Binomial</th>
+      <th>Image</th>                                    
+      <th>Details / Edit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @species.each do |species| %>
+    <tr>
+      <td>
+        <%= link_to species.common_name, species_path(species) %>
+      </td>
+      <td>
+        <%= species.binomial %>
+      </td>
+      <td>
+        <%= link_to image_tag(species.get_photo_url, :title => "First picture we could find of #{species.common_name}", 
+          :class => "box-shadow", 
+          :style => "border: 1px solid; max-height:70px;"), species_path(species) 
+        %>
+      </td>
+      <td>
+        <%= link_to "Details", edit_species_path(species), :class => "btn btn-mini btn-warning" %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
