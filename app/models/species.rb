@@ -7,7 +7,7 @@ class Species < ActiveRecord::Base
     unless self.photos.blank?
       return self.photos.first.url
     end
-    # TODO - Probably want to do this as a task and populate a DB instead, but this works!
+
     FlickRaw.api_key = APP_CONFIG['FlickRaw_api_key']
     FlickRaw.shared_secret = APP_CONFIG['FlickRaw_shared_secret']
 
