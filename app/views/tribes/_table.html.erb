@@ -3,6 +3,7 @@
     <tr>
       <th>Name</th>
       <th>Species</th>
+      <th>Image</th>
       <th>Location</th>
       <th>Details (edit/delete)</th>
     </tr>
@@ -14,7 +15,13 @@
         <%= link_to tribe.name, tribe_path(tribe) %>
       </td>
       <td>
-        <%= link_to "#{tribe.species.common_name} (#{tribe.species.binomial})", "#" %>
+        <%= link_to "#{tribe.species.common_name} (#{tribe.species.binomial})", species_path(tribe.species) %>
+      </td>
+      <td>
+        <%= link_to image_tag(tribe.species.get_photo_url, :title => "First picture we could find of #{tribe.species.common_name}", 
+          :class => "box-shadow", 
+          :style => "border: 1px solid; max-height:70px;"), species_path(tribe.species) 
+        %>
       </td>
       <td>
         <%= link_to tribe.location.name, location_path(tribe.location) %>

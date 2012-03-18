@@ -1,0 +1,14 @@
+<div class='container'>
+  <h1><%= @species.common_name %></h1>
+
+  <p>
+    <%= @species.binomial %>
+  </p>
+  <h3>Little picture</h3>
+  <p>
+    <%= image_tag @species.get_photo_url, :title => "First picture we could find of #{@species.common_name}", :class => "class" %>
+  </p>
+
+  <%= link_to "Edit this", edit_species_path(@species) %> |
+  <%= link_to "All species", species_index_path %>  
+</div>
