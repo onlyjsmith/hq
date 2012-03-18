@@ -6,7 +6,7 @@ class SightingsController < ApplicationController
     @camp = Camp.first
     @sightings = Sighting.search(params[:search])
     @drive_count = @sightings.map{|x| x.drive}.uniq.count
-
+    @species = @sightings.map{|x| x.species}.uniq
     @h = LazyHighCharts::HighChart.new('graph') do |f|
       f.options[:chart] = {:height => 200, :width => 400, :defaultSeriesType =>  "area" }
       f.options[:yAxis][:max] = 20

@@ -3,7 +3,7 @@ $(document).ready(function(){
   $(".change_date").click(function() {
     $.get(
       'sightings', 
-      $.param({search: $(this).attr('data-duration')}),
+      $.param({search: $(this).attr('data-duration')})
       // function(data){update_entries(data)}
     );
   });
