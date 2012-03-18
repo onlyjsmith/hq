@@ -62,11 +62,16 @@ p {
 .ui-autocomplete-category {
 	font-weight: bold; 
 	font: 120% "Lucida Grande", "Trebuchet MS", Verdana, sans-serif;
-	color:pink;
+	background: pink;
+	color:red;
 	padding: .2em .4em;
 	margin: .8em 0 .2em;
 	line-height: 1.5;
 } 
+
+.ui-autocomplete-category {
+  background: green;
+}
 
 .model_results {
 //  border: 1px solid grey;
@@ -96,13 +101,19 @@ p {
 .tribe h2 {
   color: #F1DBC4;
 }
+.tribe li {
+  color: #F1DBC4;
+}
 .location {
   background: #CFA364;
 }
 .time {
   background: #4A1E00;
 }
-.time h2 {
+.time h2{
+  color: #F1DBC4;
+}
+.time li{
   color: #F1DBC4;
 }
 
