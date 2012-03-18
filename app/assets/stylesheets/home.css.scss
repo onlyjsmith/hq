@@ -62,22 +62,21 @@ p {
 .ui-autocomplete-category {
 	font-weight: bold; 
 	font: 120% "Lucida Grande", "Trebuchet MS", Verdana, sans-serif;
-	background: pink;
-	color:red;
+//  background: pink;
+	color:darkgray;
 	padding: .2em .4em;
 	margin: .8em 0 .2em;
 	line-height: 1.5;
 } 
 
 .ui-autocomplete-category {
-  background: green;
+//  background: green;
 }
 
 .model_results {
 //  border: 1px solid grey;
     background: #DDD;
 }
-
 
 .omni_enter {
   font-size: 30px; 
@@ -89,7 +88,6 @@ p {
   -moz-box-shadow: inset 0 0 5px #888;
   -webkit-box-shadow: inset 0 0 5px#888;
   box-shadow: inset 0 0 5px #888; 
-  
 }
 
 .species{
@@ -98,10 +96,7 @@ p {
 .tribe {
   background: #75441B ;
 }
-.tribe h2 {
-  color: #F1DBC4;
-}
-.tribe li {
+.tribe h2, .tribe li {
   color: #F1DBC4;
 }
 .location {
@@ -110,10 +105,6 @@ p {
 .time {
   background: #4A1E00;
 }
-.time h2{
+.time h2, .time li{
   color: #F1DBC4;
 }
-.time li{
-  color: #F1DBC4;
-}
-
