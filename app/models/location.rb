@@ -5,7 +5,7 @@ class Location < ActiveRecord::Base
   has_many :tribes
   has_many :camps
   
-  before_save :update_geom_to_cartodb
+  #before_save :update_geom_to_cartodb
 
   def self.search(search)
     if search
@@ -32,9 +32,9 @@ class Location < ActiveRecord::Base
     #update or insert geom into cartodb then make the value null
     
     
+    
     #check hex is there already then update or insert accordingly
     q = "INSERT INTO locations (hex, the_geom) VALUES ('#{key}', ST_SetSRID(ST_GeomFromGeoJSON('#{self.polygon}'), 4326));"
-    puts q
     
     CartoDB::Connection.query q
     self.polygon = nil
