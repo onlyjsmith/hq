@@ -36,8 +36,20 @@ class SightingsController < ApplicationController
   end
   
   def create
-    @sighting = Sighting.new(params[:sighting])
+    @sighting = Sighting.new
+
+    # TODO: Change these defaults - they're just for demo purpose
+    @sighting.species_id = params[:species_id]
+    @sighting.tribe_id = params[:tribe_id]
+    @sighting.location_id = params[:location_id] ||
+    # Time has a weird _id suffix - it's just to keep the JS simple
+    @sighting.record_time = params[:time_id] || Time.now
     
+    @sighting.camp_id = 1
+    @sighting.drive_id = 1
+    @sighting.submission_point = "HQ"
+    
+    debugger
     respond_to do |wants|
       if @sighting.save
         flash[:notice] = 'Sighting was successfully created.'
