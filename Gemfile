@@ -34,7 +34,6 @@ end
 group :development do
   gem 'irbtools-more'
   gem 'ruby-debug19', :require => 'ruby-debug'
-  gem 'seed_dumper'
 end
   
 gem 'jquery-rails'
