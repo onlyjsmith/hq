@@ -14,9 +14,9 @@
 # Drive.create(duration_hr: 3, distance_km: 15, description: 'Round and round')                
 # Camp.create(name: 'Wonderland Camp', company_id: 1)
 # Company.create(name: 'Wildplaces')
-# User.create({:email=> 'jonathan@peoplesized.com', :password=>'egg', :password_confirmation=>'egg'}).save(:validate=> false)
 
 
+User.create({:email=> 'jonathan@peoplesized.com', :password=>'egg', :password_confirmation=>'egg'}).save(:validate=> false)
 
 Species.create(:id => 2, :common_name => "leopard", :binomial => "panthera pardus")
 Species.create(:id => 3, :common_name => "dog", :binomial => "dogus maximus")
