@@ -19,7 +19,7 @@ initialize_map = ->
       table_name: "sites"
       query: 'SELECT cartodb_id,the_geom_webmercator,name FROM {{table_name}}'
       tile_style: "#sites{marker-fill:#E25B5B}"
-      infowindow: "SELECT cartodb_id,the_geom_webmercator,name FROM {{table_name}} WHERE cartodb_id={{feature}}"
+      infowindow: "SELECT cartodb_id,the_geom_webmercator,name AS Name FROM {{table_name}} WHERE cartodb_id={{feature}}"
       auto_bound: false
       debug: true
     )

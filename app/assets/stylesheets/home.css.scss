@@ -4,10 +4,14 @@
 
 @import url(http://fonts.googleapis.com/css?family=Signika+Negative:600);
 
+html, body {
+height: 100%;
+}
+
 body {
-//  background: none repeat scroll 0% 0% rgb(238, 238, 238)
+    background: none repeat scroll 0% 0% rgb(238, 238, 238);
     padding-top: 60px;
-    padding-bottom: 40px;
+//    margin-bottom: 40px;
 }
 
 p {
@@ -29,9 +33,11 @@ p {
   
 }
                                                          
-#map {
-  width:100%; 
-  height:800px;
+.map {
+  width:100%;  
+  position: absolute; 
+  top: 40px; 
+  bottom: 0px
 }
 
 
@@ -58,4 +64,3 @@ p {
   -webkit-box-shadow: 0 0 10px#888;
   box-shadow: 0 0 10px #888;
 }
-
