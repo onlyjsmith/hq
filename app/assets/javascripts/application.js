@@ -16,8 +16,5 @@
 //= require jquery-ui
 //= require underscore
 //= require autocomplete-rails
-//= require leaflet
-//= require wax.leaflet.min
-//= require cartodb-leaflet
 //= require_tree .  
 
