@@ -10,9 +10,9 @@
   <script type="text/javascript"
     src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBayw2eSaoacD6ls7MtZEGPnc-X6riD8Pg&sensor=false">
   </script>
-  <script type="text/javascript" src="wax/dist/wax.g.min.js"></script>
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "highcharts" %>
+  <%= javascript_include_tag params[:controller] %>
   <%= csrf_meta_tags %>  
 </head>
 <body>

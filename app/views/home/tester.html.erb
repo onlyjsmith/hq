@@ -1,50 +1,53 @@
-<div class='container'>
-  <!-- Multi-model autocomplete -->
-  <div class="row">
-    <div class="span6">
-      <h2>OmniEnter box - search for everything!</h2>
-      <input id="search" placeholder="" class="omni_enter"/>
-    </div>
-    <!-- <div class="span6">
-      <h2>Time stuff</h2>
-      <form action="tester" method="get" accept-charset="utf-8">
-        <input type="text" name="time_input" placeholder="Enter any description of time"> 
-        <p><input type="submit" value="Continue"></p>
-      </form>
-    </div> -->
-  </div>
-  <div class="row show-grid">
-    <div class="span3 model_results species">
-      <ul>
-        <h2>Species</h2>
-        <div id="species"></div>
-      </ul>
-    </div>
-    <div class="span3 model_results tribe">
-      <ul>
-        <h2>Tribe</h2>
-        <div id="tribe"></div>
-      </ul>
-    </div>
-    <div class="span3 model_results location">
-      <ul>
-        <h2>Location</h2>
-        <div id="location"></div>
-      </ul>
-    </div>
-    <div class="span3 model_results time">
-      <ul>
-        <h2>Time</h2>
-        <div id="time"></div>
-      </ul>
-    </div>
-  </div>
-   
-  <!-- Time parsing -->
-  <!-- <div class='row well'>
-    <h1>Response</h1>
-    <p><%= @response %></p>
-  </div> -->
+  <script type="text/javascript">
 
-</div>
+  var cartodb1_gmapsv3
+    , cartodb2_gmapsv3
+    , cartodb3_gmapsv3;
 
+  function initialize() {
+    var map = new google.maps.Map(document.getElementById('map_canvas'), {
+      center: new google.maps.LatLng(20,0),
+      zoom: 4,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      mapTypeControl: false
+    });
+
+    cartodb2_gmapsv3 = new google.maps.CartoDBLayer({
+      map_canvas: 'map_canvas',
+      map: map,
+      user_name:"examples",
+      table_name: 'earthquakes',
+      query: "SELECT cartodb_id,the_geom_webmercator,magnitude FROM {{table_name}}",
+      tile_style: "#{{table_name}}{marker-fill:#E25B5B}",
+      map_style: true,
+      infowindow: "SELECT cartodb_id,the_geom_webmercator,magnitude FROM {{table_name}} WHERE cartodb_id={{feature}}",
+      auto_bound: false,
+      debug: true
+    });  
+
+    cartodb1_gmapsv3 = new google.maps.CartoDBLayer({
+      map_canvas: 'map_canvas',
+      map: map,
+      user_name:'examples',
+      table_name: 'country_colors',
+      query: "SELECT * FROM {{table_name}}",
+      map_style: false,
+      infowindow: false,
+      auto_bound: false,
+      debug: true
+    });
+    
+    $('form').submit(function(ev){
+      ev.stopPropagation(); ev.preventDefault();
+      var value = $(this).find('input').val();
+      cartodb2_gmapsv3.update({'query':value});
+    });
+  }
+
+  </script>
+
+<body onload="initialize()">
+  <div id="map_canvas"></div>
+  <form><input type="text" value="SELECT * FROM earthquakes"/></form>
+  <a class="cartodb_logo" href="http://www.cartodb.com" target="_blank">CartoDB</a>
+</body>
