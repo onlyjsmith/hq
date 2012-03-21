@@ -1,5 +1,5 @@
-$(document).ready ->
-  initialize_landing_map()
+# $(document).ready ->
+#   initialize_landing_map()
 
 initialize_landing_map = ->
   wax.tilejson "http://a.tiles.mapbox.com/v3/onlyjsmith.wildspot-map.jsonp", (tilejson) ->
@@ -20,7 +20,7 @@ initialize_landing_map = ->
 
     cartodb_imagemaptype = new google.maps.ImageMapType(cartodb_layer)
     map.overlayMapTypes.insertAt 0, cartodb_imagemaptype
-
+google.maps.event.addDomListener window, "load", initialize_landing_map  
 
   # Working basic map
   # 
