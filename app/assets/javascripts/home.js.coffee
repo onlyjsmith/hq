@@ -1,16 +1,7 @@
-window.WILDSPOT =
-  msg: "nonthing"
-  
-window.WILDSPOT.msg  = (message) ->
-  console.log message            
-  
 $(document).ready ->
-  # initialize_map()
-  # $("#map_landing_page").click ->
-  #   console.log "hi"
-  #   # initialize_map()
+  initialize_landing_map()
 
-window.WILDSPOT.initialize_landing_map = ->
+initialize_landing_map = ->
   wax.tilejson "http://a.tiles.mapbox.com/v3/onlyjsmith.wildspot-map.jsonp", (tilejson) ->
     map = new google.maps.Map(document.getElementById("map_landing_page"),
       center: new google.maps.LatLng(-12.6, 26)
