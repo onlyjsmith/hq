@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="page-header">
+    <div class="row">
+      <div class="span9">
+        <h1>List of companies - almost ADMIN use</h1>
+      </div>
+      <div class="span3">
+        <%= link_to "Add new one", new_company_path, :class => 'btn btn-success' %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span9">
+      <%= render :partial => 'table' %>
+    </div>
+  </div>
+</div>
+

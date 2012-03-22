@@ -17,7 +17,9 @@ Hq::Application.routes.draw do
 
   resources :species 
   resources :locations
-  resources :tribes
+  resources :tribes 
+  resources :camps
+  resources :companies
   # get "sightings/index"
   # 
   # get "sightings/new"
