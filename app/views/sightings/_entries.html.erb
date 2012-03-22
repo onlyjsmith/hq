@@ -17,8 +17,9 @@
           <%= "no tribe" %>
         <% end %>
         near
-        <%= link_to sighting.location.name, location_path(sighting.location.id) %> about 
-        <a href='#'><%= distance_of_time_in_words(Time.now, sighting.record_time) %></a> ago
+<!-- TODO: Swap this bit of model/controller logic out of the view and somewhere else  -->
+        <%= sighting.location.nil? ? "nowhere" : link_to(sighting.location.name, location_path(sighting.location.id)) %> about 
+        <a href='#'><%= sighting.record_time.nil? ? "no time" : distance_of_time_in_words(Time.now, sighting.record_time) %></a> ago
       </td>
       <td>
         <%= link_to "Details + Edit", edit_sighting_path(sighting), :class => 'btn btn-warning' %>
