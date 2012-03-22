@@ -1,12 +1,12 @@
 <div class="container">
   <h1>Sighting #<%= @sighting.id %></h1>
   <h2>What</h2>
-    <p><%= @sighting.species.common_name %> (<em><%= @sighting.species.binomial %></em>) from </p>
-    <p><%= @sighting.tribe.name %> </p>
+    <p><%= @sighting.species.try(:common_name) %> (<em><%= @sighting.species.try(:binomial) %></em>) from </p>
+    <p><%= @sighting.tribe.try(:name) %> </p>
     <p><%= @sighting.description%> </p>
   <h2>Where</h2>
-    <p><%= @sighting.location.name%></p>
-    <p>On drive #<%= @sighting.drive.id %> (<%= @sighting.drive.description %>) from Camp #<%= @sighting.camp_id %></p>
+    <p><%= @sighting.location.try(:name)%></p>
+    <p>On drive #<%= @sighting.try(:drive_id) %> from Camp #<%= @sighting.camp.try(:name) %></p>
     
   <h2>When</h2>
     <p><%= @sighting.record_time%> +/- <%= pluralize @sighting.time_window_hr, 'hour' %></p>
