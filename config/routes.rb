@@ -18,8 +18,10 @@ Hq::Application.routes.draw do
   resources :species 
   resources :locations
   resources :tribes 
-  resources :camps
-  resources :companies
+
+  resources :companies do
+    resources :camps
+  end
   # get "sightings/index"
   # 
   # get "sightings/new"
