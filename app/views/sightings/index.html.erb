@@ -2,7 +2,7 @@
   <div class="page-header">
     <div class="row">
       <div class="span9">
-        <h1>Sightings for <%= link_to "#{@camp.name}", camp_path(@camp) %></h1>
+        <h1>All Sightings</h1>
       </div>
       <div class="span3">
         <%= link_to "Add new sighting", new_sighting_path, :class => 'btn btn-success' %>
@@ -14,10 +14,10 @@
       <div class="row">
         <div class="span6">
           <div class="btn-group" data-toggle="buttons-radio">
-            <%= link_to "Today", {:url => camp_sightings_path, :filter_time => 1}, :remote => true, :class => 'btn change_date' %>
-            <%= link_to "7 days", {:url => camp_sightings_path, :filter_time => 7}, :remote => true, :class => 'btn change_date' %>
-            <%= link_to "30 days", {:url => camp_sightings_path, :filter_time => 30}, :remote => true, :class => 'btn change_date' %>
-            <%= link_to "Year", {:url => camp_sightings_path, :filter_time => 365}, :remote => true, :class => 'btn change_date' %>
+            <%= link_to "Today", {:url => sightings_path, :filter_time => 1}, :remote => true, :class => 'btn change_date' %>
+            <%= link_to "7 days", {:url => sightings_path, :filter_time => 7}, :remote => true, :class => 'btn change_date' %>
+            <%= link_to "30 days", {:url => sightings_path, :filter_time => 30}, :remote => true, :class => 'btn change_date' %>
+            <%= link_to "Year", {:url => sightings_path, :filter_time => 365}, :remote => true, :class => 'btn change_date' %>
           </div>
         </div>
         <div class="span3">
@@ -60,15 +60,6 @@
               <h2>Stats</h2>
               <h3><%= @drive_count %> drives (550km, 34hrs)</h3>
               <h3><%= @sightings.count %> sightings (19 rare)</h3>
-            </div>
-            <div id="chart" class="span6">
-              <!-- <div class="row"> 
-                <div class="span6"> -->
-                  <h2>Species history</h2>
-                  <%= high_chart("my_id", @h) %>
-                  <!-- <p>Interesting chart showing some good stats</p> -->
-                <!-- </div>
-              </div> -->
             </div>
           </div>
         </div>
