@@ -2,7 +2,7 @@
   <div class="page-header">
     <div class="row">
       <div class="span9">
-        <h1>Sightings for <%= link_to "#{@camp.name}", "#" %></h1>
+        <h1>Sightings for <%= link_to "#{@camp.name}", camp_path(@camp) %></h1>
       </div>
       <div class="span3">
         <%= link_to "Add new sighting", new_sighting_path, :class => 'btn btn-success' %>

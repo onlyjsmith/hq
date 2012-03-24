@@ -9,10 +9,10 @@
     <% @camps.each do |camp| %>
     <tr>
       <td>
-        <%= link_to camp.name, edit_company_camp_path(@company, camp) %>
+        <%= link_to camp.name, edit_camp_path(camp) %>
       </td>
       <td>
-        <%= link_to "Details", edit_company_camp_path(@company, camp), :class => "btn btn-mini btn-warning" %>
+        <%= link_to "Details", edit_camp_path(camp), :class => "btn btn-mini btn-warning" %>
       </td>
     </tr>
     <% end %>

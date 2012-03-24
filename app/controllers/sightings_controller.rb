@@ -3,7 +3,8 @@ class SightingsController < ApplicationController
   
   def index
     @user = "Bob"
-    @camp = Camp.first
+    # TODO: Stop this selecting first camp as a fallback
+    @camp = Camp.find(session[:camp_id]) || Camp.first
     @sightings = Sighting.search(params[:search])
     @drive_count = @sightings.map{|x| x.drive}.uniq.count
     @species = @sightings.map{|x| x.species}.uniq
