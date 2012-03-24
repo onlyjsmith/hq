@@ -15,12 +15,14 @@
       <h2>Headline Company Stats</h2>
       <ul>
         <li><%= pluralize(@company.camps.count, 'camp') %></li>
-        <li><%= pluralize(@sightings.count, 'sighting') %> since <%= @sightings.first.try(:record_time) %></li>
-        <li>
-          Most recent sighting was <%= @sightings.last.species.common_name %> at 
-          <%= link_to @sightings.last.camp.name, camp_path(@sightings.last.camp) %>
-          <%= link_to "(View sightings detail)", sighting_path(@sightings.last) %>
-        </li>
+        <% unless @sightings.empty? %>
+          <li><%= pluralize(@sightings.count, 'sighting') %> since <%= @sightings.first.try(:record_time) %></li>
+          <li>
+            Most recent sighting was <%= @sightings.last.species.common_name %> at 
+            <%= link_to @sightings.last.camp.name, camp_path(@sightings.last.camp) %>
+            <%= link_to "(View sightings detail)", sighting_path(@sightings.last) %>
+          </li>
+        <% end %>
         <!-- TODO: Add controller/model code to calculate camp with most sightings, etc -->
         <li>Most sightings recorded at XX </li>
       </ul>
