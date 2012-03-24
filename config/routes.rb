@@ -5,9 +5,6 @@ Hq::Application.routes.draw do
 
   get "sightings/getcsv"
 
-  resources :sightings do
-    get :autocomplete_species_common_name, :on => :collection
-  end
 
   # resources :sightings do
   #   collection do
@@ -18,7 +15,13 @@ Hq::Application.routes.draw do
   resources :species 
   resources :locations
   resources :tribes 
-  resources :camps
+  resources :camps do
+    resources :sightings do
+      get :autocomplete_species_common_name, :on => :collection
+    end
+  end
+  
+  
   resources :companies 
   
   get "company/:id/camps", :as => :company_camps, :controller => :companies, :action => :camps_index

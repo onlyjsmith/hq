@@ -12,9 +12,7 @@ class CampsController < ApplicationController
     # @most_sightings_camp = @camps.
   end
           
-  # TODO: Replace this with Camp HEADLINES - for now redirects to sightings#index 
   def show
-    session[:camp_id] = params[:id]
-    redirect_to sightings_path
+    @camp = Camp.find(params[:id])
   end
 end

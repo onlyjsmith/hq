@@ -3,8 +3,9 @@ class SightingsController < ApplicationController
   
   def index
     @user = User.first
+    # debugger
     # TODO: Stop this selecting first camp as a fallback
-    @camp = Camp.find(session[:camp_id]) || Camp.first
+    @camp = Camp.find(params[:camp_id])
 
     # TODO: Scope this by Camp
     @sightings = Sighting.filter_time(params[:filter_time])
