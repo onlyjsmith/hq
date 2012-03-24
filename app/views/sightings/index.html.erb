@@ -27,13 +27,13 @@
   </div>  
   
   <div class="row">
-    <div class="span12" id="entries">
+    <div class="span12" id="table">
       <h2>Entries</h2>
-      <%= render :partial => 'entries' %>
+      <%= render :partial => 'table' %>
     </div>
   </div>
   <div class="row">
-    <div class="span12" id="entries">
+    <div class="span12">
       <h2>Pics of recent species</h2>
       <% @species.each do |species| %> 
         <!-- TODO: Definitely not the way to get or display these images, but works for now -->
