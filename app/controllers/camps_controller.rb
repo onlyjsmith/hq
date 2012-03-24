@@ -1,5 +1,6 @@
 class CampsController < ApplicationController
   def index
+    debugger
     # TODO: Redirect to "no company page" as fallback instead of selecting the first company
     @company = Company.find(session[:company_id]) || Company.first
 

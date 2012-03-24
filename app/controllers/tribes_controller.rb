@@ -2,7 +2,7 @@ class TribesController < ApplicationController
   def index
     # debugger
     @tribes = Tribe.scoped
-    @tribes = @tribe.by_species(params[:species_id]) if params[:species_id]
+    @tribes = @tribes.by_species(params[:species_id]) if params[:species_id]
     @species = Species.find(params[:species_id]) if params[:species_id]
   end
 
@@ -15,8 +15,10 @@ class TribesController < ApplicationController
   end
 
   def new
+    # debugger
     @species = Species.find(params[:species_id])
     @tribe = Tribe.new
+    @tribe.species_id = @species.id
   end
 
   def create
