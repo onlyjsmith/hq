@@ -26,8 +26,11 @@ Species.create(:id => 1, :common_name => "lion", :binomial => "panthera leo")
 
 
 Company.create(:id => 1, :name => "Wildplaces")
+Company.create(:id => 2, :name => "Lesswildplaces")
 
 Camp.create(:id => 1, :name => "Wonderland Camp", :company_id => 1)
+Camp.create(:id => 2, :name => "Sugarland Camp", :company_id => 1)
+Camp.create(:id => 3, :name => "Seenothing Camp", :company_id => 2)
 
 
 Location.create(:id => 1, :name => "End of the garden")
