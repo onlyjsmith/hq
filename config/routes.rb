@@ -18,10 +18,10 @@ Hq::Application.routes.draw do
   resources :species 
   resources :locations
   resources :tribes 
-
-  resources :companies do
-    resources :camps
-  end
+  resources :camps
+  resources :companies 
+  
+  get "company/:id/camps", :as => :company_camps, :controller => :companies, :action => :camps_index
   # get "sightings/index"
   # 
   # get "sightings/new"
