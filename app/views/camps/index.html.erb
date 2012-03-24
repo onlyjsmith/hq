@@ -15,7 +15,8 @@
       <h2>Headline Company Stats</h2>
       <ul>
         <li><%= pluralize(@company.camps.count, 'camp') %></li>
-        <li><%= pluralize(@sightings.count, 'sighting') %> since <%= @sightings.last.try(:record_time) %></li>
+        <li><%= pluralize(@sightings.count, 'sighting') %> since <%= @sightings.first.try(:record_time) %></li>
+        <li>Most recent sighting was <%= @sightings.last.species.common_name %> at <%= link_to @sightings.last.camp.name, company_camps_path(@sightings.last) %></li>
       </ul>
     </div>
   </div>
