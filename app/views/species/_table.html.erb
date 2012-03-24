@@ -27,8 +27,9 @@
         <%= link_to "Details", edit_species_path(species), :class => "btn btn-mini btn-warning" %>
       </td>
       <td>
+        <%= link_to "Add new", new_species_tribe_path(species), :class => "btn btn-mini btn-success" %>
         <% unless species.tribes.blank? %>
-          <%= link_to "Tribes", species_tribes_path(species), :class => "btn btn-mini btn-warning" %>
+          <%= link_to "Existing tribes", species_tribes_path(species), :class => "btn btn-mini btn-warning" %>
         <% end %>
       </td>
     </tr>

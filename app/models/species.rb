@@ -2,6 +2,8 @@ class Species < ActiveRecord::Base
   has_many :sightings
   has_many :tribes 
   has_many :photos, :as => :imageable
+
+  accepts_nested_attributes_for :tribes, :allow_destroy => true  
   
   def get_photo_url
     unless self.photos.blank?
