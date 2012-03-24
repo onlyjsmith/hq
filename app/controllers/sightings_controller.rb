@@ -5,6 +5,8 @@ class SightingsController < ApplicationController
     @user = "Bob"
     # TODO: Stop this selecting first camp as a fallback
     @camp = Camp.find(session[:camp_id]) || Camp.first
+
+    # TODO: Scope this by Camp
     @sightings = Sighting.search(params[:search])
     @drive_count = @sightings.map{|x| x.drive}.uniq.count
     @species = @sightings.map{|x| x.species}.uniq
