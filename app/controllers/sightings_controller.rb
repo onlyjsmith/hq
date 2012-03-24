@@ -2,7 +2,7 @@ class SightingsController < ApplicationController
   autocomplete :species, :common_name
   
   def index
-    @user = "Bob"
+    @user = User.first
     # TODO: Stop this selecting first camp as a fallback
     @camp = Camp.find(session[:camp_id]) || Camp.first
 
