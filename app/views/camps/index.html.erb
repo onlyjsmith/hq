@@ -19,7 +19,10 @@
         <li>
           Most recent sighting was <%= @sightings.last.species.common_name %> at 
           <%= link_to @sightings.last.camp.name, camp_path(@sightings.last.camp) %>
-          <%= link_to "(View sightings detail)", sighting_path(@sightings.last) %></li>
+          <%= link_to "(View sightings detail)", sighting_path(@sightings.last) %>
+        </li>
+        <!-- TODO: Add controller/model code to calculate camp with most sightings, etc -->
+        <li>Most sightings recorded at XX </li>
       </ul>
     </div>
   </div>
