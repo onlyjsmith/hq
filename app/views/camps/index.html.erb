@@ -11,6 +11,15 @@
     </div>
   </div>
   <div class="row">
+    <div id="stats" class="span12">
+      <h2>Headline Company Stats</h2>
+      <ul>
+        <li><%= pluralize(@company.camps.count, 'camp') %></li>
+        <li><%= pluralize(@sightings.count, 'sighting') %> since <%= @sightings.last.try(:record_time) %></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
     <div class="span9">
       <%= render :partial => 'table' %>
     </div>
