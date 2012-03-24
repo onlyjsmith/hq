@@ -18,7 +18,8 @@
         <li><%= pluralize(@sightings.count, 'sighting') %> since <%= @sightings.first.try(:record_time) %></li>
         <li>
           Most recent sighting was <%= @sightings.last.species.common_name %> at 
-          <%= link_to @sightings.last.camp.name, camp_path(@sightings.last.camp) %></li>
+          <%= link_to @sightings.last.camp.name, camp_path(@sightings.last.camp) %>
+          <%= link_to "(View sightings detail)", sighting_path(@sightings.last) %></li>
       </ul>
     </div>
   </div>
