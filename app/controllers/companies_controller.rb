@@ -6,8 +6,8 @@ class CompaniesController < ApplicationController
   
   def show
     @company = Company.find(params[:id])
-    session[:company_id] = @company.id
-    redirect_to companies_path
+    # session[:company_id] = @company.id
+    # redirect_to companies_path
   end
   
   def camps_index

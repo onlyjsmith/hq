@@ -13,4 +13,12 @@ class Sighting < ActiveRecord::Base
       all
     end
   end
+  
+  def self.by_camp(camp)
+    if camp
+      where(:camp_id => camp.id)
+    else
+      all
+    end
+  end
 end

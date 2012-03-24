@@ -1,12 +1,8 @@
 class CampsController < ApplicationController
   def index
-    @camps = Camp.scoped
-    # debugger
-    # TODO: Redirect to "no company page" as fallback instead of selecting the first company
-    # @company = Company.find(session[:company_id]) || Company.first
-
-    # TODO: Scope this to only the company's camps - this doesn't feel like the right way, but it works
-    # @camps = Camp.company_camps(@company.id)
+    # Scopes by company if exists.
+    @company = Company.find(params[:company_id]) if params[:company_id]
+    @camps = Camp.company_camps(@company)
 
     # @sightings = @camps.all.map{|e| e.sightings}.flatten
     

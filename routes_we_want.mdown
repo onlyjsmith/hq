@@ -1,22 +1,23 @@
 # BASIC index
-  /companies      list all companies
-  /camps          list all camps
-  /sightings      list all sightings
-  /species        list all species
-  /tribes         list all tribes
-  /locations      list all locations
+Y  /companies                    list all companies --> ADMIN function
+Y  /camps                        list all camps in the world
+Y  /sightings                    list all sightings
+Y  /species                      list all species
+Y  /tribes                       list all tribes
+Y  /locations                    list all locations
 
 # ASSOCIATED indexes
-  /companies/:id/camps    list all camps for a company
-  /camps/:id/sightings    list all sightings recorded at a camp
-  /camps/:id/locations    list all locations in proximity to a camp - not a static association
-  /species/:id/tribes     list all tribes for a species
-  /tribes/:id/sightings   list all sightings of a tribe
+Y  /companies/:id/camps          list all camps for a company
+  /companies/:id/sightings      list/filter all sightings for a company
+  /camps/:id/sightings          list all sightings recorded at a camp
+  /camps/:id/locations          list all locations in proximity to a camp - not a static association
+Y  /species/:id/tribes           list all tribes for a species
+  /tribes/:id/sightings         list all sightings of a tribe
   
 # CRUDing  
-  /companies/!CRUD    CRUD companies --> ADMIN
-  /camps/!CRUD        CRUD camps
-  /sightings/!CRUD    CRUD sightings
-  /species/!CRUD      CRUD species
-  /tribes/!CRUD       CRUD tribes
-  /locations/!CRUD    CRUD locations
+Y  /companies/!CRUD              CRUD companies --> ADMIN function
+Y  /camps/!CRUD                  CRUD camps
+Y  /sightings/!CRUD              CRUD sightings
+Y  /species/!CRUD                CRUD species
+Y  /species/:id/tribes/!CRUD     CRUD species_tribes
+Y  /locations/!CRUD              CRUD locations
