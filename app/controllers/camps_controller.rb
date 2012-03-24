@@ -1,9 +1,7 @@
 class CampsController < ApplicationController
   def index
-    # debugger                                   
-
-    # TODO: Stop this selecting only the first company!
-    @company = session[:company] || Company.first
+    # TODO: Redirect to "no company page" as fallback instead of selecting the first company
+    @company = Company.find(session[:company_id]) || Company.first
 
     # TODO: Scope this to only the company's camps - this doesn't feel like the right way, but it works
     @camps = Camp.company_camps(@company.id)
@@ -16,7 +14,6 @@ class CampsController < ApplicationController
           
   # TODO: Replace this with Camp HEADLINES - for now redirects to sightings#index 
   def show
-    # debugger
     session[:camp_id] = params[:id]
     redirect_to sightings_path
   end
