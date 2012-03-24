@@ -11,18 +11,22 @@ Hq::Application.routes.draw do
   #     get 'search'
   #   end
   # end
-
-  resources :species 
+  resources :tribes, :only => [:index]
+  resources :species do
+    resources :tribes 
+  end
+     
   resources :locations
-  resources :tribes 
-  resources :camps do
-    resources :sightings do
-      get :autocomplete_species_common_name, :on => :collection
-    end
+
+  resources :sightings do
+    get :autocomplete_species_common_name, :on => :collection
+  end
+
+  resources :camps, :only => [:index]
+  resources :companies do
+    resources :camps
   end
   
-  
-  resources :companies 
   
   get "company/:id/camps", :as => :company_camps, :controller => :companies, :action => :camps_index
   # get "sightings/index"

@@ -5,6 +5,7 @@
       <th>Binomial</th>
       <th>Image</th>                                    
       <th>Details / Edit</th>
+      <th>Family groups / Tribes</th>
     </tr>
   </thead>
   <tbody>
@@ -24,6 +25,11 @@
       </td>
       <td>
         <%= link_to "Details", edit_species_path(species), :class => "btn btn-mini btn-warning" %>
+      </td>
+      <td>
+        <% unless species.tribes.blank? %>
+          <%= link_to "Tribes", species_tribes_path(species), :class => "btn btn-mini btn-warning" %>
+        <% end %>
       </td>
     </tr>
     <% end %>
