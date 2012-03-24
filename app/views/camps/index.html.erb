@@ -3,30 +3,16 @@
     <div class="row">
       <div class="span9">
         <!-- TODO: Nest this properly. Following is example of what not to do -->
-        <h1>Summary of Camps for <%= link_to "#{@company.name} Company", company_path(@company) %></h1>
+        <h1>
+          List of Camps 
+          <% if @company %>
+            for <%= link_to "#{@company.name} Company", company_path(@company) %>
+          <% end %>
+        </h1>
       </div>
       <div class="span3">
-        <%= link_to "Add new one", new_company_path, :class => 'btn btn-success' %>
+        <%= link_to "Add new camp", new_camp_path, :class => 'btn btn-success' %>
       </div>
-    </div>
-  </div>
-  <div class="row">
-    <div id="stats" class="span12">
-      <h2>Headline Company Stats</h2>
-      <ul>
-        <li><%= pluralize(@company.camps.count, 'camp') %></li>
-        <% unless @sightings.empty? %>
-          <li><%= pluralize(@sightings.count, 'sighting') %> since <%= @sightings.first.try(:record_time) %></li>
-          <li>
-            Most recent sighting was <%= @sightings.last.species.common_name %> at 
-            <%= link_to @sightings.last.camp.name, camp_path(@sightings.last.camp) %>
-            <%= link_to "(View sightings detail)", sighting_path(@sightings.last) %>
-          </li>
-
-          <!-- TODO: Add controller/model code to calculate camp with most sightings, etc -->
-          <li>Most sightings recorded at XX </li>
-        <% end %>
-      </ul>
     </div>
   </div>
   <div class="row">
