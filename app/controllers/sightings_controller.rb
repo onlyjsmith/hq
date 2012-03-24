@@ -7,7 +7,7 @@ class SightingsController < ApplicationController
     @camp = Camp.find(session[:camp_id]) || Camp.first
 
     # TODO: Scope this by Camp
-    @sightings = Sighting.search(params[:search])
+    @sightings = Sighting.filter_time(params[:filter_time])
     @drive_count = @sightings.map{|x| x.drive}.uniq.count
     @species = @sightings.map{|x| x.species}.uniq
     @h = LazyHighCharts::HighChart.new('graph') do |f|

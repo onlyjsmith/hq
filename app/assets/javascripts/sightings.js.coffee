@@ -2,7 +2,7 @@
 $(document).ready -> 
   $(".tabs").button()
   $(".change_date").click ->
-    $.get "sightings", $.param(search: $(this).attr("data-duration"))
+    $.get "sightings", $.param(filter_time: $(this).attr("data-duration"))
 
   $("input:text:visible:first").focus()
   $("#search").catcomplete
