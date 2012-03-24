@@ -1,5 +1,6 @@
-<%= simple_form_for @tribe do |f| %>
+<%= simple_form_for @tribe do |f| %>      
   <%= f.input :name %>
+  <%# debugger %>
   <%= f.collection_select :species_id, Species.all, :id, :common_name %>
   <%= f.association :location %>
   <%= f.button :submit %>
