@@ -9,7 +9,7 @@
     <% @sightings.each do |sighting| %>
     <tr>
       <td>
-        <a href="#"><%= @user %></a> reported
+        <a href="#"><%= @user.email %></a> reported
         <%= link_to sighting.species.common_name, species_path(sighting.species) %></a> from
         <% if sighting.tribe.try(:name) %> 
           <%= link_to sighting.tribe.name, tribe_path(sighting.tribe) %>
