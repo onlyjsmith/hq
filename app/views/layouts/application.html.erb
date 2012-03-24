@@ -39,11 +39,18 @@
           <!-- <li><%= link_to "Stuff Tester", home_tester_path %></li> -->
           <li><%= link_to "ADMIN", rails_admin.dashboard_path %></li>
         </ul>
-        <%= link_to "+ Add new sighting", new_sighting_path, :class => 'navbar-text pull-right' %>
+
+        <!-- Displays company and camp selected - mostly for development -->
       </div>
     </div>
   </div>
 </div>
+<p>
+  <%= session[:company_id].nil? ? "No company" : Company.find(session[:company_id]).name %> selected
+</p>
+<p>
+  <%= session[:camp_id].nil? ? "No camp" : Camp.find(session[:camp_id]).name %> selected
+</p>
 
 <%= yield %>
 
