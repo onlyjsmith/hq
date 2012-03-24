@@ -45,12 +45,12 @@
     </div>
   </div>
 </div>
-<p>
-  <%= session[:company_id].nil? ? "No company" : Company.find(session[:company_id]).name %> selected
+<!-- <p>
+  <%# session[:company_id].nil? ? "No company" : Company.find(session[:company_id]).name %> selected
 </p>
 <p>
-  <%= session[:camp_id].nil? ? "No camp" : Camp.find(session[:camp_id]).name %> selected
-</p>
+  <%# #session[:camp_id].nil? ? "No camp" : Camp.find(session[:camp_id]).name %> selected
+</p>  -->
 
 <%= yield %>
 
