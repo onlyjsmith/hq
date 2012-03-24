@@ -11,7 +11,7 @@ Hq::Application.routes.draw do
   #     get 'search'
   #   end
   # end
-  resources :tribes, :only => [:index]
+  resources :tribes
   resources :species do
     resources :tribes 
   end
