@@ -8,8 +8,13 @@ class SightingsController < ApplicationController
 
     @sightings = Sighting.scoped
     @sightings = @sightings.by_camp(@camp) if @camp
-    @sightings = @sightings.filter_time(params[:filter_time])
 
+    # TODO: Remove, is just for testing
+    params[:species] = Species.find(2)
+
+
+    # debugger                                                             
+    @sightings = @sightings.filter_by(params[:filter_time], params[:species])
 
     @drive_count = @sightings.map{|x| x.drive}.uniq.count
     @species = @sightings.map{|x| x.species}.uniq
@@ -19,6 +24,19 @@ class SightingsController < ApplicationController
       # format.json { render json: @sightings }
       format.js
     end
+  end
+  
+  def filter
+    puts
+    puts "PARAMS: > #{params}" 
+    @sightings = Sighting.all
+
+    respond_to do |format|
+      # format.html # index.html.erb
+      # format.json { render json: @sightings }
+      format.js               
+    end
+    
   end
 
   def show
