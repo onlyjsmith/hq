@@ -14,12 +14,6 @@ class SightingsController < ApplicationController
     @drive_count = @sightings.map{|x| x.drive}.uniq.count
     @species = @sightings.map{|x| x.species}.uniq
     
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: [@sightings,params] }
-      # format.json { render json: params }
-      format.js
-    end
   end
 
   def show
