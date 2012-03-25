@@ -3,6 +3,7 @@ require 'SecureRandom'
 class Location < ActiveRecord::Base
   has_many :sightings
   has_many :tribes
+  # TODO: Location <-> Camp should be a location-based association, dynamic
   has_many :camps
   
   #before_save :update_geom_to_cartodb

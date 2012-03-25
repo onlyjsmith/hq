@@ -1,0 +1,23 @@
+# BASIC index
+Y  /companies                    list all companies --> ADMIN function
+Y  /camps                        list all camps in the world
+Y  /sightings                    list all sightings
+Y  /species                      list all species
+Y  /tribes                       list all tribes
+Y  /locations                    list all locations
+
+# ASSOCIATED indexes
+Y  /companies/:id/camps          list all camps for a company
+  /companies/:id/sightings      list/filter all sightings for a company
+  /camps/:id/sightings          list all sightings recorded at a camp
+  /camps/:id/locations          list all locations in proximity to a camp - not a static association
+Y  /species/:id/tribes           list all tribes for a species
+  /tribes/:id/sightings         list all sightings of a tribe
+  
+# CRUDing  
+Y  /companies/!CRUD              CRUD companies --> ADMIN function
+Y  /camps/!CRUD                  CRUD camps
+Y  /sightings/!CRUD              CRUD sightings
+Y  /species/!CRUD                CRUD species
+Y  /species/:id/tribes/!CRUD     CRUD species_tribes
+Y  /locations/!CRUD              CRUD locations

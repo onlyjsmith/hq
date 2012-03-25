@@ -2,7 +2,7 @@
   <div class="page-header">
     <div class="row">
       <div class="span9">
-        <h1>Sightings for <%= link_to "#{@camp.name}", "#" %></h1>
+        <h1>All Sightings</h1>
       </div>
       <div class="span3">
         <%= link_to "Add new sighting", new_sighting_path, :class => 'btn btn-success' %>
@@ -14,9 +14,10 @@
       <div class="row">
         <div class="span6">
           <div class="btn-group" data-toggle="buttons-radio">
-            <%= link_to "Today", {:url => sightings_path, :search => 1}, :remote => true, :class => 'btn change_date' %>
-            <%= link_to "7 days", {:url => sightings_path, :search => 7}, :remote => true, :class => 'btn change_date' %>
-            <%= link_to "30 days", {:url => sightings_path, :search => 30}, :remote => true, :class => 'btn change_date' %>
+            <%= link_to "Today", {:url => sightings_path, :filter_time => 1}, :remote => true, :class => 'btn change_date' %>
+            <%= link_to "7 days", {:url => sightings_path, :filter_time => 7}, :remote => true, :class => 'btn change_date' %>
+            <%= link_to "30 days", {:url => sightings_path, :filter_time => 30}, :remote => true, :class => 'btn change_date' %>
+            <%= link_to "Year", {:url => sightings_path, :filter_time => 365}, :remote => true, :class => 'btn change_date' %>
           </div>
         </div>
         <div class="span3">
@@ -27,13 +28,12 @@
   </div>  
   
   <div class="row">
-    <div class="span12" id="entries">
-      <h2>Entries</h2>
-      <%= render :partial => 'entries' %>
+    <div class="span12" id="table">
+      <%= render :partial => 'table' %>
     </div>
   </div>
   <div class="row">
-    <div class="span12" id="entries">
+    <div class="span12">
       <h2>Pics of recent species</h2>
       <% @species.each do |species| %> 
         <!-- TODO: Definitely not the way to get or display these images, but works for now -->
@@ -60,15 +60,6 @@
               <h2>Stats</h2>
               <h3><%= @drive_count %> drives (550km, 34hrs)</h3>
               <h3><%= @sightings.count %> sightings (19 rare)</h3>
-            </div>
-            <div id="chart" class="span6">
-              <!-- <div class="row"> 
-                <div class="span6"> -->
-                  <h2>Species history</h2>
-                  <%= high_chart("my_id", @h) %>
-                  <!-- <p>Interesting chart showing some good stats</p> -->
-                <!-- </div>
-              </div> -->
             </div>
           </div>
         </div>

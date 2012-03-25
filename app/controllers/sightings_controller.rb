@@ -2,19 +2,17 @@ class SightingsController < ApplicationController
   autocomplete :species, :common_name
   
   def index
-    @user = "Bob"
-    @camp = Camp.first
-    @sightings = Sighting.search(params[:search])
+    @user = User.first
+
+    @camp = Camp.find(params[:camp_id])    if params[:camp_id]         
+
+    @sightings = Sighting.scoped
+    @sightings = @sightings.by_camp(@camp) if @camp
+    @sightings = @sightings.filter_time(params[:filter_time])
+
+
     @drive_count = @sightings.map{|x| x.drive}.uniq.count
     @species = @sightings.map{|x| x.species}.uniq
-    @h = LazyHighCharts::HighChart.new('graph') do |f|
-      f.options[:chart] = {:height => 200, :width => 400, :defaultSeriesType =>  "area" }
-      f.options[:yAxis][:max] = 20
-      f.options[:title][:text] = nil 
-      f.options[:legend] = {:floating => true, :verticalAlign => 'top'}
-      f.series(:name=>'Lion', :color => '#b1ad73', :data=>[3, 20, 3, 5, 4, 10, 12, 5,6,7,7,10,9,9])
-      f.series(:name=>'Tiger', :color => '#6b8665', :data=> [1, 3, 4, 3, 3, 5, 4,7,8,8,9,9,0,0,9] )
-    end
     
     respond_to do |format|
       format.html # index.html.erb
@@ -37,8 +35,23 @@ class SightingsController < ApplicationController
   end
   
   def create
-    @sighting = Sighting.new(params[:sighting])
+    @sighting = Sighting.new
+
+    # TODO: Change these defaults - they're just for demo purpose
+    # TODO: Definitely want to add defaults and validations to the model, not controller
+    @sighting.species_id = params[:species_id]
+    @sighting.tribe_id = params[:tribe_id]
+    @sighting.location_id = params[:location_id] ||
+    # Time has a weird _id suffix - it's just to keep the JS simple
+    @sighting.record_time = Time.parse(params[:time_id]) || Time.now
+    @sighting.time_window_hr = 0
+    @sighting.description = params[:description] || "No description"
+    @sighting.camp_id = 1
+    @sighting.drive_id = 1
+    @sighting.submission_point = "HQ"
+    @sighting.user_id = 1
     
+    debugger
     respond_to do |wants|
       if @sighting.save
         flash[:notice] = 'Sighting was successfully created.'
