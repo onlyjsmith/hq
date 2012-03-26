@@ -13,13 +13,13 @@ Hq::Application.routes.draw do
   # end
   resources :tribes, :only => [:index]
   resources :species do
+    get :autocomplete_species_common_name, :on => :collection
     resources :tribes 
   end
      
   resources :locations
 
   resources :sightings do
-    get :autocomplete_species_common_name, :on => :collection
   end
 
   resources :camps do
