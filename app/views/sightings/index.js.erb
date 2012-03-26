@@ -1,2 +1,6 @@
+function render_partial (partial, locals{}) {
+  return "<%= escape_javascript(render(:partial => 'table', :locals => {:sightings => @sightings})) %>";
+}
+
 // Looks like it's an odd place for this file, but it needs to not be in the ASSETS PIPELINE, or 'render' fails
 $("#table").html("<%= escape_javascript(render(:partial => 'table', :locals => {:sightings => @sightings})) %>");
