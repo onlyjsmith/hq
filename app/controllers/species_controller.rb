@@ -1,6 +1,6 @@
 class SpeciesController < ApplicationController
   def index
-    @species = Species.all
+    @species = Species.search(params[:term])
   end
   
   def show

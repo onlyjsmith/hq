@@ -6,25 +6,31 @@
       <div id="results"></div>
     </div>
     <div class="span6">
-      <h1>Filters</h1>
-      <%= form_tag sightings_path, :method => 'post' do %>
-        <%= label_tag :species %>
-        <%= text_field_tag :species, params[:species] %>
+      <div class="row">
+        <h1>Filters</h1>
+          <%= form_tag sightings_path, :method => 'post' do %>
+            <%= label_tag :species %>
+            <%= text_field_tag :species, params[:species], :class => 'auto' %>
+            <%= hidden_field_tag :species_id %>
 
-        <%= label_tag :tribe %>
-        <%= text_field_tag :tribe, params[:tribe] %>
+            <%= label_tag :tribe %>
+            <%= text_field_tag :tribe, params[:tribe] %>
 
-        <%= label_tag :camp %>
-        <%= text_field_tag :camp, params[:camp] %>
+            <%= label_tag :camp %>
+            <%= text_field_tag :camp, params[:camp] %>
 
-        <%= label_tag :location %>
-        <%= text_field_tag :location, params[:location] %>
+            <%= label_tag :location %>
+            <%= text_field_tag :location, params[:location] %>
 
         
-        <%= label_tag %>
-        <%= submit_tag "Search" %>
-      <% end %>
-      
+            <%= label_tag %>
+            <%= submit_tag "Search" %>
+          <% end %>
+      </div>      
+      <!-- <div class="row">
+        <h1>Selected</h1>
+        <div id="selected"></div>
+      </div> -->
     </div>
   </div>
 </div>

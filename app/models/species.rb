@@ -4,6 +4,14 @@ class Species < ActiveRecord::Base
   has_many :photos, :as => :imageable
 
   accepts_nested_attributes_for :tribes, :allow_destroy => true  
+
+  def self.search(species)
+    if species
+      where('common_name ILIKE ?', "%#{species}%")
+    else
+      all
+    end
+  end
   
   def get_photo_url
     unless self.photos.blank?

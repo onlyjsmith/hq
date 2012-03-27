@@ -1,7 +1,7 @@
 class LocationsController < ApplicationController
   
   def index
-    @locations = Location.search(params[:search])
+    @locations = Location.search(params[:term])
     @search = Location.new
     @camp = Camp.first
     # puts "SEARCH TERMZ: #{@search.class}"

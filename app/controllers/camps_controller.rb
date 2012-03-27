@@ -3,7 +3,7 @@ class CampsController < ApplicationController
     # Scopes by company if exists.
     @company = Company.find(params[:company_id]) if params[:company_id]
     @camps = Camp.company_camps(@company)
-
+    # @camps = @camps.search(params[:term])
     # @sightings = @camps.all.map{|e| e.sightings}.flatten
     
     # TODO: Calculate the interesting stats for the company

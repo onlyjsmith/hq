@@ -8,11 +8,11 @@ class Location < ActiveRecord::Base
   
   #before_save :update_geom_to_cartodb
 
-  def self.search(search)
-    if search
-      find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
+  def self.search(location)
+    if location
+      where('name ILIKE ?', "%#{location}%")
     else
-      find(:all)
+      all
     end
   end
   
