@@ -1,10 +1,12 @@
 # Comment in coffeescript
 $(document).ready -> 
   $(".tabs").button()
+
   $(".change_date").click ->
     $.get "sightings", $.param(filter_time: $(this).attr("data-duration"))
 
   $("input:text:visible:first").focus()
+
   $("#search").catcomplete
     delay: 0
     source: "/home/auto_search.json"
