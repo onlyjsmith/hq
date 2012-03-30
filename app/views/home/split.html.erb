@@ -11,10 +11,11 @@
           <%= form_tag sightings_path, :method => 'post' do %>
             <%= label_tag :species %>
             <%= text_field_tag :species, params[:species], :class => 'auto' %>
-            <%= hidden_field_tag :species_id %>
+            <%= hidden_field_tag :species_ids %>
 
-            <%= label_tag :tribe %>
-            <%= text_field_tag :tribe, params[:tribe] %>
+            <%= label_tag :tribes %>
+            <%= text_field_tag :tribes, params[:tribes] %>
+            <%= hidden_field_tag :tribe_ids %>
 
             <%= label_tag :camp %>
             <%= text_field_tag :camp, params[:camp] %>
