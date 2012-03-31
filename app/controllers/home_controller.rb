@@ -3,18 +3,7 @@ class HomeController < ApplicationController
   end
   
   def redirect
-    item_id = params[:id]
-
-    case params[:model]
-    when 'species'
-      redirect_to species_path(item_id)
-    when 'tribe'
-      redirect_to species_tribe_path(Tribe.find(item_id))
-    when 'camp'
-      redirect_to camp_path(item_id)
-    when 'location'
-      redirect_to location_path(item_id)
-    end
+    redirect_to sightings_path("q[#{params[:model]}_id_eq]" => params[:id])
   end
   
   def auto_search
