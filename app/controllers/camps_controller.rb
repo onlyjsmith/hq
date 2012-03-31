@@ -15,5 +15,10 @@ class CampsController < ApplicationController
           
   def show
     @camp = Camp.find(params[:id])
+    @sightings = Sighting.where(:camp_id => @camp.id)
+    # if @sightings.nil?
+    #   @sightings = Sighting.all
+    # end
+    
   end
 end

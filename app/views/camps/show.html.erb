@@ -1,5 +1,11 @@
 <div class="container">
   <h1><%= @camp.name %></h1> 
-  <%= link_to "Show all sightings", camp_sightings_path(@camp) %>
+  <% if @sightings.blank? %>
+    <p>No sightings at this camp,
+      <%= link_to "add one?", new_sighting_path %>
+    </p>
+  <% else %>
+    <%= render :partial => 'sightings/table' %>
+  <% end %>
 </div>
 
