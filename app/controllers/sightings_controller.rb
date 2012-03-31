@@ -23,7 +23,7 @@ class SightingsController < ApplicationController
     
     respond_to do |format|
       format.html # index.html.erb
-      # format.json { render json: @sightings }
+      format.json { render json: @sightings }
       format.js
     end
   end
