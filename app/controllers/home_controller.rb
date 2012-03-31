@@ -3,22 +3,19 @@ class HomeController < ApplicationController
   end
   
   def redirect
-    id = params[:id]
+    item_id = params[:id]
 
     case params[:model]
     when 'species'
-      redirect_to species_path(id)
+      redirect_to species_path(item_id)
     when 'tribe'
-      redirect_to species_tribe_path(Tribe.find(id))
+      redirect_to species_tribe_path(Tribe.find(item_id))
     when 'camp'
-      redirect_to camp_path(id)
+      redirect_to camp_path(item_id)
     when 'location'
-      redirect_to location_path(id)
+      redirect_to location_path(item_id)
     end
   end
-  # def tester
-  #   @response = TimeParse.parse(params[:time_input]) 
-  # end
   
   def auto_search
     @search_response = Home.search(params[:term])
