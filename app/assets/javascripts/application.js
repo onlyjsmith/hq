@@ -16,6 +16,7 @@
 //= require jquery-ui
 //= require underscore
 //= require autocomplete-rails
+//= require cartodb/cartodb-gmapsv3
 //= require wax/dist/wax.g
 //= require_tree .  
 
