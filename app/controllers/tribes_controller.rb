@@ -7,6 +7,7 @@ class TribesController < ApplicationController
 
   def show
     @tribe = Tribe.find(params[:id])
+    @sightings = Sighting.where(:tribe_id => @tribe.id)
   end
 
   def edit
