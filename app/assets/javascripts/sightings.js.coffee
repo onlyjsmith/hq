@@ -7,8 +7,8 @@ $(document).ready ->
     console.log "Item selected"
     $("#sighting_search").submit()
   
-
   $("input:text:visible:first").focus()
+  
   $("#search").catcomplete
     delay: 0
     source: "/home/auto_search.json"

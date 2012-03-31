@@ -2,12 +2,10 @@ class HomeController < ApplicationController
   def index
   end
   
-  def map
-  end
   
-  def tester
-    @response = TimeParse.parse(params[:time_input]) 
-  end
+  # def tester
+  #   @response = TimeParse.parse(params[:time_input]) 
+  # end
   
   def auto_search
     @search_response = Home.search(params[:term])
