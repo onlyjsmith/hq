@@ -19,5 +19,6 @@
 //= require cartodb/cartodb-gmapsv3
 //= require wax/dist/wax.g
 //= require jquery.isotope
+//= require jquery.cookie
 //= require_tree .  
 

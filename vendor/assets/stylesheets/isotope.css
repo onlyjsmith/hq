@@ -4,9 +4,12 @@ body {
 }
 
 #headlines {
-  border: 1px solid #666;
+//  border: 1px solid #666;
   padding: 5px;
   margin-bottom: 20px;
+  height: 600px;
+  width: 100%;
+  }
 }
 
 .headline * {
