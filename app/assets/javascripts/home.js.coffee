@@ -9,7 +9,9 @@ $(document).ready ->
     close: (event, ui) ->
       @value = "" 
 
-  initializeLandingMap()
+  $("#map-landing-page").ready ->
+    console.log 'landing page ready'
+    initializeLandingMap()
 
 # TODO: Add interaction
 initializeLandingMap = () -> 

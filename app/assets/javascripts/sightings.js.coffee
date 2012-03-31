@@ -18,17 +18,22 @@ $(document).ready ->
     close: (event, ui) ->
       @value = ""
 
-  $("#tabs").tabs ajaxOptions:
-    error: (xhr, status, index, anchor) ->
-      $(anchor.hash).html "Couldn't load this tab. We'll try to fix this as soon as possible."
+  $("#tabs").tabs 
+    cookie: 
+      expires: 1
+    ajaxOptions:
+      error: (xhr, status, index, anchor) ->
+        $(anchor.hash).html "Couldn't load this tab. We'll try to fix this as soon as possible."
     
   $('#headlines').isotope
     itemSelector : '.headline'
     # layoutMode : 'masonry'
-    masonry: {
-        columnWidth: 20
-      }
+    masonry: { columnWidth: 20 }
 
+  $("#sightings_map").ready ->
+    console.log 'sightings_map DIV loaded'
+    initializeSightingsMap()
+  
 
 $.widget "custom.catcomplete", $.ui.autocomplete,
   _renderMenu: (ul, items) ->
@@ -39,3 +44,28 @@ $.widget "custom.catcomplete", $.ui.autocomplete,
         ul.append "<li class='ui-autocomplete-category'>" + capitaliseFirstLetter(item.category) + "</li>"
         currentCategory = item.category
       self._renderItem ul, item
+      
+initializeSightingsMap = () -> 
+  url = "http://a.tiles.mapbox.com/v3/onlyjsmith.wildspot-map.jsonp"
+  wax.tilejson url, (tilejson) ->
+    m = new google.maps.Map(document.getElementById("sightings_map"),
+      center: new google.maps.LatLng(-15.9, 28.0)
+      disableDefaultUI: true
+      zoom: 5
+      # mapTypeId: google.maps.MapTypeId.ROADMAP
+    )
+    m.mapTypes.set "mb", new wax.g.connector(tilejson)
+    m.setMapTypeId "mb"
+    # wax.g.interaction().map(m).tilejson(tilejson).on wax.tooltip().parent(map.getDiv()).events()
+
+    google.maps.event.addListener m, "click", (event) ->
+      console.log "Clicked at lat:" + event.latLng.lat() + ", lng:" + event.latLng.lng()
+
+    locationOptions =
+      getTileUrl: (coord, zoom) ->
+        "http://craigmills.cartodb.com/tiles/locations/" + zoom + "/" + coord.x + "/" + coord.y + ".png"
+
+      tileSize: new google.maps.Size(256, 256)
+
+    locationMapType = new google.maps.ImageMapType(locationOptions)
+    m.overlayMapTypes.insertAt 0, locationMapType
