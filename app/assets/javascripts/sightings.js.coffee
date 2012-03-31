@@ -18,6 +18,12 @@ $(document).ready ->
     close: (event, ui) ->
       @value = ""
 
+  $("#tabs").tabs ajaxOptions:
+    error: (xhr, status, index, anchor) ->
+      $(anchor.hash).html "Couldn't load this tab. We'll try to fix this as soon as possible."
+
+
+
 $.widget "custom.catcomplete", $.ui.autocomplete,
   _renderMenu: (ul, items) ->
     self = this

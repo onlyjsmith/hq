@@ -101,6 +101,18 @@ class SightingsController < ApplicationController
      :disposition => 'attachment'
   end
 
+  # def headlines
+  #   @sightings = Sighting.all
+  # end          
+  # 
+  # def map
+  #   @sightings = Sighting.all
+  # end    
+  # 
+  # def list
+  #   @sightings = Sighting.all
+  #   render :partial => 'sightings/table'
+  # end
   
   # def search
   #   puts params

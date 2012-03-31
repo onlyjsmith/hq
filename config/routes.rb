@@ -12,7 +12,10 @@ Hq::Application.routes.draw do
   resources :locations
 
   resources :sightings do
-    get :download, :on => :collection
+    get :download, :on => :collection                  
+    get :headlines, :on => :collection
+    get :map, :on => :collection
+    get :list, :on => :collection
     get :autocomplete_species_common_name, :on => :collection
     get :autocomplete_species_binomial, :on => :collection
     get :autocomplete_tribe_name, :on => :collection
