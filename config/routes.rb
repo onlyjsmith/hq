@@ -16,6 +16,8 @@ Hq::Application.routes.draw do
     get :autocomplete_species_common_name, :on => :collection
     get :autocomplete_species_binomial, :on => :collection
     get :autocomplete_tribe_name, :on => :collection
+    get :autocomplete_camp_name, :on => :collection
+    get :autocomplete_location_name, :on => :collection
   end
 
   resources :camps do
