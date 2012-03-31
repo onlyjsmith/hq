@@ -19,8 +19,8 @@ $(document).ready ->
       @value = ""
 
   $("#tabs").tabs 
-    cookie: 
-      expires: 1
+    # cookie: 
+    #   expires: 1
     ajaxOptions:
       error: (xhr, status, index, anchor) ->
         $(anchor.hash).html "Couldn't load this tab. We'll try to fix this as soon as possible."
@@ -33,6 +33,11 @@ $(document).ready ->
   $("#sightings_map").ready ->
     console.log 'sightings_map DIV loaded'
     initializeSightingsMap()
+    
+  $('#sightings_map').bind 'tabsshow', (event, ui) ->
+    console.log "resizing map"
+    resizeMap() if ui.panel.id is "map"
+      
   
 
 $.widget "custom.catcomplete", $.ui.autocomplete,
