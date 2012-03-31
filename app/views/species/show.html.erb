@@ -1,18 +1,27 @@
 <div class='container'>
-  <h1><%= @species.common_name %></h1>
+  <p>
+    <%= link_to species_path(@species) do %>
+      <%= @species.common_name %>
+      <em>(<%= @species.binomial %>)</em>
+    <% end %>
+  </p>
+  <div class="row">
+    <div class="span3">
+      <h3>Little picture</h3>
+      <%= link_to image_tag(@species.get_photo_url, :title => "First picture we could find of #{@species.common_name}", 
+        :class => "photo"), species_path(@species) 
+      %>
+    </div>
+    <div class="span9">
+      <h3>Sightings</h3>
+      <%= render :partial => 'sightings/table'%>
+    </div>
+  </div>
 
-  <p>
-    <%= @species.binomial %>
-  </p>
-  <h3>Little picture</h3>
-  <p>
-    <%= image_tag @species.get_photo_url, :title => "First picture we could find of #{@species.common_name}", :class => "species photo" %>
-  </p>
+
   <%= link_to "Edit this", edit_species_path(@species) %> |
   <%= link_to "All species", species_index_path %>  
-  
-  <h3>Sightings of this species</h3>
-  <%= render :partial => 'entries', :locals => {:sightings => @species.sightings} %>
+
 
 </div>
                              

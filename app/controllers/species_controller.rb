@@ -5,6 +5,7 @@ class SpeciesController < ApplicationController
 
   def show
     @species = Species.find(params[:id])
+    @sightings = Sighting.where(:species_id => @species.id)
   end
 
   def edit
