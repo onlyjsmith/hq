@@ -69,4 +69,7 @@ line-height: 1.5;
 
 #tabs {
 //  height: 400px;
+  -moz-box-shadow: 0 0 10px #888;
+  -webkit-box-shadow: 0 0 10px#888;
+  box-shadow: 0 0 10px #888;
 }
