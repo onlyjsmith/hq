@@ -4,7 +4,7 @@ Hq::Application.routes.draw do
   devise_for :users
 
   get "sightings/getcsv"
-
+  get "sightings/filter"
 
   # resources :sightings do
   #   collection do

@@ -3,7 +3,11 @@ $(document).ready ->
   $(".tabs").button()
 
   $(".change_date").click ->
-    $.get "sightings", $.param(filter_time: $(this).attr("data-duration"))
+    console.log 'yes, clicked a date'
+    $.get "sightings/filter", $.param(filter_time: $(this).attr("data-duration"))
+  # $(".change_species").click ->
+  #   console.log "clicked SPECIES"
+  #   $.get "sightings", $.param(species: $(this).attr("data-duration"))
 
   $("input:text:visible:first").focus()
 

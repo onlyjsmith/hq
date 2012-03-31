@@ -14,15 +14,19 @@
       <div class="row">
         <div class="span6">
           <div class="btn-group" data-toggle="buttons-radio">
-            <%= link_to "Today", {:url => sightings_path, :filter_time => 1}, :remote => true, :class => 'btn change_date' %>
-            <%= link_to "7 days", {:url => sightings_path, :filter_time => 7}, :remote => true, :class => 'btn change_date' %>
-            <%= link_to "30 days", {:url => sightings_path, :filter_time => 30}, :remote => true, :class => 'btn change_date' %>
-            <%= link_to "Year", {:url => sightings_path, :filter_time => 365}, :remote => true, :class => 'btn change_date' %>
+            <%= link_to "Today", {:url => '/sightings/filter', :filter_time => 1}, :remote => true, :class => 'btn change_date' %>
+            <%= link_to "7 days", {:url => '/sightings/filter', :filter_time => 7}, :remote => true, :class => 'btn change_date' %>
+            <%= link_to "30 days", {:url => '/sightings/filter', :filter_time => 30}, :remote => true, :class => 'btn change_date' %>
+            <%= link_to "Year", {:url => '/sightings/filter', :filter_time => 365}, :remote => true, :class => 'btn change_date' %>
           </div>
         </div>
-        <div class="span3">
-          <h6>10 Feb to 10 March 2012</h6>
-        </div>
+        <!-- <div class="span6">
+          <div class="btn-group" data-toggle="buttons-radio">
+            <%# Species.all.each do |species| %>
+              <%#= link_to species.common_name, {:url => sightings_path, :species => species.id}, :remote => true, :class => 'btn change_species' %>
+            <%# end %>
+          </div>
+        </div> -->
       </div>
     </div>
   </div>  
