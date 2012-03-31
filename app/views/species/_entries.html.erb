@@ -12,8 +12,8 @@
       <td>
         <!-- <a href="#"><%= @user %></a> reported -->
         <%= link_to sighting.species.common_name, species_path(sighting.species) %></a> from
-        <% if sighting.tribe.try(:name) %> 
-          <%= link_to sighting.tribe.name, tribe_path(sighting.tribe) %>
+        <% unless sighting.tribe.nil? %> 
+          <%= link_to sighting.tribe.name, species_tribe_path(sighting.tribe) %>
         <% else %>
           <%= "no tribe" %>
         <% end %>
