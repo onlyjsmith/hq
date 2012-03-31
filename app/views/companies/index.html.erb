@@ -2,7 +2,8 @@
   <div class="page-header">
     <div class="row">
       <div class="span9">
-        <h1>List of companies - almost ADMIN use</h1>
+        <h1>List of companies</h1>
+        <p>Selecting below sets the <code>session[:company_id]</code> variable. Returning to this index page deletes it.</p>
       </div>
       <div class="span3">
         <%= link_to "Add new one", new_company_path, :class => 'btn btn-success' %>
