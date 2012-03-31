@@ -1,8 +1,12 @@
 # Comment in coffeescript
 $(document).ready -> 
-  $(".tabs").button()
-  $(".change_date").click ->
-    $.get "sightings", $.param(filter_time: $(this).attr("data-duration"))
+  # $(".tabs").button()
+  # $(".change_date").click ->
+  #   $.get "sightings", $.param(filter_time: $(this).attr("data-duration"))
+  $(".autocomplete").bind 'railsAutocomplete.select', (event, data) ->
+    console.log "Item selected"
+    $("#sighting_search").submit()
+  
 
   $("input:text:visible:first").focus()
   $("#search").catcomplete
