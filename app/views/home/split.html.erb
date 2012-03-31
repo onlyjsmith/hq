@@ -14,15 +14,16 @@
             <%= hidden_field_tag :species_ids %>
 
             <%= label_tag :tribes %>
-            <%= text_field_tag :tribes, params[:tribes] %>
+            <%= text_field_tag :tribes, params[:tribe] %>
             <%= hidden_field_tag :tribe_ids %>
 
-            <%= label_tag :camp %>
-            <%= text_field_tag :camp, params[:camp] %>
+            <%= label_tag :camps %>
+            <%= text_field_tag :camps, params[:camp] %>
+            <%= hidden_field_tag :camp_ids %>
 
-            <%= label_tag :location %>
+            <%= label_tag :locations %>
             <%= text_field_tag :location, params[:location] %>
-
+            <%= hidden_field_tag :location_ids %>
         
             <%= label_tag %>
             <%= submit_tag "Search" %>
