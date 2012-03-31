@@ -24,6 +24,6 @@ $.widget "custom.catcomplete", $.ui.autocomplete,
     currentCategory = ""
     $.each items, (index, item) ->
       unless item.category is currentCategory
-        ul.append "<li class='ui-autocomplete-category'>" + item.category + "</li>"
+        ul.append "<li class='ui-autocomplete-category'>" + capitaliseFirstLetter(item.category) + "</li>"
         currentCategory = item.category
       self._renderItem ul, item
