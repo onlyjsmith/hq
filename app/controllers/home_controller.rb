@@ -2,7 +2,20 @@ class HomeController < ApplicationController
   def index
   end
   
-  
+  def redirect
+    id = params[:id]
+
+    case params[:model]
+    when 'species'
+      redirect_to species_path(id)
+    when 'tribe'
+      redirect_to species_tribe_path(Tribe.find(id))
+    when 'camp'
+      redirect_to camp_path(id)
+    when 'location'
+      redirect_to location_path(id)
+    end
+  end
   # def tester
   #   @response = TimeParse.parse(params[:time_input]) 
   # end

@@ -36,7 +36,7 @@ Hq::Application.routes.draw do
   # get "sightings/new"
   # 
   # get "sightings/edit"
-
+  get "home/redirect/:model/:id", :controller => 'home', :action => 'redirect'
   get "home/auto_search"
   get "home/tester"
   get "home/index"

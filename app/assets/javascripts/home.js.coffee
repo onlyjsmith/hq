@@ -11,7 +11,7 @@ $(document).ready ->
       # $("#" + ui.item.category + "_id").val(ui.item.value) 
 
       # FIXME: This only works for camps and locations
-      window.location = "/" + ui.item.category + "s" + "/" + ui.item.id
+      window.location = "/home/redirect/"+ ui.item.category + "/" + ui.item.id
     close: (event, ui) ->
       @value = "" 
 
