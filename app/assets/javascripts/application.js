@@ -16,5 +16,6 @@
 //= require jquery-ui
 //= require underscore
 //= require autocomplete-rails
+//= require wax/dist/wax.g
 //= require_tree .  
 
