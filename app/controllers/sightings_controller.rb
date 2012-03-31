@@ -2,17 +2,17 @@ class SightingsController < ApplicationController
   autocomplete :species, :common_name
   
   def index
-    @user = User.first
-
-    @camp = Camp.find(params[:camp_id])    if params[:camp_id]         
-
-    @sightings = Sighting.scoped
-    @sightings = @sightings.by_camp(@camp) if @camp
-    @sightings = @sightings.filter_time(params[:filter_time])
-
-
-    @drive_count = @sightings.map{|x| x.drive}.uniq.count
-    @species = @sightings.map{|x| x.species}.uniq
+    # @user = User.first
+    # 
+    # @camp = Camp.find(params[:camp_id])    if params[:camp_id]         
+    # 
+    @sightings = Sighting.all
+    # @sightings = @sightings.by_camp(@camp) if @camp
+    # @sightings = @sightings.filter_time(params[:filter_time])
+    # 
+    # 
+    # @drive_count = @sightings.map{|x| x.drive}.uniq.count
+    # @species = @sightings.map{|x| x.species}.uniq
     
     respond_to do |format|
       format.html # index.html.erb
