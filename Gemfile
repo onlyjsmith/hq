@@ -17,7 +17,7 @@ gem 'chronic'
 gem 'rails3-jquery-autocomplete'
 gem 'flickraw'
 gem 'cartodb-rb-client', :git => 'git@github.com:craigmmills/cartodb-rb-client.git'
-
+gem "ransack"
 
 
 # Gems used only for assets and not required
