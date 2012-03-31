@@ -3,7 +3,12 @@
 <div id="box" class="overlayBox">
   <h1>Howdy, what are you looking for?...</h1>
   <!-- <input type="text" class="response" name="some_name" value="" id="some_name"> -->
-  <input type="text" class="response" data-autocomplete="sightings/autocomplete_species_common_name">
+  
+  <%= form_tag sightings_path, :method => 'post' do %>
+    <%= text_field_tag :home_search, params[:search], :class => 'omni_enter' %>
+  <% end %>
+  
+
   <div>
     <a href="/sightings">All sightings</a>
   </div>
