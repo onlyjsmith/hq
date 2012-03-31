@@ -5,8 +5,10 @@ class SightingsController < ApplicationController
     # @user = User.first
     # 
     # @camp = Camp.find(params[:camp_id])    if params[:camp_id]         
-    # 
-    @sightings = Sighting.filter_by_params(params)
+    #
+    @q = Sighting.search(params[:q]) 
+    @sightings = @q.result(:distinct => true)
+
     # @sightings = @sightings.by_camp(@camp) if @camp
     # @sightings = @sightings.filter_time(params[:filter_time])
     # 

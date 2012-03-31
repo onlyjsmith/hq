@@ -10,60 +10,17 @@
     </div>
   </div>
   <div class="row">
-    <div class="span12">
-      <div class="row">
-        <div class="span6">
-          <div class="btn-group" data-toggle="buttons-radio">
-            <%= link_to "Today", {:url => sightings_path, :filter_time => 1}, :remote => true, :class => 'btn change_date' %>
-            <%= link_to "7 days", {:url => sightings_path, :filter_time => 7}, :remote => true, :class => 'btn change_date' %>
-            <%= link_to "30 days", {:url => sightings_path, :filter_time => 30}, :remote => true, :class => 'btn change_date' %>
-            <%= link_to "Year", {:url => sightings_path, :filter_time => 365}, :remote => true, :class => 'btn change_date' %>
-          </div>
-        </div>
-        <div class="span3">
-          <h6>10 Feb to 10 March 2012</h6>
-        </div>
-      </div>
-    </div>
-  </div>  
-  
-  <div class="row">
-    <div class="span12" id="table">
+    <div class="span9">
+      <h1 id="results">Results</h1>
       <%= render :partial => 'table' %>
     </div>
-  </div>
-  <div class="row">
-    <div class="span12">
-      <h2>Pics of recent species</h2>
-      <%# @species.each do |species| %> 
-        <!-- TODO: Definitely not the way to get or display these images, but works for now -->
-        <%# link_to image_tag(species.get_photo_url, 
-          :title => "First picture we could find of #{species.common_name}", 
-          :class => "box-shadow", 
-          :style => "border: 1px solid; max-height:70px;"), 
-          species_path(species) %>
-      <%# end %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="span12">
-      <div class="row">
-        <div id="map_here" class="span6">
-          <h2>Map</h2>
-          <div id="map-sightings-index" style="height: 250px; border: 1px solid">
-            <!-- <p>Wow - what an interesting map</p> -->
-          </div>
-        </div>
-        <div id="stats_chart" class="span6">
-          <div class="row">
-            <div id="stats" class="span6">
-              <h2>Stats</h2>
-              <h3><%= @drive_count %> drives (550km, 34hrs)</h3>
-              <h3><%= @sightings.count %> sightings (19 rare)</h3>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="span3">
+      <h1 id="filters">Filters</h1>
+      <%= search_form_for @q do |f| %>
+        <%= f.label :description_cont %>
+        <%= f.text_field :description_cont %>
+        <%= f.submit %>
+      <% end %>
     </div>
   </div>
 </div>  
