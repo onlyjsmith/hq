@@ -12,10 +12,10 @@ class Home
       end
     end
     # debugger
-    if TimeParse.parse(term) != nil
-      time_hash = {:label => "#{(TimeParse.parse(term))}", :value => "#{(TimeParse.parse(term))}", :category => 'time'}
-      response.push time_hash
-    end
+    # if TimeParse.parse(term) != nil
+    #   time_hash = {:label => "#{(TimeParse.parse(term))}", :value => "#{(TimeParse.parse(term))}", :category => 'time'}
+    #   response.push time_hash
+    # end
     response
   end
 
