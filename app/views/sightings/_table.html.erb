@@ -24,8 +24,13 @@
   <!-- TODO: Swap this bit of model/controller logic out of the view and somewhere else  -->
           <%= sighting.location.nil? ? "nowhere" : link_to(sighting.location.name, location_path(sighting.location.id)) %>  
           <a href='#'><%= sighting.record_time.nil? ? "no time" : distance_of_time_in_words(Time.now, sighting.record_time) %></a> ago
-         </em>      
-        </td>
+        </em>      
+      </td>
+      <td>
+        <%= link_to image_tag(sighting.species.get_photo_url, :title => "First picture we could find of #{sighting.species.common_name}", 
+          :class => "photo small_photo"), species_path(sighting.species) 
+        %>
+      </td>
       <td>
         <%= link_to edit_sighting_path(sighting), :class => 'btn btn-warning' do %>
           <i class="icon-edit icon-white"></i> Edit
