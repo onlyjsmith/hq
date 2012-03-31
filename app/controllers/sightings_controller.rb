@@ -6,7 +6,7 @@ class SightingsController < ApplicationController
     # 
     # @camp = Camp.find(params[:camp_id])    if params[:camp_id]         
     # 
-    @sightings = Sighting.all
+    @sightings = Sighting.filter_by_params(params)
     # @sightings = @sightings.by_camp(@camp) if @camp
     # @sightings = @sightings.filter_time(params[:filter_time])
     # 
