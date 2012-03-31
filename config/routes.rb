@@ -11,9 +11,7 @@ Hq::Application.routes.draw do
   #     get 'search'
   #   end
   # end
-  resources :tribes, :only => [:index] do
-    get :autocomplete_tribe_name, :on => :collection
-  end
+  resources :tribes, :only => [:index]
 
   resources :species do
     resources :tribes 
@@ -23,6 +21,7 @@ Hq::Application.routes.draw do
 
   resources :sightings do
     get :autocomplete_species_common_name, :on => :collection
+    get :autocomplete_tribe_name, :on => :collection
   end
 
   resources :camps do

@@ -27,7 +27,7 @@
         <%= f.text_field :species_binomial_cont %>
 
         <%= f.label :tribe_name_cont, "Tribe Name contains" %>
-        <%= f.text_field :tribe_name_cont %>
+        <%= f.text_field :tribe_name_cont, 'data-autocomplete' => "sightings/autocomplete_tribe_name"  %>
         
         <%= f.label :camp_name_cont, "Camp Name contains" %>
         <%= f.text_field :camp_name_cont %>
