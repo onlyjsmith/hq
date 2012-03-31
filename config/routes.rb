@@ -11,7 +11,10 @@ Hq::Application.routes.draw do
   #     get 'search'
   #   end
   # end
-  resources :tribes, :only => [:index]
+  resources :tribes, :only => [:index] do
+    get :autocomplete_tribe_name, :on => :collection
+  end
+
   resources :species do
     resources :tribes 
   end

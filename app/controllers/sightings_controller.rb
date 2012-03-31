@@ -1,5 +1,6 @@
 class SightingsController < ApplicationController
-  autocomplete :species, :common_name
+  autocomplete :species, :common_name, :full => true
+  autocomplete :tribe, :name, :full => true
   
   def index
     # @user = User.first
