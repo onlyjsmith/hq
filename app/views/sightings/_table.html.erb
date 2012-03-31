@@ -25,11 +25,15 @@
          </em>      
         </td>
       <td>
-        <%= link_to "Details + Edit", edit_sighting_path(sighting), :class => 'btn btn-warning' %>
+        <%= link_to edit_sighting_path(sighting), :class => 'btn btn-warning' do %>
+          <i class="icon-edit icon-white"></i> Edit
+        <% end %>
       </td>
     </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to "DOWNLOAD CSV", sightings_getcsv_path, :class => 'btn btn-warning' %>
+<%= link_to download_sightings_path, :class => 'btn btn-info' do %>
+  <i class="icon-download-alt icon-white"></i> Download CSV
+<% end %>

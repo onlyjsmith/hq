@@ -6,7 +6,8 @@ class SightingsController < ApplicationController
     # @user = User.first
     # 
     # @camp = Camp.find(params[:camp_id])    if params[:camp_id]         
-    #
+    # 
+    # debugger
     @q = Sighting.search(params[:q]) 
     @sightings = @q.result(:distinct => true)
 
@@ -83,7 +84,7 @@ class SightingsController < ApplicationController
     end
   end
 
-  def getcsv
+  def download
     sightings = Sighting.all
     csv_string = CSV.generate do |csv| 
       # TODO - move this 'view' stuff out of controller

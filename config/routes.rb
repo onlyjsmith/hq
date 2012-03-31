@@ -3,14 +3,6 @@ Hq::Application.routes.draw do
 
   devise_for :users
 
-  get "sightings/getcsv"
-
-
-  # resources :sightings do
-  #   collection do
-  #     get 'search'
-  #   end
-  # end
   resources :tribes, :only => [:index]
 
   resources :species do
@@ -20,6 +12,7 @@ Hq::Application.routes.draw do
   resources :locations
 
   resources :sightings do
+    get :download, :on => :collection
     get :autocomplete_species_common_name, :on => :collection
     get :autocomplete_tribe_name, :on => :collection
   end
