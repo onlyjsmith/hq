@@ -19,6 +19,22 @@
       <%= search_form_for @q do |f| %>
         <%= f.label :description_cont %>
         <%= f.text_field :description_cont %>
+        
+        <%= f.label :species_common_name_cont, "Species Common Name contains" %>
+        <%= f.text_field :species_common_name_cont %>
+        
+        <%= f.label :species_binomial_cont, "Species Binomial contains" %>
+        <%= f.text_field :species_binomial_cont %>
+
+        <%= f.label :tribe_name_cont, "Tribe Name contains" %>
+        <%= f.text_field :tribe_name_cont %>
+        
+        <%= f.label :camp_name_cont, "Camp Name contains" %>
+        <%= f.text_field :camp_name_cont %>
+        
+        <%= f.label :location_name_cont, "Location Name contains" %>
+        <%= f.text_field :location_name_cont %>
+        
         <%= f.submit %>
       <% end %>
     </div>
