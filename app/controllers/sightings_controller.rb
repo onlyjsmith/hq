@@ -101,9 +101,9 @@ class SightingsController < ApplicationController
      :disposition => 'attachment'
   end
 
-  # def headlines
-  #   @sightings = Sighting.all
-  # end          
+  def headlines
+    @sightings = Sighting.all
+  end          
   # 
   # def map
   #   @sightings = Sighting.all

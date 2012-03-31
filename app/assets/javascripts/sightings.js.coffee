@@ -21,7 +21,13 @@ $(document).ready ->
   $("#tabs").tabs ajaxOptions:
     error: (xhr, status, index, anchor) ->
       $(anchor.hash).html "Couldn't load this tab. We'll try to fix this as soon as possible."
-
+    
+  $('#headlines').isotope
+    itemSelector : '.headline'
+    # layoutMode : 'masonry'
+    masonry: {
+        columnWidth: 20
+      }
 
 
 $.widget "custom.catcomplete", $.ui.autocomplete,

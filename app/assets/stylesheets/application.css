@@ -10,12 +10,13 @@
  *
  *= require_self
  *= require bootstrap
- *= require wax/theme/controls
+ *= require wax/theme/controls 
+ *= require isotope
  *= require_tree .
 */     
 
 body {
   font-family: 'Signika Negative', sans-serif;      
   font-size: 13px;  
-  margin: 15px;   
+  margin: 15px;
 }
