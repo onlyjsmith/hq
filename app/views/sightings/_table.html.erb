@@ -11,7 +11,7 @@
       <td>
         <%= sighting.description %></br>
         <em>
-          <a href="#"><%= sighting.try(:user).email %></a> reported
+          <a href="#"><%= sighting.try(:user).email %></a> saw
           <%= link_to sighting.species.common_name, species_path(sighting.species) %></a> from
           <% if sighting.tribe.try(:name) %> 
             <%= link_to sighting.tribe.name, species_tribe_path(sighting.tribe.species, sighting.tribe) %>
@@ -20,7 +20,7 @@
           <% end %>
           near
   <!-- TODO: Swap this bit of model/controller logic out of the view and somewhere else  -->
-          <%= sighting.location.nil? ? "nowhere" : link_to(sighting.location.name, location_path(sighting.location.id)) %> about 
+          <%= sighting.location.nil? ? "nowhere" : link_to(sighting.location.name, location_path(sighting.location.id)) %>  
           <a href='#'><%= sighting.record_time.nil? ? "no time" : distance_of_time_in_words(Time.now, sighting.record_time) %></a> ago
          </em>      
         </td>
