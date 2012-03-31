@@ -21,7 +21,7 @@
         <%= f.text_field :description_cont %>
         
         <%= f.label :species_common_name_cont, "Species Common Name contains" %>
-        <%= f.text_field :species_common_name_cont %>
+        <%= f.text_field :species_common_name_cont, 'data-autocomplete' => "sightings/autocomplete_species_common_name" %>
         
         <%= f.label :species_binomial_cont, "Species Binomial contains" %>
         <%= f.text_field :species_binomial_cont %>
