@@ -10,17 +10,17 @@
     <div class="span9">
       <div id="tabs">
       	<ul>
-      		<li><a href="#tabs-1">Headlines</a></li>
-      		<li><a href="#tabs-2">Map</a></li>
-      		<li><a href="#tabs-3">List (<%= @sightings.count %>)</a></li>
+      		<li><a href="#headlines">Headlines</a></li>
+      		<li><a href="#map">Map</a></li>
+      		<li><a href="#list">List (<%= @sightings.count %>)</a></li>
       	</ul>
-        <div id="tabs-1">
+        <div id="headlines">
           <%= render :partial => 'headlines' %>
         </div>
-        <div id="tabs-2">
+        <div id="map">
           <%= render :partial => 'map' %>
         </div>
-        <div id="tabs-3">
+        <div id="list">
           <%= render :partial => 'table' %>
         </div>
       </div>      
