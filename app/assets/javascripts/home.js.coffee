@@ -3,14 +3,8 @@ $(document).ready ->
   $("#home_search").catcomplete
     delay: 0
     source: "/home/auto_search.json"
-    focus: (event, ui) ->
-      console.log "focus on " + ui.item.category + "#" + ui.item.id + " (" + ui.item.label + ")"
-      # $("#home_search").val(ui.item.label)
     select: (event, ui) ->
-      # $("#" + ui.item.category).append "<li>" + ui.item.label + "</li"
-      # $("#" + ui.item.category + "_id").val(ui.item.value) 
-
-      # FIXME: This only works for camps and locations
+      # TODO: Improve this - works, but could be a more reliable way
       window.location = "/home/redirect/"+ ui.item.category + "/" + ui.item.id
     close: (event, ui) ->
       @value = "" 
