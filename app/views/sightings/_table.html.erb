@@ -9,7 +9,9 @@
     <% @sightings.each do |sighting| %>
     <tr>
       <td>
-        <%= sighting.description %></br>
+        <h3>
+          <%= sighting.description %>
+        </h3>
         <em>
           <a href="#"><%= sighting.try(:user).email %></a> saw
           <%= link_to sighting.species.common_name, species_path(sighting.species) %></a> from
@@ -33,6 +35,9 @@
     <% end %>
   </tbody>
 </table>
+<%= link_to new_sighting_path, :class => 'btn btn-success' do %>
+  <i class="icon-plus icon-white"></i> Add sighting
+<% end %>
 
 <%= link_to download_sightings_path, :class => 'btn btn-info' do %>
   <i class="icon-download-alt icon-white"></i> Download CSV
