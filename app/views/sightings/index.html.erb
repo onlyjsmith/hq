@@ -35,14 +35,14 @@
   <div class="row">
     <div class="span12">
       <h2>Pics of recent species</h2>
-      <% @species.each do |species| %> 
+      <%# @species.each do |species| %> 
         <!-- TODO: Definitely not the way to get or display these images, but works for now -->
-        <%= link_to image_tag(species.get_photo_url, 
+        <%# link_to image_tag(species.get_photo_url, 
           :title => "First picture we could find of #{species.common_name}", 
           :class => "box-shadow", 
           :style => "border: 1px solid; max-height:70px;"), 
           species_path(species) %>
-      <% end %>
+      <%# end %>
     </div>
   </div>
   <div class="row">
