@@ -19,8 +19,7 @@
       </td>
       <td>
         <%= link_to image_tag(species.get_photo_url, :title => "First picture we could find of #{species.common_name}", 
-          :class => "box-shadow", 
-          :style => "border: 1px solid; max-height:70px;"), species_path(species) 
+          :class => "box-shadow species photo small_photo"), species_path(species) 
         %>
       </td>
       <td>
