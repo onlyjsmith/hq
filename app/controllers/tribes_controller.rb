@@ -1,9 +1,8 @@
 class TribesController < ApplicationController
   def index
-    # debugger
-    @tribes = Tribe.scoped
-    @tribes = @tribes.by_species(params[:species_id]) if params[:species_id]
-    @species = Species.find(params[:species_id]) if params[:species_id]
+    @tribes = Tribe.all
+    # @tribes = @tribes.by_species(params[:species_id]) if params[:species_id]
+    # @species = Species.find(params[:species_id]) if params[:species_id]
   end
 
   def show
