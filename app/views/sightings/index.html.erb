@@ -25,7 +25,8 @@
           :class => :autocomplete %>
         
         <%= f.label :species_binomial_cont, "Species Binomial contains" %>
-        <%= f.text_field :species_binomial_cont %>
+        <%= f.text_field :species_binomial_cont, 'data-autocomplete' => "sightings/autocomplete_species_binomial", 
+          :class => :autocomplete %>
 
         <%= f.label :tribe_name_cont, "Tribe Name contains" %>
         <%= f.text_field :tribe_name_cont, 'data-autocomplete' => "sightings/autocomplete_tribe_name", 

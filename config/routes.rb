@@ -14,6 +14,7 @@ Hq::Application.routes.draw do
   resources :sightings do
     get :download, :on => :collection
     get :autocomplete_species_common_name, :on => :collection
+    get :autocomplete_species_binomial, :on => :collection
     get :autocomplete_tribe_name, :on => :collection
   end
 
