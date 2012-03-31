@@ -4,12 +4,14 @@ $(document).ready ->
     delay: 0
     source: "/home/auto_search.json"
     focus: (event, ui) ->
-      console.log ui.item.category + " > " + ui.item.value
+      console.log "focus on " + ui.item.category + "#" + ui.item.id + " (" + ui.item.label + ")"
       # $("#home_search").val(ui.item.label)
-      
     select: (event, ui) ->
       # $("#" + ui.item.category).append "<li>" + ui.item.label + "</li"
-      # $("#" + ui.item.category + "_id").val(ui.item.value)
+      # $("#" + ui.item.category + "_id").val(ui.item.value) 
+
+      # FIXME: This only works for camps and locations
+      window.location = "/" + ui.item.category + "s" + "/" + ui.item.id
     close: (event, ui) ->
       @value = "" 
 

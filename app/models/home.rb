@@ -7,7 +7,7 @@ class Home
     @model_names.each do |model_name, column|
       eval("#{model_name.capitalize}").where("#{column} ILIKE ?","%#{term}%").each do |result|
         # debugger
-        result_hash = {:label => result.send(column), :value => result.id, :category => model_name}
+        result_hash = {:id => result.id, :label => result.send(column), :category => model_name }
         response.push result_hash
       end
     end
