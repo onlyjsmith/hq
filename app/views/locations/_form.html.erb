@@ -1,5 +1,13 @@
-<%= simple_form_for @location do |f| %>
-  <%= f.input :name %>
-  <%= f.input :polygon, :as => :text, :input_html => { :cols => 50, :rows => 2 } %>
-  <%= f.button :submit %>
-<% end %>     
+<div class="row">
+  <div class="span4">
+    <%= simple_form_for @location do |f| %>
+      <%= f.input :name %>
+      <%= f.input :polygon, :as => :text, :input_html => { :cols => 50, :rows => 2 } %>
+      <%= f.button :submit %>
+    <% end %>
+  </div>
+
+  <div class="span8">
+    <div id="map"></div>       
+  </div>
+</div>

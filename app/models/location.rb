@@ -35,7 +35,8 @@ class Location < ActiveRecord::Base
     
     
     #check hex is there already then update or insert accordingly
-    q = "INSERT INTO locations (hex, the_geom) VALUES ('#{key}', ST_SetSRID(ST_GeomFromGeoJSON('#{self.polygon}'), 4326));"
+    # Including name in INSERT just for debugging and development
+    q = "INSERT INTO locations (hex, the_geom, name) VALUES ('#{key}', ST_SetSRID(ST_GeomFromGeoJSON('#{self.polygon}'), 4326), '#{self.name}');"
     
     CartoDB::Connection.query q
     self.polygon = nil
