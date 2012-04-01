@@ -39,16 +39,16 @@ $(document).ready ->
     resizeMap() if ui.panel.id is "map"
       
   
-
-$.widget "custom.catcomplete", $.ui.autocomplete,
-  _renderMenu: (ul, items) ->
-    self = this
-    currentCategory = ""
-    $.each items, (index, item) ->
-      unless item.category is currentCategory
-        ul.append "<li class='ui-autocomplete-category'>" + capitaliseFirstLetter(item.category) + "</li>"
-        currentCategory = item.category
-      self._renderItem ul, item
+# MOVED TO global.js
+# $.widget "custom.catcomplete", $.ui.autocomplete,
+#   _renderMenu: (ul, items) ->
+#     self = this
+#     currentCategory = ""
+#     $.each items, (index, item) ->
+#       unless item.category is currentCategory
+#         ul.append "<li class='ui-autocomplete-category'>" + capitaliseFirstLetter(item.category) + "</li>"
+#         currentCategory = item.category
+#       self._renderItem ul, item
       
 initializeSightingsMap = () -> 
   url = "http://a.tiles.mapbox.com/v3/onlyjsmith.wildspot-map.jsonp"

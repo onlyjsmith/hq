@@ -10,8 +10,8 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require global
 //= require jquery
+//= require global
 //= require jquery_ujs
 //= require jquery-ui
 //= require underscore
@@ -19,6 +19,5 @@
 //= require cartodb/cartodb-gmapsv3
 //= require wax/dist/wax.g
 //= require jquery.isotope
-//= require jquery.cookie
-//= require_tree .  
+//= require jquery.cookie  
 
