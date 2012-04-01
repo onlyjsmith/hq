@@ -1,4 +1,6 @@
 <div class='container'>
+  <h1><%= @species.common_name %></h1>
+
   <p>
     <%= link_to species_path(@species) do %>
       <%= @species.common_name %>
@@ -13,8 +15,21 @@
       %>
     </div>
     <div class="span9">
-      <h3>Sightings</h3>
-      <%= render :partial => 'sightings/table'%>
+        <h3>Sightings</h3>                 
+      <% if @species.sightings.blank? %>
+        <p>No sightings recorded, <%= link_to "add one?", new_sighting_path(:details => {:species_id => @species.id}) %></p>
+      <% else %>
+        <%= render :partial => 'sightings/table'%>
+      <% end %>
+
+      <% unless @species.tribes.blank? %>
+        <h3>Tribes</h3>
+        <ul>
+          <% @species.tribes.each do |tribe| %>
+            <%= link_to tribe.name, species_tribe_path(tribe) %>
+          <% end %>
+        </ul>
+      <% end %>
     </div>
   </div>
 
