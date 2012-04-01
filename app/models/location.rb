@@ -16,27 +16,32 @@ class Location < ActiveRecord::Base
     end
   end
 
+  # Returns either cartodb_id of location or false
   def self.store_poly_to_cartodb(params)
-    # debugger
     geojson = JSON.load(params[:geojson])
     cartodb_id = params[:cartodb_id] || false
     poly = geojson['coordinates'][0][0]
+
     begin
-      #close the loop
+      # close the loop
       poly.append(poly[0])
-      #check to enforce that all numeric values were supplied
+      # check to enforce that all numeric values were supplied
       poly = poly.map{|p| "#{p[0]} #{p[1]}"}
-      # poly = ["%f %f" % (float(i[0]), float(i[1])) for i in poly]
+
       if cartodb_id == false
-        sql = "INSERT INTO locations (the_geom) VALUES (GEOMETRYFROMTEXT('MULTIPOLYGON(((#{poly.join(',')})))',4326))"
+        sql = "INSERT INTO locations (the_geom) " + 
+          "VALUES (GEOMETRYFROMTEXT('MULTIPOLYGON(((#{poly.join(',')})))',4326)) " +
+          "RETURNING cartodb_id"
       else
-        sql = "UPDATE locations SET the_geom = GEOMETRYFROMTEXT('MULTIPOLYGON(((#{poly.join(',')})))',4326) WHERE cartodb_id = #{cartodb_id}"
+        sql = "UPDATE locations SET the_geom = GEOMETRYFROMTEXT('MULTIPOLYGON(((#{poly.join(',')})))',4326) " +
+          "WHERE cartodb_id = #{cartodb_id}"
       end
       
-      CartoDB::Connection.query sql
-      # AUTH.getCDB().sql(sql)
-      # self.response.http_status_message(200)
+      # debugger
+      response = CartoDB::Connection.query sql
+      cartodb_id ||= response[:rows][0][:cartodb_id]
     rescue
+      return false
       # self.error(500)
     end
     
