@@ -46,8 +46,7 @@ class LocationsController < ApplicationController
   end
   
   def post_polygon
-    
-    
+    Location.store_poly_to_cartodb(params)
   end
   
 end

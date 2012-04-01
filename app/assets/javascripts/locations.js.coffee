@@ -67,50 +67,28 @@ storePoly = (path, cartodb_id) ->
   q = q + "&cartodb_id=" + cartodb_id  if cartodb_id
   $.ajax
     url: "/locations/post_polygon"
-    crossDomain: true
+    # crossDomain: true
     type: "POST"
     dataType: "json"
     data: q
     success: ->
-
+      console.log 'POSTed successfully'
     error: ->
+      console.log 'POST failed for some reason'
+
 
 $ ->
+  $("#geocode_this").keyup ->
+    # console.log "keyed up KILL THIS"
+    codeAddress()
+
   cartodbMapOptions =
     zoom: 5
     center: new google.maps.LatLng(lat, lng)
     disableDefaultUI: true
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+    mapTypeId: google.maps.MapTypeId.TERRAIN
 
-  carto_map = new google.maps.Map(document.getElementById("map"), cartodbMapOptions)
-  # map_style = [
-  #   stylers: [saturation: -65, gamma: 1.52],
-  #   featureType: "administrative"
-  #   stylers: [saturation: -95, gamma: 2.26],
-  #   featureType: "water"
-  #   elementType: "labels"
-  #   stylers: [ visibility: "off" ],
-  #   featureType: "administrative.locality"
-  #   stylers: [ visibility: "off" ],
-  #   featureType: "road"
-  #   stylers: [visibility: "simplified", saturation: -99, gamma: 2.22],
-  #   featureType: "poi"
-  #   elementType: "labels"
-  #   stylers: [ visibility: "off" ],
-  #   featureType: "road.arterial"
-  #   stylers: [ visibility: "off" ],
-  #   featureType: "road.local"
-  #   elementType: "labels"
-  #   stylers: [ visibility: "off" ],
-  #   featureType: "transit"
-  #   stylers: [ visibility: "off" ],
-  #   featureType: "road"
-  #   elementType: "labels"
-  #   stylers: [ visibility: "off" ],
-  #   featureType: "poi"
-  #   stylers: [ saturation: -55 ]
-  #   ]
-  # carto_map.setOptions styles: map_style
+  carto_map = new google.maps.Map(document.getElementById("location_map"), cartodbMapOptions)
   getPolys()
   drawingManager = new google.maps.drawing.DrawingManager(
     drawingControl: true
@@ -137,5 +115,14 @@ $ ->
     setSelection newShape
     storePoly newShape.getPath()
     newShape.setEditable false
+  
+  codeAddress = ->
+    address = $("#geocode_this").val()
+    geocoder = new google.maps.Geocoder()
+    geocoder.geocode
+      address: address, (results, status) ->
+        console.log results[0]
+        carto_map.fitBounds results[0].geometry.bounds
+    
 
   google.maps.event.addListener carto_map, "click", clearSelection

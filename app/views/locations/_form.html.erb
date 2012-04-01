@@ -8,6 +8,10 @@
   </div>
 
   <div class="span8">
-    <div id="map"></div>       
+    <%= form_tag do  %>
+      <%= label_tag "Search Locations" %>
+      <%= text_field_tag :geocode_this %>
+    <% end %>
+    <div id="location_map"></div>       
   </div>
 </div>
