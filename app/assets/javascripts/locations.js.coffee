@@ -66,7 +66,7 @@ storePoly = (path, cartodb_id) ->
   q = "geojson=" + JSON.stringify(payload)
   q = q + "&cartodb_id=" + cartodb_id  if cartodb_id
   $.ajax
-    url: "http://cartodb-gallery.appspot.com/cartodb/write/polygon"
+    url: "/write/polygon"
     crossDomain: true
     type: "POST"
     dataType: "json"

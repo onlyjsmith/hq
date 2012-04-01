@@ -45,4 +45,9 @@ class LocationsController < ApplicationController
     end
   end
   
+  def post_polygon
+    
+    
+  end
+  
 end
