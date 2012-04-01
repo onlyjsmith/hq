@@ -5,6 +5,12 @@ class Location < ActiveRecord::Base
   has_many :tribes
   # TODO: Location <-> Camp should be a location-based association, dynamic
   has_many :camps
+
+
+  validates :name, :presence => true
+
+  after_initialize :default_values
+  
   
   # before_save :update_geom_to_cartodb
 
@@ -75,6 +81,12 @@ class Location < ActiveRecord::Base
     self.hex = key
     
   end
+  
+  private
+  
+  def default_values
+  end
+
   
   
 end
