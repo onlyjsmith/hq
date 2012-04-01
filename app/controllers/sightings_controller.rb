@@ -48,8 +48,11 @@ class SightingsController < ApplicationController
     @sighting.species_id = params[:species_id]
     @sighting.tribe_id = params[:tribe_id]
     @sighting.location_id = params[:location_id] ||
+    
     # Time has a weird _id suffix - it's just to keep the JS simple
-    @sighting.record_time = Time.parse(params[:time_id]) || Time.now
+    # TODO: Put the parsing of time back in
+    # @sighting.record_time = Time.parse(params[:time_id]) || Time.now    
+    @sighting.record_time =  Time.now
     @sighting.time_window_hr = 0
     @sighting.description = params[:description] || "No description"
     @sighting.camp_id = 1
@@ -93,6 +96,7 @@ class SightingsController < ApplicationController
       # TODO - move this 'view' stuff out of controller
       csv << %w(When What Where)
       sightings.each do |s|
+        # debugger
         csv << [s.record_time, s.species.common_name, s.location.name]
       end
     end
