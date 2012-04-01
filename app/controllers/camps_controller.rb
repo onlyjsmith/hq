@@ -16,9 +16,8 @@ class CampsController < ApplicationController
   def show
     @camp = Camp.find(params[:id])
     @sightings = Sighting.where(:camp_id => @camp.id)
-    # if @sightings.nil?
-    #   @sightings = Sighting.all
-    # end
-    
+
+    # TODO: Add the following line back in to redirect to sightings_index with search terms
+    # redirect_to sightings_path("q[camp_id_eq]" => @camp.id)
   end
 end
