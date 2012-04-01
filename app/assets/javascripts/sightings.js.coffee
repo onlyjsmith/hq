@@ -34,9 +34,8 @@ $(document).ready ->
   if $("#sightings_map").length
     initializeSightingsMap()
   
-  $('#sightings_map').bind 'tabsshow', (event, ui) ->
-    console.log "resizing map"
-    resizeMap() if ui.panel.id is "map"
+  $('#tabs').bind 'tabsshow', (event, ui) ->
+    $('#headlines').isotope('reLayout') if ui.panel.id is "headlines_panel"
       
   
 # MOVED TO global.js
@@ -75,3 +74,7 @@ initializeSightingsMap = () ->
 
     locationMapType = new google.maps.ImageMapType(locationOptions)
     m.overlayMapTypes.insertAt 0, locationMapType
+    
+    $("#tabs").bind 'tabsshow', (event, ui) -> 
+      console.log "Resizing map"
+      google.maps.event.trigger(m, 'resize') if ui.panel.id is "map_panel" 
