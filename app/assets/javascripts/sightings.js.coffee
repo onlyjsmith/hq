@@ -65,7 +65,18 @@ initializeSightingsMap = () ->
 
     locationMapType = new google.maps.ImageMapType(locationOptions)
     m.overlayMapTypes.insertAt 0, locationMapType
+
+    siteOptions =
+      getTileUrl: (coord, zoom) ->
+        "http://craigmills.cartodb.com/tiles/sites/" + zoom + "/" + coord.x + "/" + coord.y + ".png"
+
+      tileSize: new google.maps.Size(256, 256)
+
+    siteMapType = new google.maps.ImageMapType(siteOptions)
+    m.overlayMapTypes.insertAt 2, siteMapType
     
+
+
     $("#tabs").bind 'tabsshow', (event, ui) -> 
       if ui.panel.id is "map_panel" 
         google.maps.event.trigger(m, 'resize')
