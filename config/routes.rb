@@ -14,6 +14,7 @@ Hq::Application.routes.draw do
   end
 
   resources :sightings do
+    post :index, :on => :collection
     get :download, :on => :collection                  
     get :headlines, :on => :collection
     get :map, :on => :collection
