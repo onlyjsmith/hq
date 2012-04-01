@@ -76,5 +76,7 @@ initializeSightingsMap = () ->
     m.overlayMapTypes.insertAt 0, locationMapType
     
     $("#tabs").bind 'tabsshow', (event, ui) -> 
-      console.log "Resizing map"
-      google.maps.event.trigger(m, 'resize') if ui.panel.id is "map_panel" 
+      if ui.panel.id is "map_panel" 
+        google.maps.event.trigger(m, 'resize')
+        centre = new google.maps.LatLng(-15.9, 28.0)
+        m.setCenter centre 
