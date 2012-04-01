@@ -6,7 +6,7 @@ class Location < ActiveRecord::Base
   # TODO: Location <-> Camp should be a location-based association, dynamic
   has_many :camps
   
-  #before_save :update_geom_to_cartodb
+  before_save :update_geom_to_cartodb
 
   def self.search(search)
     if search
@@ -38,7 +38,8 @@ class Location < ActiveRecord::Base
     # Including name in INSERT just for debugging and development
     q = "INSERT INTO locations (hex, the_geom, name) VALUES ('#{key}', ST_SetSRID(ST_GeomFromGeoJSON('#{self.polygon}'), 4326), '#{self.name}');"
     
-    CartoDB::Connection.query q
+    a = CartoDB::Connection.query q
+    debugger
     self.polygon = nil
     self.hex = key
     
