@@ -3,7 +3,7 @@
     <h1>Add new sighting</h1>
     <h2><small>Use this "OmniEnter" box to search for everything!</small></h2>
     
-    <%= form_tag sightings_path, :method => 'post' do %>
+    <%= form_tag sightings_path, :controller => :sightings, :action => :create, :method => 'post' do %>
 
         <%= text_field_tag :search, params[:search], :class => 'omni_enter' %>
         <%= hidden_field_tag(:species_id) %>
@@ -14,11 +14,6 @@
         <%= submit_tag "Add this!", :name => nil %>
 
     <% end %>
-    
-<!--     <input id="search" placeholder="" class="omni_enter"/>
-      <input type="hidden" />     -->
-      
-    
     
       <div class="span3 model_results species">
         <ul>
