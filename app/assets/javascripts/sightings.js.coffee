@@ -30,10 +30,10 @@ $(document).ready ->
     # layoutMode : 'masonry'
     masonry: { columnWidth: 20 }
 
-  $("#sightings_map").ready ->
-    console.log 'sightings_map DIV loaded'
+  # Looks for element on page, checks if exists using .length
+  if $("#sightings_map").length
     initializeSightingsMap()
-    
+  
   $('#sightings_map').bind 'tabsshow', (event, ui) ->
     console.log "resizing map"
     resizeMap() if ui.panel.id is "map"
@@ -49,7 +49,8 @@ $(document).ready ->
 #         ul.append "<li class='ui-autocomplete-category'>" + capitaliseFirstLetter(item.category) + "</li>"
 #         currentCategory = item.category
 #       self._renderItem ul, item
-      
+
+# Map for sightings_index map tab
 initializeSightingsMap = () -> 
   url = "http://a.tiles.mapbox.com/v3/onlyjsmith.wildspot-map.jsonp"
   wax.tilejson url, (tilejson) ->

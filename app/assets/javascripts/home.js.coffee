@@ -10,7 +10,6 @@ $(document).ready ->
       @value = "" 
 
   $("#map-landing-page").ready ->
-    console.log 'landing page ready'
     initializeLandingMap()
 
 # TODO: Add interaction

@@ -1,3 +1,49 @@
+$ ->
+  $("#geocode_this").keyup ->
+    # console.log "keyed up KILL THIS"
+    codeAddress()
+
+  cartodbMapOptions =
+    zoom: 5
+    center: new google.maps.LatLng(lat, lng)
+    disableDefaultUI: true
+    mapTypeId: google.maps.MapTypeId.TERRAIN
+
+  # Looks for element on page, checks if exists using .length
+  if $("#location_map").length
+    carto_map = new google.maps.Map(document.getElementById("location_map"), cartodbMapOptions)
+    getPolys()
+    drawingManager = new google.maps.drawing.DrawingManager(
+      drawingControl: true
+      drawingControlOptions:
+        position: google.maps.ControlPosition.TOP_RIGHT
+        drawingModes: [ google.maps.drawing.OverlayType.POLYGON ]
+
+      polygonOptions:
+        fillColor: "#0099FF"
+        fillOpacity: 0.7
+        strokeColor: "#AA2143"
+        strokeWeight: 2
+        clickable: true
+        zIndex: 1
+        editable: true
+    )
+    drawingManager.setMap carto_map
+    google.maps.event.addListener drawingManager, "overlaycomplete", (e) ->
+      newShape = e.overlay
+      newShape.type = e.type
+      google.maps.event.addListener newShape, "click", ->
+        setSelection this
+
+      setSelection newShape
+      storePoly newShape.getPath()
+      newShape.setEditable false
+  
+    
+
+    google.maps.event.addListener carto_map, "click", clearSelection
+
+
 overlay = undefined
 cartodb_imagemaptype = undefined
 image = undefined
@@ -12,10 +58,10 @@ lng = 24 + Math.floor(Math.random() * 12)
 drawPolygon = (id, poly) ->
   newPoly = new google.maps.Polygon(
     paths: poly
-    strokeColor: "#AA2143"
+    strokeColor: "#333333"
     strokeOpacity: 1
     strokeWeight: 2
-    fillColor: "#FF6600"
+    fillColor: "#719700"
     fillOpacity: 0.7
   )
   newPoly.cartodb_id = id
@@ -81,52 +127,10 @@ storePoly = (path, cartodb_id) ->
       console.log 'POST failed for some reason'
 
 
-$ ->
-  $("#geocode_this").keyup ->
-    # console.log "keyed up KILL THIS"
-    codeAddress()
-
-  cartodbMapOptions =
-    zoom: 5
-    center: new google.maps.LatLng(lat, lng)
-    disableDefaultUI: true
-    mapTypeId: google.maps.MapTypeId.TERRAIN
-
-  carto_map = new google.maps.Map(document.getElementById("location_map"), cartodbMapOptions)
-  getPolys()
-  drawingManager = new google.maps.drawing.DrawingManager(
-    drawingControl: true
-    drawingControlOptions:
-      position: google.maps.ControlPosition.TOP_RIGHT
-      drawingModes: [ google.maps.drawing.OverlayType.POLYGON ]
-
-    polygonOptions:
-      fillColor: "#0099FF"
-      fillOpacity: 0.7
-      strokeColor: "#AA2143"
-      strokeWeight: 2
-      clickable: true
-      zIndex: 1
-      editable: true
-  )
-  drawingManager.setMap carto_map
-  google.maps.event.addListener drawingManager, "overlaycomplete", (e) ->
-    newShape = e.overlay
-    newShape.type = e.type
-    google.maps.event.addListener newShape, "click", ->
-      setSelection this
-
-    setSelection newShape
-    storePoly newShape.getPath()
-    newShape.setEditable false
-  
-  codeAddress = ->
-    address = $("#geocode_this").val()
-    geocoder = new google.maps.Geocoder()
-    geocoder.geocode
-      address: address, (results, status) ->
-        console.log results[0]
-        carto_map.fitBounds results[0].geometry.bounds
-    
-
-  google.maps.event.addListener carto_map, "click", clearSelection
+codeAddress = ->
+  address = $("#geocode_this").val()
+  geocoder = new google.maps.Geocoder()
+  geocoder.geocode
+    address: address, (results, status) ->
+      console.log results[0]
+      carto_map.fitBounds results[0].geometry.bounds
