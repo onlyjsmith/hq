@@ -57,7 +57,7 @@ class SightingsController < ApplicationController
     @sighting.submission_point = "HQ"
     @sighting.user_id = 1
     
-    debugger
+    # debugger
     respond_to do |wants|
       if @sighting.save
         flash[:notice] = 'Sighting was successfully created.'
