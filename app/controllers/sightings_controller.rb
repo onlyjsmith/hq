@@ -37,7 +37,7 @@ class SightingsController < ApplicationController
   end
 
   def new
-    @sighting = Sighting.new
+    @sighting = Sighting.new(params[:details])
   end
   
   def create
