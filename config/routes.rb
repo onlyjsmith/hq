@@ -9,7 +9,9 @@ Hq::Application.routes.draw do
     resources :tribes 
   end
      
-  resources :locations
+  resources :locations do
+    post :post_polygon, :on => :collection
+  end
 
   resources :sightings do
     get :download, :on => :collection                  
