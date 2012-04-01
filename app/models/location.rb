@@ -6,7 +6,7 @@ class Location < ActiveRecord::Base
   # TODO: Location <-> Camp should be a location-based association, dynamic
   has_many :camps
   
-  before_save :update_geom_to_cartodb
+  # before_save :update_geom_to_cartodb
 
   def self.search(search)
     if search

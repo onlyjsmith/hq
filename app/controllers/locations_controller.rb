@@ -10,7 +10,7 @@ class LocationsController < ApplicationController
   
   def create
     @location = Location.new(params[:location])
-    
+    # debugger
     respond_to do |wants|
       if @location.save
         flash[:notice] = 'Location was successfully created.'
@@ -42,7 +42,10 @@ class LocationsController < ApplicationController
   end
   
   def post_polygon
-    Location.store_poly_to_cartodb(params)
+    response = Location.store_poly_to_cartodb(params)
+    respond_to do |format|
+      format.json { render :json => {:cartodb_id => response}}
+    end
   end
   
 end

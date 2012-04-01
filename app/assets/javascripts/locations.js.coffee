@@ -66,13 +66,17 @@ storePoly = (path, cartodb_id) ->
   q = "geojson=" + JSON.stringify(payload)
   q = q + "&cartodb_id=" + cartodb_id  if cartodb_id
   $.ajax
-    url: "/locations/post_polygon"
+    url: "/locations/post_polygon.json"
     # crossDomain: true
     type: "POST"
     dataType: "json"
     data: q
-    success: ->
+    success: (responsedata) ->
+      # console.log responsedata.cartodb_id
+      $("#location_cartodb_id").val responsedata.cartodb_id
+      # $("#response").html("<p>Fine</p>")
       console.log 'POSTed successfully'
+      
     error: ->
       console.log 'POST failed for some reason'
 
