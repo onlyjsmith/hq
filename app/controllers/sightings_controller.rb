@@ -13,7 +13,7 @@ class SightingsController < ApplicationController
     # debugger
     @q = Sighting.search(params[:q]) 
     @sightings = @q.result(:distinct => true)
-
+    # debugger
     # @sightings = @sightings.by_camp(@camp) if @camp
     # @sightings = @sightings.filter_time(params[:filter_time])
     # 
@@ -103,23 +103,17 @@ class SightingsController < ApplicationController
 
   def headlines
     @sightings = Sighting.all
-  end          
-  # 
-  # def map
-  #   @sightings = Sighting.all
-  # end    
-  # 
-  # def list
-  #   @sightings = Sighting.all
-  #   render :partial => 'sightings/table'
-  # end
+  end
   
-  # def search
-  #   puts params
-  #   @sightings = Sighting.duration(params[:duration])
-  #   respond_to do |format|
-  #     format.html { render :partial => 'entries' }
-  #     format.json { render json: @sightings }
-  #   end
-  # end
+  # def filter
+  #   @q = Sighting.search(params[:q]) 
+  #   @sightings = @q.result(:distinct => true)
+  # 
+  #   # respond_to do |format|
+  #   #   format.html # index.html.erb
+  #   #   format.json { render json: @sightings }
+  #   #   format.js
+  #   # end
+  #   redirect_to :index
+  # end          
 end

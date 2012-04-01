@@ -14,7 +14,6 @@ Hq::Application.routes.draw do
   end
 
   resources :sightings do
-    # post :index, :on => :collection
     get :download, :on => :collection                  
     get :headlines, :on => :collection
     get :map, :on => :collection
@@ -24,6 +23,7 @@ Hq::Application.routes.draw do
     get :autocomplete_tribe_name, :on => :collection
     get :autocomplete_camp_name, :on => :collection
     get :autocomplete_location_name, :on => :collection
+    post :filter, :on => :collection
   end
 
   resources :camps do
