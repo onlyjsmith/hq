@@ -33,21 +33,12 @@ $(document).ready ->
   # Looks for element on page, checks if exists using .length
   if $("#sightings_map").length
     initializeSightingsMap()
-  
+    
   $('#tabs').bind 'tabsshow', (event, ui) ->
     $('#headlines').isotope('reLayout') if ui.panel.id is "headlines_panel"
       
   
-# MOVED TO global.js
-# $.widget "custom.catcomplete", $.ui.autocomplete,
-#   _renderMenu: (ul, items) ->
-#     self = this
-#     currentCategory = ""
-#     $.each items, (index, item) ->
-#       unless item.category is currentCategory
-#         ul.append "<li class='ui-autocomplete-category'>" + capitaliseFirstLetter(item.category) + "</li>"
-#         currentCategory = item.category
-#       self._renderItem ul, item
+
 
 # Map for sightings_index map tab
 initializeSightingsMap = () -> 
@@ -80,3 +71,4 @@ initializeSightingsMap = () ->
         google.maps.event.trigger(m, 'resize')
         centre = new google.maps.LatLng(-15.9, 28.0)
         m.setCenter centre 
+
