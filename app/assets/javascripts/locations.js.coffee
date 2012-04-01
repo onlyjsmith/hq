@@ -27,7 +27,7 @@ drawPolygon = (id, poly) ->
   polys.push newPoly
 
 getPolys = ->
-  url = "http://craigmills.cartodb.com/api/v1/sql?q=SELECT cartodb_id,ST_AsGeoJSON(the_geom) as geoj FROM locations ORDER BY updated_at DESC LIMIT 25"
+  url = "http://craigmills.cartodb.com/api/v1/sql?q=SELECT cartodb_id,ST_AsGeoJSON(the_geom) as geoj FROM locations ORDER BY cartodb_id DESC LIMIT 25"
   $.getJSON url, (response) ->
     for i of response.rows
       coords = JSON.parse(response.rows[i].geoj).coordinates[0][0]

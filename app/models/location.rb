@@ -49,7 +49,7 @@ class Location < ActiveRecord::Base
   
   def geom
     
-    result = CartoDB::Connection.query "SELECT the_geom FROM locations where hex = '#{self.hex}'", :page => 1
+    result = CartoDB::Connection.query "SELECT the_geom FROM locations where cartodb_id = '#{self.cartodb_id}'", :page => 1
     result[:rows][0][:the_geom].as_json
     
   end
