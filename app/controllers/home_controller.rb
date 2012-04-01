@@ -3,6 +3,7 @@ class HomeController < ApplicationController
   end
   
   def redirect
+    # TODO: Find another way to pass parameters from home#redirect to sightings#index without using POST
     redirect_to sightings_path("q[#{params[:model]}_id_eq]" => params[:id])
   end
   
