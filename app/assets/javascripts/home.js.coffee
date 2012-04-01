@@ -37,4 +37,14 @@ initializeLandingMap = () ->
       tileSize: new google.maps.Size(256, 256)
 
     locationMapType = new google.maps.ImageMapType(locationOptions)
-    m.overlayMapTypes.insertAt 0, locationMapType
+    m.overlayMapTypes.insertAt 1, locationMapType
+    
+    siteOptions =
+      getTileUrl: (coord, zoom) ->
+        "http://craigmills.cartodb.com/tiles/sites/" + zoom + "/" + coord.x + "/" + coord.y + ".png"
+
+      tileSize: new google.maps.Size(256, 256)
+
+    siteMapType = new google.maps.ImageMapType(siteOptions)
+    m.overlayMapTypes.insertAt 2, siteMapType
+    
