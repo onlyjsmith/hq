@@ -7,9 +7,9 @@
       <%= search_form_for @q do |f| %>
         <%= f.label :location_name_cont, "Location Name contains" %>
         <%= f.text_field :location_name_cont, 'data-autocomplete' => "/sightings/autocomplete_location_name", 
-          :class => :autocomplete  %>
+          :class => [:autocomplete, :new_sighting ]%>
         <%= f.submit %>
-        <%= link_to "Reset", sightings_path %>
+        <%= link_to "Reset", "#", :id => 'reset_location' %>
       <% end %>
       
     </div>

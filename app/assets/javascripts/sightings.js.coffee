@@ -3,9 +3,17 @@ $(document).ready ->
   # $(".tabs").button()
   # $(".change_date").click ->
   #   $.get "sightings", $.param(filter_time: $(this).attr("data-duration"))
-  $(".autocomplete").bind 'railsAutocomplete.select', (event, data) ->
-    console.log "Item selected"
+  $(".autocomplete.filters").bind 'railsAutocomplete.select', (event, data) ->
+    console.log "Filter item selected"
     $("#sighting_search").submit()
+
+  $(".autocomplete.new_sighting").bind 'railsAutocomplete.select', (event, data) ->
+    console.log "New location item selected:" + data.item.id
+    # Get map tiles from CartoDB                          
+  
+  $("a#reset_location").bind 'click', (event) -> 
+    # console.log "clicked reset for " +  $(".autocomplete.new_sighting#q_location_name_cont")
+    $(".autocomplete.new_sighting#q_location_name_cont")[0].value = ""
   
   $("input:text:visible:first").focus()
   
