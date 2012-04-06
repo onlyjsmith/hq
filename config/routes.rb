@@ -10,7 +10,8 @@ Hq::Application.routes.draw do
   end
      
   resources :locations do
-    post :post_polygon, :on => :collection
+    post :post_polygon, :on => :collection  
+    get :search_by_bounding_box, :on => :collection
   end
 
   resources :sightings do
