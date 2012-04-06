@@ -59,7 +59,7 @@ class Location < ActiveRecord::Base
     
   end
   
-  def self.within_bounding_box(topleft, bottomright)
+  def self.within_bounding_box(topright, bottomleft)
     # Head to cartodb grab all locations within bounding box
     all
   end
