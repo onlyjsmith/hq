@@ -2,27 +2,27 @@
 <%# search_form_for @q, :url => filter_sightings_path, :html => {:method => :get} do |f| %>
 <%= search_form_for @q do |f| %>
   <%= f.label :description_cont %>
-  <%= f.text_field :description_cont %>
+  <%= f.text_field :description_cont, :class => [:autocomplete, :filters] %>
   
   <%= f.label :species_common_name_cont, "Species Common Name contains" %>
   <%= f.text_field :species_common_name_cont, 'data-autocomplete' => "sightings/autocomplete_species_common_name", 
-    :class => :autocomplete %>
+    :class => [:autocomplete, :filters] %>
   
   <%= f.label :species_binomial_cont, "Species Binomial contains" %>
   <%= f.text_field :species_binomial_cont, 'data-autocomplete' => "sightings/autocomplete_species_binomial", 
-    :class => :autocomplete %>
+    :class => [:autocomplete, :filters] %>
 
   <%= f.label :tribe_name_cont, "Tribe Name contains" %>
   <%= f.text_field :tribe_name_cont, 'data-autocomplete' => "sightings/autocomplete_tribe_name", 
-    :class => :autocomplete  %>
+    :class => [:autocomplete, :filters]  %>
   
   <%= f.label :camp_name_cont, "Camp Name contains" %>
   <%= f.text_field :camp_name_cont, 'data-autocomplete' => "sightings/autocomplete_camp_name", 
-    :class => :autocomplete  %>
+    :class => [:autocomplete, :filters]  %>
   
   <%= f.label :location_name_cont, "Location Name contains" %>
   <%= f.text_field :location_name_cont, 'data-autocomplete' => "sightings/autocomplete_location_name", 
-    :class => :autocomplete  %>
+    :class => [:autocomplete, :filters]  %>
   
   <%= f.submit %>
   <%= link_to "Reset", sightings_path %>

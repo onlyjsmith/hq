@@ -2,8 +2,7 @@
   <div class="span4">
     <%= simple_form_for @location do |f| %>
       <%= f.input :name %>
-      <%= f.input :polygon, :as => :hidden %>
-      <%= f.input :cartodb_id, :as => :string %>
+      <%= f.input :polygon%>  <!-- , :as => :hidden --> 
       <%= f.button :submit %>
     <% end %>
   </div>
