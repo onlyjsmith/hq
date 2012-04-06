@@ -3,9 +3,17 @@ $(document).ready ->
   # $(".tabs").button()
   # $(".change_date").click ->
   #   $.get "sightings", $.param(filter_time: $(this).attr("data-duration"))
-  $(".autocomplete").bind 'railsAutocomplete.select', (event, data) ->
-    console.log "Item selected"
+  $(".autocomplete.filters").bind 'railsAutocomplete.select', (event, data) ->
+    console.log "Filter item selected"
     $("#sighting_search").submit()
+
+  $(".autocomplete.new_sighting").bind 'railsAutocomplete.select', (event, data) ->
+    console.log "New location item selected:" + data.item.id
+    # Get map tiles from CartoDB                          
+  
+  $("a#reset_location").bind 'click', (event) -> 
+    # console.log "clicked reset for " +  $(".autocomplete.new_sighting#q_location_name_cont")
+    $(".autocomplete.new_sighting#q_location_name_cont")[0].value = ""
   
   $("input:text:visible:first").focus()
   
@@ -33,11 +41,12 @@ $(document).ready ->
   # Looks for element on page, checks if exists using .length
   if $("#sightings_map").length
     initializeSightingsMap()
+
+  if $("#new_map").length
+    initializeNewMap()
     
   $('#tabs').bind 'tabsshow', (event, ui) ->
     $('#headlines').isotope('reLayout') if ui.panel.id is "headlines_panel"
-      
-  
 
 
 # Map for sightings_index map tab
@@ -83,3 +92,42 @@ initializeSightingsMap = () ->
         centre = new google.maps.LatLng(-15.9, 28.0)
         m.setCenter centre 
 
+# Map for new_sighting page
+initializeNewMap = () -> 
+  # url = "http://a.tiles.mapbox.com/v3/onlyjsmith.wildspot-map.jsonp"
+  # wax.tilejson url, (tilejson) ->
+  $.get "/sightings/new.json", (data) ->
+    m = new google.maps.Map(document.getElementById("new_map"),
+      center: new google.maps.LatLng(data[1], data[0])
+      disableDefaultUI: true
+      zoom: 13
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    )
+    # m.mapTypes.set "mb", new wax.g.connector(tilejson)
+    # m.setMapTypeId "mb"
+    # wax.g.interaction().map(m).tilejson(tilejson).on wax.tooltip().parent(map.getDiv()).events()
+
+    google.maps.event.addListener m, "click", (event) ->
+      console.log "Clicked at lat:" + event.latLng.lat() + ", lng:" + event.latLng.lng()
+
+    locationOptions =
+      getTileUrl: (coord, zoom) ->
+        "http://craigmills.cartodb.com/tiles/locations/" + zoom + "/" + coord.x + "/" + coord.y + ".png"
+
+      tileSize: new google.maps.Size(256, 256)
+
+    locationMapType = new google.maps.ImageMapType(locationOptions)
+    m.overlayMapTypes.insertAt 0, locationMapType
+
+    siteOptions =
+      getTileUrl: (coord, zoom) ->
+        "http://craigmills.cartodb.com/tiles/sites/" + zoom + "/" + coord.x + "/" + coord.y + ".png"
+
+      tileSize: new google.maps.Size(256, 256)
+
+    siteMapType = new google.maps.ImageMapType(siteOptions)
+    m.overlayMapTypes.insertAt 2, siteMapType
+
+
+getLocationsByBoundingBox = (topleft, bottomright) ->
+  

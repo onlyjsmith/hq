@@ -6,7 +6,6 @@ class Location < ActiveRecord::Base
   # TODO: Location <-> Camp should be a location-based association, dynamic
   has_many :camps
 
-
   validates :name, :presence => true
 
   after_initialize :default_values
@@ -41,6 +40,11 @@ class Location < ActiveRecord::Base
     result[:rows][0][:the_geom].as_json
   end
   
+  def self.within_bounding_box(topright, bottomleft)
+    # Head to cartodb grab all locations within bounding box
+    all
+  end
+
   
   
   
