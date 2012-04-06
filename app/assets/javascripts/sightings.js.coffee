@@ -113,8 +113,8 @@ initializeNewMap = () ->
 
     locationOptions =
       getTileUrl: (coord, zoom) ->
-        "http://craigmills.cartodb.com/tiles/locations/" + zoom + "/" + coord.x + "/" + coord.y + ".png"
-
+        # TODO: Add styling to selected loc_id
+        "http://craigmills.cartodb.com/tiles/locations/" + zoom + "/" + coord.x + "/" + coord.y + ".png" + "?sql=SELECT * FROM locations WHERE ST_Intersects(ST_PointFromText('POINT(22.695476740722597 -19.023144314307835 )', 4326), the_geom)"
       tileSize: new google.maps.Size(256, 256)
 
     locationMapType = new google.maps.ImageMapType(locationOptions)

@@ -2,6 +2,14 @@
   <div class="row">
     <h1>Add new sighting</h1>
     <h3>Hey, what have you seen, and where have you seen it?</h3>   
+
+    <% Species.all.each do |species| %>
+      <%= link_to image_tag(species.get_photo_url, :title => "First picture we could find of #{species.common_name}", 
+        :class => "box-shadow species photo small_photo"), "#" 
+      %>
+    <% end %>
+
+
     <div id="selector">
 
       <label for="locations_search">Locations: </label>
@@ -10,9 +18,16 @@
       <!-- <input id="location_id"> -->
       
     </div>
-    <div id="new_map" class="map">
+    <div class="row">
+      <div class="span9">
+        <div id="new_map" class="map">
       
-    </div>      
+        </div>      
+      </div>
+      <div class="span3">
+        <h3>Camp details</h3>
+      </div>
+    </div>
   </div>    
 </div>
 
