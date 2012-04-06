@@ -19,6 +19,6 @@ class Camp < ActiveRecord::Base
     location_id = 195826 # For Duba Plains, Botswana
 
     result = CartoDB::Connection.query "SELECT ST_AsGeoJSON(the_geom) AS pnt FROM sites WHERE id = #{location_id}"
-    JSON.parse result
+    JSON.parse result[:rows][0][:pnt]
   end
 end
