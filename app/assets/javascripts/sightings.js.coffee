@@ -41,6 +41,9 @@ $(document).ready ->
   # Looks for element on page, checks if exists using .length
   if $("#sightings_map").length
     initializeSightingsMap()
+
+  if $("#new_map").length
+    initializeNewMap()
     
   $('#tabs').bind 'tabsshow', (event, ui) ->
     $('#headlines').isotope('reLayout') if ui.panel.id is "headlines_panel"
@@ -91,3 +94,45 @@ initializeSightingsMap = () ->
         centre = new google.maps.LatLng(-15.9, 28.0)
         m.setCenter centre 
 
+# Map for sightings_index map tab
+initializeNewMap = () -> 
+  url = "http://a.tiles.mapbox.com/v3/onlyjsmith.wildspot-map.jsonp"
+  wax.tilejson url, (tilejson) ->
+    m = new google.maps.Map(document.getElementById("new_map"),
+      center: new google.maps.LatLng(-15.9, 28.0)
+      disableDefaultUI: true
+      zoom: 5
+      # mapTypeId: google.maps.MapTypeId.ROADMAP
+    )
+    m.mapTypes.set "mb", new wax.g.connector(tilejson)
+    m.setMapTypeId "mb"
+    # wax.g.interaction().map(m).tilejson(tilejson).on wax.tooltip().parent(map.getDiv()).events()
+
+    google.maps.event.addListener m, "click", (event) ->
+      console.log "Clicked at lat:" + event.latLng.lat() + ", lng:" + event.latLng.lng()
+
+    locationOptions =
+      getTileUrl: (coord, zoom) ->
+        "http://craigmills.cartodb.com/tiles/locations/" + zoom + "/" + coord.x + "/" + coord.y + ".png"
+
+      tileSize: new google.maps.Size(256, 256)
+
+    locationMapType = new google.maps.ImageMapType(locationOptions)
+    m.overlayMapTypes.insertAt 0, locationMapType
+
+    siteOptions =
+      getTileUrl: (coord, zoom) ->
+        "http://craigmills.cartodb.com/tiles/sites/" + zoom + "/" + coord.x + "/" + coord.y + ".png"
+
+      tileSize: new google.maps.Size(256, 256)
+
+    siteMapType = new google.maps.ImageMapType(siteOptions)
+    m.overlayMapTypes.insertAt 2, siteMapType
+
+
+
+    $("#tabs").bind 'tabsshow', (event, ui) -> 
+      if ui.panel.id is "map_panel" 
+        google.maps.event.trigger(m, 'resize')
+        centre = new google.maps.LatLng(-15.9, 28.0)
+        m.setCenter centre 
