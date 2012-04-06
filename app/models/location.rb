@@ -6,7 +6,6 @@ class Location < ActiveRecord::Base
   # TODO: Location <-> Camp should be a location-based association, dynamic
   has_many :camps
 
-
   validates :name, :presence => true
 
   after_initialize :default_values
@@ -14,13 +13,13 @@ class Location < ActiveRecord::Base
   
   # before_save :update_geom_to_cartodb
 
-  def self.search(search)
-    if search
-      find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
-    else
-      find(:all)
-    end
-  end
+  # def self.search(search)
+  #   if search
+  #     find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
+  #   else
+  #     find(:all)
+  #   end
+  # end
 
   # Returns either cartodb_id of location or false
   def self.store_poly_to_cartodb(params)

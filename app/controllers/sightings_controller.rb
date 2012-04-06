@@ -37,6 +37,9 @@ class SightingsController < ApplicationController
   end
 
   def new
+    @q = Sighting.search(params[:q]) 
+    @sightings = @q.result(:distinct => true)
+    
     @sighting = Sighting.new(params[:details])
   end
   

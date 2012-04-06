@@ -3,6 +3,14 @@
     <h1>Add new sighting</h1>
     <h3>Hey, what have you seen, and where have you seen it?</h3>   
     <div id="selector">
+
+      <%= search_form_for @q do |f| %>
+        <%= f.label :location_name_cont, "Location Name contains" %>
+        <%= f.text_field :location_name_cont, 'data-autocomplete' => "/sightings/autocomplete_location_name", 
+          :class => :autocomplete  %>
+        <%= f.submit %>
+        <%= link_to "Reset", sightings_path %>
+      <% end %>
       
     </div>
     <div id="map">
