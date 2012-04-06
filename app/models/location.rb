@@ -59,6 +59,11 @@ class Location < ActiveRecord::Base
     
   end
   
+  def self.within_bounding_box(topleft, bottomright)
+    # Head to cartodb grab all locations within bounding box
+    all
+  end
+
   
   protected
   def update_geom_to_cartodb
