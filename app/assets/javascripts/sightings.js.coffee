@@ -47,7 +47,7 @@ $(document).ready ->
     
   $('#tabs').bind 'tabsshow', (event, ui) ->
     $('#headlines').isotope('reLayout') if ui.panel.id is "headlines_panel"
-
+  
 
 # Map for sightings_index map tab
 initializeSightingsMap = () -> 
@@ -103,6 +103,7 @@ initializeNewMap = () ->
       zoom: 13
       mapTypeId: google.maps.MapTypeId.ROADMAP
     )
+
     # m.mapTypes.set "mb", new wax.g.connector(tilejson)
     # m.setMapTypeId "mb"
     # wax.g.interaction().map(m).tilejson(tilejson).on wax.tooltip().parent(map.getDiv()).events()
@@ -117,7 +118,7 @@ initializeNewMap = () ->
       tileSize: new google.maps.Size(256, 256)
 
     locationMapType = new google.maps.ImageMapType(locationOptions)
-    m.overlayMapTypes.insertAt 0, locationMapType
+    m.overlayMapTypes.insertAt 1, locationMapType
 
     siteOptions =
       getTileUrl: (coord, zoom) ->
@@ -128,6 +129,23 @@ initializeNewMap = () ->
     siteMapType = new google.maps.ImageMapType(siteOptions)
     m.overlayMapTypes.insertAt 2, siteMapType
 
+    google.maps.event.addListener m, "bounds_changed", (event) ->
+      bounds = m.getBounds()
+      bb = [bounds.getSouthWest().lat(), bounds.getSouthWest().lng(), bounds.getNorthEast().lat(), bounds.getNorthEast().lng()]
+      $.get "/locations/search_by_bounding_box",
+        bounding_box: bb,
+        (response_data) ->
+          # alert "Data Loaded: " + data
+          console.log "it worked"
+          console.log response_data
+
+          $("#locations_search").autocomplete
+            source: response_data
+            select: (event, ui) ->
+              console.log (if ui.item then "Selected: " + ui.item.value + " aka " + ui.item.id else "Nothing selected, input was " + @value)       
+              console.log ui.item.value
+              $("#location_id").val(ui.item.value)
+              $("#locations_search").val(ui.item.label)
 
 getLocationsByBoundingBox = (topleft, bottomright) ->
   

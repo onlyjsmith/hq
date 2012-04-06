@@ -20,16 +20,20 @@ class Location < ActiveRecord::Base
     end
   end
   
-  def self.search_by_bb(bb)
-
-    result = CartoDB::Connection.query "SELECT loc_id FROM locations where ST_Intersect(the_geom, ST_MakeEnvelope(bb[0], bb[1], bb[2], bb[3], 4326))"
+  def self.search_by_bounding_box(bb)
+    sql = "SELECT loc_id FROM locations where ST_Intersects(the_geom, ST_MakeEnvelope(#{bb[1]}, #{bb[0]}, #{bb[3]}, #{bb[2]}, 4326))"           
+    # sql = "SELECT loc_id FROM locations"           
+    # debugger
+    ids = CartoDB::Connection.query sql
+    puts ids  
     
+    locations = []
     
-    puts result
-    
-    result[:rows][0][:the_geom].as_json
-  
-  
+    ids[:rows].each do |id|
+      loc = Location.find(id[:loc_id])
+      locations << { :label => loc.name, :value => loc.id }
+    end
+    locations
   end
   
   
@@ -40,13 +44,7 @@ class Location < ActiveRecord::Base
     result[:rows][0][:the_geom].as_json
   end
   
-  def self.within_bounding_box(topright, bottomleft)
-    # Head to cartodb grab all locations within bounding box
-    all
-  end
-
-  
-  
+ 
   
   protected
   def update_geom_to_cartodb
