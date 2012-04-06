@@ -1,53 +1,20 @@
 <div class="container">
   <div class="row">
     <h1>Add new sighting</h1>
-    <h3>Hey, what have you seen, and where have you seen it?</h3>
-    
-    <%= form_tag sightings_path, :controller => :sightings, :action => :create, :method => 'post' do %>
+    <h3>Hey, what have you seen, and where have you seen it?</h3>   
+    <div id="selector">
 
-        <%= label_tag 'Use this "OmniEnter" box to search for everything!' %>
-        <%= text_field_tag :search, params[:search], :class => 'omni_enter' %>
-        <%= hidden_field_tag(:species_id) %>
-        <%= hidden_field_tag(:tribe_id) %>
-        <%= hidden_field_tag(:location_id) %>
-        <%= hidden_field_tag(:time_id) %>    
-        
-        <p>IMAGES OF SPECIES</p>
-        <% Species.all.each do |species| %>
-          <%= link_to image_tag(species.get_photo_url, :title => "First picture we could find of #{species.common_name}", 
-            :class => "box-shadow species photo small_photo"), species_path(species) 
-          %>
-        <% end %>
-        <%= label_tag "Describe what you saw:" %>
-        <%= text_field_tag :description, nil, :placeholder => "ugly but working description box" %>
-        <%= submit_tag "Add this!", :name => nil %>
-
-    <% end %>
-    
-      <div class="span3 model_results species">
-        <ul>
-          <h2>Species</h2>
-          <div id="species"></div> 
-        </ul>
-      </div>
-      <div class="span3 model_results tribe">
-        <ul>
-          <h2>Tribe</h2>
-          <div id="tribe"></div>
-        </ul>
-      </div>
-      <div class="span3 model_results location">
-        <ul>
-          <h2>Location</h2>
-          <div id="location"></div>
-        </ul>
-      </div>
-      <div class="span3 model_results time">
-        <ul>
-          <h2>Time</h2>
-          <div id="time"></div>
-        </ul>
-      </div>
+      <%= search_form_for @q do |f| %>
+        <%= f.label :location_name_cont, "Location Name contains" %>
+        <%= f.text_field :location_name_cont, 'data-autocomplete' => "/sightings/autocomplete_location_name", 
+          :class => [:autocomplete, :new_sighting ]%>
+        <%= link_to "Reset", "#", :id => 'reset_location' %>
+      <% end %>
+      
     </div>
+    <div id="new_map" class="map">
+      
+    </div>      
+  </div>    
 </div>
 
