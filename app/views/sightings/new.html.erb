@@ -1,15 +1,24 @@
 <div class="container">
   <div class="row">
     <h1>Add new sighting</h1>
-    <h2><small>Use this "OmniEnter" box to search for everything!</small></h2>
+    <h3>Hey, what have you seen, and where have you seen it?</h3>
     
     <%= form_tag sightings_path, :controller => :sightings, :action => :create, :method => 'post' do %>
 
+        <%= label_tag 'Use this "OmniEnter" box to search for everything!' %>
         <%= text_field_tag :search, params[:search], :class => 'omni_enter' %>
         <%= hidden_field_tag(:species_id) %>
         <%= hidden_field_tag(:tribe_id) %>
         <%= hidden_field_tag(:location_id) %>
-        <%= hidden_field_tag(:time_id) %>
+        <%= hidden_field_tag(:time_id) %>    
+        
+        <p>IMAGES OF SPECIES</p>
+        <% Species.all.each do |species| %>
+          <%= link_to image_tag(species.get_photo_url, :title => "First picture we could find of #{species.common_name}", 
+            :class => "box-shadow species photo small_photo"), species_path(species) 
+          %>
+        <% end %>
+        <%= label_tag "Describe what you saw:" %>
         <%= text_field_tag :description, nil, :placeholder => "ugly but working description box" %>
         <%= submit_tag "Add this!", :name => nil %>
 
