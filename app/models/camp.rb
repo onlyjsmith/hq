@@ -13,4 +13,12 @@ class Camp < ActiveRecord::Base
       all
     end
   end
+  
+  def location
+    # Make this dynamic, once Cartodb linked up to locations and camps properly
+    location_id = 195826 # For Duba Plains, Botswana
+
+    result = CartoDB::Connection.query "SELECT the_geom FROM sites where id = #{location_id}"
+    result[:rows][0][:the_geom].as_json
+  end
 end

@@ -37,6 +37,8 @@ class SightingsController < ApplicationController
   end
 
   def new
+    @camp = Camp.first.location
+    
     @q = Sighting.search(params[:q]) 
     @sightings = @q.result(:distinct => true)
     
