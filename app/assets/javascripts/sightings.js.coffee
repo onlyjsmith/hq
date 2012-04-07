@@ -95,42 +95,48 @@ initializeSightingsMap = () ->
     
 # Map for new_sighting page
 initializeNewMap = () -> 
-  # url = "http://a.tiles.mapbox.com/v3/onlyjsmith.wildspot-map.jsonp"
-  # wax.tilejson url, (tilejson) ->
+
+  # 
+
   $.get "/sightings/new.json", (data) ->
-    m = new google.maps.Map(document.getElementById("new_map"),
+    m = new google.maps.Map document.getElementById("new_map"),
       center: new google.maps.LatLng(data[1], data[0])
       disableDefaultUI: true
       zoom: 13
       mapTypeId: google.maps.MapTypeId.ROADMAP
-    )
+    window.NewMap = m
 
-
-    # m.mapTypes.set "mb", new wax.g.connector(tilejson)
-    # m.setMapTypeId "mb"
-    # wax.g.interaction().map(m).tilejson(tilejson).on wax.tooltip().parent(map.getDiv()).events()
-
+    # m = window.NewMap  
     google.maps.event.addListener m, "click", (event) ->
       console.log "Clicked at lat:" + event.latLng.lat() + ", lng:" + event.latLng.lng()
 
+    # Add locations tiles overlay
     locationOptions =
-      getTileUrl: (coord, zoom) ->
-        # TODO: Add styling to selected loc_id
-        "http://craigmills.cartodb.com/tiles/locations/" + zoom + "/" + coord.x + "/" + coord.y + ".png" #+ "?sql=SELECT * FROM locations WHERE ST_Intersects(ST_PointFromText('POINT(22.695476740722597 -19.023144314307835 )', 4326), the_geom)"
-      tileSize: new google.maps.Size(256, 256)
+      click: [-19.03434170077973, 22.474033564453066]
+      loc_id: 6
+      
+      # TODO: Add styling to selected loc_id
+      # "http://craigmills.cartodb.com/tiles/locations/" + zoom + "/" + coord.x + "/" + coord.y + ".png" + 
+      # "?sql=SELECT the_geom_webmercator FROM locations WHERE ST_Intersects(ST_PointFromText('POINT("+ click[1] + " " + click[0] + 
+      # " )', 4326), the_geom)"
 
+      
+      getTileUrl: (coord, zoom, loc_id) ->
+        "http://craigmills.cartodb.com/tiles/locations/" + zoom + "/" + coord.x + "/" + coord.y + ".png?style"+
+        "=#locations {line-color:#333333; line-width:2; line-opacity:0.48; polygon-opacity:0.9;} #locations[loc_id=" + loc_id + "]{polygon-fill:#F1EEF6}"
+      tileSize: new google.maps.Size(256, 256)
     locationMapType = new google.maps.ImageMapType(locationOptions)
     m.overlayMapTypes.insertAt 1, locationMapType
 
+    # Add sites tiles overlay
     siteOptions =
       getTileUrl: (coord, zoom) ->
         "http://craigmills.cartodb.com/tiles/sites/" + zoom + "/" + coord.x + "/" + coord.y + ".png"
-
       tileSize: new google.maps.Size(256, 256)
-
     siteMapType = new google.maps.ImageMapType(siteOptions)
     m.overlayMapTypes.insertAt 2, siteMapType
 
+    # Add changed bounds listener to repopulate drop-down 
     google.maps.event.addListener m, "bounds_changed", (event) ->
       bounds = m.getBounds()
       bb = [bounds.getSouthWest().lat(), bounds.getSouthWest().lng(), bounds.getNorthEast().lat(), bounds.getNorthEast().lng()]
