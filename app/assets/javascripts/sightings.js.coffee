@@ -47,7 +47,7 @@ $(document).ready ->
     
   $('#tabs').bind 'tabsshow', (event, ui) ->
     $('#headlines').isotope('reLayout') if ui.panel.id is "headlines_panel"
-  
+    
 
 # Map for sightings_index map tab
 initializeSightingsMap = () -> 
@@ -91,7 +91,8 @@ initializeSightingsMap = () ->
         google.maps.event.trigger(m, 'resize')
         centre = new google.maps.LatLng(-15.9, 28.0)
         m.setCenter centre 
-
+      
+    
 # Map for new_sighting page
 initializeNewMap = () -> 
   # url = "http://a.tiles.mapbox.com/v3/onlyjsmith.wildspot-map.jsonp"
@@ -104,6 +105,7 @@ initializeNewMap = () ->
       mapTypeId: google.maps.MapTypeId.ROADMAP
     )
 
+
     # m.mapTypes.set "mb", new wax.g.connector(tilejson)
     # m.setMapTypeId "mb"
     # wax.g.interaction().map(m).tilejson(tilejson).on wax.tooltip().parent(map.getDiv()).events()
@@ -114,7 +116,7 @@ initializeNewMap = () ->
     locationOptions =
       getTileUrl: (coord, zoom) ->
         # TODO: Add styling to selected loc_id
-        "http://craigmills.cartodb.com/tiles/locations/" + zoom + "/" + coord.x + "/" + coord.y + ".png" + "?sql=SELECT * FROM locations WHERE ST_Intersects(ST_PointFromText('POINT(22.695476740722597 -19.023144314307835 )', 4326), the_geom)"
+        "http://craigmills.cartodb.com/tiles/locations/" + zoom + "/" + coord.x + "/" + coord.y + ".png" #+ "?sql=SELECT * FROM locations WHERE ST_Intersects(ST_PointFromText('POINT(22.695476740722597 -19.023144314307835 )', 4326), the_geom)"
       tileSize: new google.maps.Size(256, 256)
 
     locationMapType = new google.maps.ImageMapType(locationOptions)
