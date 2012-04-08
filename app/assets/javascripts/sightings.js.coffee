@@ -1,22 +1,16 @@
-# Comment in coffeescript
 $(document).ready -> 
-  # $(".tabs").button()
-  # $(".change_date").click ->
-  #   $.get "sightings", $.param(filter_time: $(this).attr("data-duration"))
+  # ALL ACTIONS: place cursor in first input box
+  $("input:text:visible:first").focus()
+  
+  # FILTERS partial
   $(".autocomplete.filters").bind 'railsAutocomplete.select', (event, data) ->
     console.log "Filter item selected"
     $("#sighting_search").submit()
-
-  $(".autocomplete.new_sighting").bind 'railsAutocomplete.select', (event, data) ->
-    console.log "New location item selected:" + data.item.id
-    # Get map tiles from CartoDB                          
   
-  $("a#reset_location").bind 'click', (event) -> 
-    # console.log "clicked reset for " +  $(".autocomplete.new_sighting#q_location_name_cont")
-    $(".autocomplete.new_sighting#q_location_name_cont")[0].value = ""
+  # $("a#reset_location").bind 'click', (event) -> 
+  #   $(".autocomplete.new_sighting#q_location_name_cont")[0].value = ""
   
-  $("input:text:visible:first").focus()
-  
+  # OLD-NEW page (OMNI-ENTER box)
   $("#search").catcomplete
     delay: 0
     source: "/home/auto_search.json"
@@ -26,6 +20,7 @@ $(document).ready ->
     close: (event, ui) ->
       @value = ""
 
+  # INDEX page
   $("#tabs").tabs 
     # cookie: 
     #   expires: 1
@@ -42,14 +37,28 @@ $(document).ready ->
   if $("#sightings_map").length
     initializeSightingsMap()
 
+  $('#tabs').bind 'tabsshow', (event, ui) ->
+    $('#headlines').isotope('reLayout') if ui.panel.id is "headlines_panel"
+
+  # NEW page  
   if $("#new_map").length
     initializeNewMap()
     
-  $('#tabs').bind 'tabsshow', (event, ui) ->
-    $('#headlines').isotope('reLayout') if ui.panel.id is "headlines_panel"
     
-
-# Map for sightings_index map tab
+  # populateLocationSearch = (boundingbox) ->
+  #   alert boundingbox
+  #   $.get "/locations/search_by_bounding_box",
+  #       bounding_box: bb,
+  #       (response_data) ->
+  # 
+  #         $("#locations_search").autocomplete
+  #           source: response_data
+  #           select: (event, ui) ->
+  #             $("#location_id").val(ui.item.value)
+  #             $("#locations_search").val(ui.item.label)
+  
+  
+# INDEX page: map for sightings_index map tab
 initializeSightingsMap = () -> 
   url = "http://a.tiles.mapbox.com/v3/onlyjsmith.wildspot-map.jsonp"
   wax.tilejson url, (tilejson) ->
@@ -93,7 +102,7 @@ initializeSightingsMap = () ->
         m.setCenter centre 
       
     
-# Map for new_sighting page
+# NEW page: map for new_sighting page
 initializeNewMap = () -> 
   $.get "/sightings/new.json", (data) ->
     m = new google.maps.Map document.getElementById("new_map"),
@@ -113,7 +122,7 @@ initializeNewMap = () ->
       console.log "Got loc_id from cartodb :" + loc_id
       
       console.log 'responding to click by refreshing locations tiles'
-
+      
 
       locationOptions =
         getTileUrl: (coord, zoom) ->
@@ -146,17 +155,17 @@ initializeNewMap = () ->
     siteMapType = new google.maps.ImageMapType(siteOptions)
     m.overlayMapTypes.insertAt 2, siteMapType
 
-    # Add changed bounds listener to repopulate search drop-down 
-    google.maps.event.addListener m, "bounds_changed", (event) ->
-      bounds = m.getBounds()
-      bb = [bounds.getSouthWest().lat(), bounds.getSouthWest().lng(), bounds.getNorthEast().lat(), bounds.getNorthEast().lng()]
-      $.get "/locations/search_by_bounding_box",
-        bounding_box: bb,
-        (response_data) ->
-
-          $("#locations_search").autocomplete
-            source: response_data
-            select: (event, ui) ->
-              $("#location_id").val(ui.item.value)
-              $("#locations_search").val(ui.item.label)
+    # # Add changed bounds listener to repopulate search drop-down 
+    # google.maps.event.addListener m, "bounds_changed", (event) ->
+    #   bounds = m.getBounds()
+    #   bb = [bounds.getSouthWest().lat(), bounds.getSouthWest().lng(), bounds.getNorthEast().lat(), bounds.getNorthEast().lng()]
+    #   $.get "/locations/search_by_bounding_box",
+    #     bounding_box: bb,
+    #     (response_data) ->
+    # 
+    #       $("#locations_search").autocomplete
+    #         source: response_data
+    #         select: (event, ui) ->
+    #           $("#location_id").val(ui.item.value)
+    #           $("#locations_search").val(ui.item.label)
   
