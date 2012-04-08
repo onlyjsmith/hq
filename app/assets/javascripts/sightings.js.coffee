@@ -95,35 +95,48 @@ initializeSightingsMap = () ->
     
 # Map for new_sighting page
 initializeNewMap = () -> 
-
-  # 
-
   $.get "/sightings/new.json", (data) ->
     m = new google.maps.Map document.getElementById("new_map"),
       center: new google.maps.LatLng(data[1], data[0])
       disableDefaultUI: true
       zoom: 13
       mapTypeId: google.maps.MapTypeId.ROADMAP
-    window.NewMap = m
-
     # m = window.NewMap  
     google.maps.event.addListener m, "click", (event) ->
       console.log "Clicked at lat:" + event.latLng.lat() + ", lng:" + event.latLng.lng()
+      click = [event.latLng.lat(), event.latLng.lng()]
+      loc_id = 6
+      
+      console.log 'responding to click by refreshing locations tiles'
 
-    # Add locations tiles overlay
+
+      locationOptions =
+        getTileUrl: (coord, zoom, loc_id) ->
+          "http://craigmills.cartodb.com/tiles/locations/" + zoom + "/" + coord.x + "/" + coord.y + ".png"+
+          "?style=#locations {line-color:#333333;line-width:2;line-opacity:0.48;polygon-opacity:0.48;polygon-fill:#FFFFB2}#locations [loc_id="+ 
+          loc_id +"] {polygon-fill:#B10026}"
+          # TODO: Add styling to selected loc_id
+          # "http://craigmills.cartodb.com/tiles/locations/" + zoom + "/" + coord.x + "/" + coord.y + ".png" + 
+          # "?sql=SELECT the_geom_webmercator FROM locations WHERE ST_Intersects(ST_PointFromText('POINT("+ click[1] + " " + click[0] + 
+          # " )', 4326), the_geom)"
+
+
+        tileSize: new google.maps.Size(256, 256)
+      locationMapType = new google.maps.ImageMapType(locationOptions)
+      # m.overlayMapTypes.removeAt 2
+      # arr = m.overlayMapTypes.getArray()
+      # m.overlayMapTypes.removeAt 1
+      # console.log 'removed  layer 1?'
+      m.overlayMapTypes.insertAt 2, locationMapType
+
+      
+
+    # Add initial locations tiles overlay
     locationOptions =
-      click: [-19.03434170077973, 22.474033564453066]
-      loc_id: 6
-      
-      # TODO: Add styling to selected loc_id
-      # "http://craigmills.cartodb.com/tiles/locations/" + zoom + "/" + coord.x + "/" + coord.y + ".png" + 
-      # "?sql=SELECT the_geom_webmercator FROM locations WHERE ST_Intersects(ST_PointFromText('POINT("+ click[1] + " " + click[0] + 
-      # " )', 4326), the_geom)"
-
-      
       getTileUrl: (coord, zoom, loc_id) ->
-        "http://craigmills.cartodb.com/tiles/locations/" + zoom + "/" + coord.x + "/" + coord.y + ".png?style"+
-        "=#locations {line-color:#333333; line-width:2; line-opacity:0.48; polygon-opacity:0.9;} #locations[loc_id=" + loc_id + "]{polygon-fill:#F1EEF6}"
+        console.log 'adding initial locations tiles - shouldnt be coloured'
+        "http://craigmills.cartodb.com/tiles/locations/" + zoom + "/" + coord.x + "/" + coord.y + ".png"#"?style"+
+        # "=#locations {line-color:#333333; line-width:2; line-opacity:0.48; polygon-opacity:0.9;} #locations[loc_id=" + loc_id + "]{polygon-fill:#F1EEF6}"
       tileSize: new google.maps.Size(256, 256)
     locationMapType = new google.maps.ImageMapType(locationOptions)
     m.overlayMapTypes.insertAt 1, locationMapType
@@ -136,14 +149,13 @@ initializeNewMap = () ->
     siteMapType = new google.maps.ImageMapType(siteOptions)
     m.overlayMapTypes.insertAt 2, siteMapType
 
-    # Add changed bounds listener to repopulate drop-down 
+    # Add changed bounds listener to repopulate search drop-down 
     google.maps.event.addListener m, "bounds_changed", (event) ->
       bounds = m.getBounds()
       bb = [bounds.getSouthWest().lat(), bounds.getSouthWest().lng(), bounds.getNorthEast().lat(), bounds.getNorthEast().lng()]
       $.get "/locations/search_by_bounding_box",
         bounding_box: bb,
         (response_data) ->
-          # alert "Data Loaded: " + data
           console.log "it worked"
           console.log response_data
 
@@ -154,6 +166,4 @@ initializeNewMap = () ->
               console.log ui.item.value
               $("#location_id").val(ui.item.value)
               $("#locations_search").val(ui.item.label)
-
-getLocationsByBoundingBox = (topleft, bottomright) ->
   
