@@ -1,0 +1,31 @@
+#Make map work
+
+when map div read, initializemap ->
+  create basic map with these options
+    center: take the coords for the first camp and centre map on this
+    zoom: 13
+    type: roadmap
+    
+    after initializemap ->
+      populate autocomplete list for locations within bounds
+    
+  add locations overlay
+    tiles_url: locations cartodb table
+  add sites overlay
+    tiles_url: sites cartodb table
+  add event listeners
+    change bounds:
+      update locations autocomplete list for search box
+    click: 
+      if click is within a location
+        select that location (to hidden div)
+        highlight that location in layer (by loading vector on top?)
+      else
+        mark that location with a marker
+        create new location buffered hexagon/octagon around that point by X metres, named as 
+        select that location (to highlight div)
+      end
+        
+when search div ready ->
+	get bounds for map
+	populate autocomplete list for locations within bounds   
