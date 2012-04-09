@@ -127,21 +127,20 @@ initializeNewMap = () ->
 
   # Add LISTENERS
   addListeners = (map) ->
+    # On click, searches for locations under click
     google.maps.event.addListener m, "click", (event) ->
-      # console.log "Clicked at lat:" + event.latLng.lat() + ", lng:" + event.latLng.lng()
       clickCoords = [event.latLng.lat(), event.latLng.lng()]
-      console.log clickCoords
+      # console.log clickCoords
       $.get "/locations/find_by_coords.json", {coords: clickCoords}, (responseData) ->
-        console.log responseData
-        # $("#location_options").text(responseData)
+        # console.log responseData
         responseText = ""
         $.each responseData, (i,v) ->
           responseText += "<li>Location_id = " + v + "</li>"
-          # console.log responseText
         $("#location_options").html(responseText)
-        # recenterMap(responseData)
+        clearLocationVectors()
+        loadLocationVectors(responseData)
     
-    # Add changed bounds listener to repopulate search drop-down 
+    # Add IDLE listener to repopulate search drop-down - waits until zooming, panning finished
     google.maps.event.addListener m, "idle", (event) ->
       bounds = m.getBounds()
       bb = [bounds.getSouthWest().lat(), bounds.getSouthWest().lng(), bounds.getNorthEast().lat(), bounds.getNorthEast().lng()]
@@ -165,7 +164,13 @@ initializeNewMap = () ->
       select: (event, ui) ->
         $("#location_id").val(ui.item.value)
         $("#locations_search").val(ui.item.label)
-      
+
+  clearLocationVectors = ->
+    map = window.NewMap
+
+  loadLocationVectors = (ids) ->
+    map = window.NewMap
+    console.log "Loading vectors for: " + ids
     
     # click = [event.latLng.lat(), event.latLng.lng()]
     # 
