@@ -92,6 +92,7 @@ initializeSightingsMap = () ->
         google.maps.event.trigger(m, 'resize')
         centre = new google.maps.LatLng(-15.9, 28.0)
         m.setCenter centre 
+
         
 # NEW page: map for new_sighting page
 initializeNewMap = () -> 
@@ -167,10 +168,7 @@ initializeNewMap = () ->
     $("#location_options").html(content)
     $(".location_option").click ->
       $("#location_selection").html("<li>Location_id = " + this.dataset.locationId + "</li>")
-
-    
-    
-    
+      
   clearLocationVectors = ->
     map = window.NewMap
     console.log "Clearing vectors"
@@ -186,8 +184,8 @@ initializeNewMap = () ->
       table: "locations"
       where: "loc_id = " + ids[0]
       scaleRange: [ 3, 20 ]
-      infoWindowTemplate: "<div>Location #{ids[0]}</div>"
-      # infoWindowTemplate: "<div class=\"iw-content\"><h3>Location</h3><table class=\"condensed-table\"><tr><th>Diameter</th><td>{mh_dia} ft.</td></tr><tr><th>Depth</th><td>{mh_depth} ft.</td></tr><tr><th>Address</th><td>{street_add}</td></tr><tr><th>Flows To</th><td>{wwtp} WWTP</td></tr></table></div>"
+      # infoWindowTemplate: "<div>Here</div>"
+      infoWindowTemplate: "<div><a href='#' data-location-id=#{ids[0]} class='location_option_popup'>Location: ##{ids[0]}</a></div>"
       singleInfoWindow: true
       symbology: {
           type: "single", # Defines the symbology as a single type of representation for all features
@@ -210,7 +208,7 @@ initializeNewMap = () ->
     center: new google.maps.LatLng(-19.02071, 22.69788)
     disableDefaultUI: true
     zoom: 13
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+    mapTypeId: google.maps.MapTypeId.TERRAIN
     noClear: true
 
   # Create new map, add locations overlay, and export to global variable
