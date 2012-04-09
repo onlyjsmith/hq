@@ -100,8 +100,7 @@ initializeSightingsMap = () ->
         google.maps.event.trigger(m, 'resize')
         centre = new google.maps.LatLng(-15.9, 28.0)
         m.setCenter centre 
-      
-    
+        
 # NEW page: map for new_sighting page
 initializeNewMap = () -> 
 
@@ -167,10 +166,35 @@ initializeNewMap = () ->
 
   clearLocationVectors = ->
     map = window.NewMap
+    console.log "Clearing vectors"
+    if window.Vector?
+      window.Vector.setMap(null)
 
   loadLocationVectors = (ids) ->
     map = window.NewMap
     console.log "Loading vectors for: " + ids
+    
+    location_vector = new gvector.CartoDB(
+      user: "craigmills"
+      table: "locations"
+      where: "loc_id = " + ids[0]
+      scaleRange: [ 3, 20 ]
+      infoWindowTemplate: "<div>Location {ids}</div>"
+      # infoWindowTemplate: "<div class=\"iw-content\"><h3>Location</h3><table class=\"condensed-table\"><tr><th>Diameter</th><td>{mh_dia} ft.</td></tr><tr><th>Depth</th><td>{mh_depth} ft.</td></tr><tr><th>Address</th><td>{street_add}</td></tr><tr><th>Flows To</th><td>{wwtp} WWTP</td></tr></table></div>"
+      singleInfoWindow: true
+      symbology: {
+          type: "single", # Defines the symbology as a single type of representation for all features
+          vectorOptions: { # Google maps vector options for all features
+              fillColor: "#46461f",
+              fillOpacity: 0.5,
+              strokeWeight: 4,
+              strokeColor: "#ff7800"
+          }    
+      }
+    )
+    window.Vector = location_vector
+    location_vector.setMap(map)
+    console.log "Done loading. See any different?"
     
     # click = [event.latLng.lat(), event.latLng.lng()]
     # 
@@ -202,6 +226,7 @@ initializeNewMap = () ->
     disableDefaultUI: true
     zoom: 13
     mapTypeId: google.maps.MapTypeId.ROADMAP
+    noClear: true
 
   # Create new map, add locations overlay, and export to global variable
   m = new google.maps.Map document.getElementById("new_map"), mapOptions
