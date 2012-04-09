@@ -105,7 +105,44 @@ initializeSightingsMap = () ->
 # NEW page: map for new_sighting page
 initializeNewMap = () -> 
 
+  # Add initial locations tiles overlay
+  addLocationsOverlay = (map) ->
+    locationOptions =
+      getTileUrl: (coord, zoom, loc_id) ->
+        console.log 'adding initial locations tiles - shouldnt be coloured'
+        "http://craigmills.cartodb.com/tiles/locations/" + zoom + "/" + coord.x + "/" + coord.y + ".png"#"?style"+
+        # "=#locations {line-color:#333333; line-width:2; line-opacity:0.48; polygon-opacity:0.9;} #locations[loc_id=" + loc_id + "]{polygon-fill:#F1EEF6}"
+      tileSize: new google.maps.Size(256, 256)
+    locationMapType = new google.maps.ImageMapType(locationOptions)
+    map.overlayMapTypes.insertAt 1, locationMapType
 
+  # Add sites tiles overlay
+  addSitesOverlay = (map) ->
+    siteOptions =
+      getTileUrl: (coord, zoom) ->
+        "http://craigmills.cartodb.com/tiles/sites/" + zoom + "/" + coord.x + "/" + coord.y + ".png"
+      tileSize: new google.maps.Size(256, 256)
+    siteMapType = new google.maps.ImageMapType(siteOptions)
+    m.overlayMapTypes.insertAt 2, siteMapType
+
+  # Add LISTENERS
+  addListeners = (map) ->
+    google.maps.event.addListener m, "click", (event) ->
+      # console.log "Clicked at lat:" + event.latLng.lat() + ", lng:" + event.latLng.lng()
+      clickCoords = [event.latLng.lat(), event.latLng.lng()]
+      $.get "/sightings/new.json", clickCoords, (data) ->
+        recenterMap(data)
+    
+    # Add changed bounds listener to repopulate search drop-down 
+    google.maps.event.addListener m, "idle", (event) ->
+      bounds = m.getBounds()
+      bb = [bounds.getSouthWest().lat(), bounds.getSouthWest().lng(), bounds.getNorthEast().lat(), bounds.getNorthEast().lng()]
+      $.get "/locations/search_by_bounding_box",
+        bounding_box: bb,
+        (responseData) ->
+          populateSearch(responseData)
+
+  # MAP FUNCTIONS
   recenterMap = (clickCoords) ->
     map = window.NewMap
     # console.log 'clickCoords = ' + clickCoords
@@ -113,22 +150,14 @@ initializeNewMap = () ->
     center = new google.maps.LatLng(clickCoords[1], clickCoords[0])
     # console.log 'recentreing map to ' + center
     map.setCenter center
-
-  mapOptions =
-    # Defaulting to location of first camp for now
-    center: new google.maps.LatLng(-19.02071, 22.69788)
-    disableDefaultUI: true
-    zoom: 13
-    mapTypeId: google.maps.MapTypeId.ROADMAP
     
-  m = new google.maps.Map document.getElementById("new_map"), mapOptions
-  window.NewMap = m
-  
-  google.maps.event.addListener m, "click", (event) ->
-    # console.log "Clicked at lat:" + event.latLng.lat() + ", lng:" + event.latLng.lng()
-    clickCoords = [event.latLng.lat(), event.latLng.lng()]
-    $.get "/sightings/new.json", clickCoords, (data) ->
-      recenterMap(data)
+  populateSearch = (data) ->
+    $("#locations_search").autocomplete
+      source: response_data
+      select: (event, ui) ->
+        $("#location_id").val(ui.item.value)
+        $("#locations_search").val(ui.item.label)
+      
     
     # click = [event.latLng.lat(), event.latLng.lng()]
     # 
@@ -139,7 +168,7 @@ initializeNewMap = () ->
     # console.log "Got loc_id from cartodb :" + loc_id
     # 
     # console.log 'responding to click by refreshing locations tiles'
-    
+  
 
     # locationOptions =
     #   getTileUrl: (coord, zoom) ->
@@ -153,35 +182,19 @@ initializeNewMap = () ->
     # m.overlayMapTypes.insertAt 1, locationMapType
 
     
+  # Set initial map options
+  mapOptions =
+    # Defaulting to location of first camp for now
+    center: new google.maps.LatLng(-19.02071, 22.69788)
+    disableDefaultUI: true
+    zoom: 13
+    mapTypeId: google.maps.MapTypeId.ROADMAP
 
-  # Add initial locations tiles overlay
-  locationOptions =
-    getTileUrl: (coord, zoom, loc_id) ->
-      console.log 'adding initial locations tiles - shouldnt be coloured'
-      "http://craigmills.cartodb.com/tiles/locations/" + zoom + "/" + coord.x + "/" + coord.y + ".png"#"?style"+
-      # "=#locations {line-color:#333333; line-width:2; line-opacity:0.48; polygon-opacity:0.9;} #locations[loc_id=" + loc_id + "]{polygon-fill:#F1EEF6}"
-    tileSize: new google.maps.Size(256, 256)
-  locationMapType = new google.maps.ImageMapType(locationOptions)
-  m.overlayMapTypes.insertAt 1, locationMapType
+  # Create new map, add locations overlay, and export to global variable
+  m = new google.maps.Map document.getElementById("new_map"), mapOptions
+  addLocationsOverlay(m)
+  addSitesOverlay(m)
+  addListeners(m)
+  window.NewMap = m
 
-  # Add sites tiles overlay
-  siteOptions =
-    getTileUrl: (coord, zoom) ->
-      "http://craigmills.cartodb.com/tiles/sites/" + zoom + "/" + coord.x + "/" + coord.y + ".png"
-    tileSize: new google.maps.Size(256, 256)
-  siteMapType = new google.maps.ImageMapType(siteOptions)
-  m.overlayMapTypes.insertAt 2, siteMapType
 
-  # Add changed bounds listener to repopulate search drop-down 
-  google.maps.event.addListener m, "bounds_changed", (event) ->
-    bounds = m.getBounds()
-    bb = [bounds.getSouthWest().lat(), bounds.getSouthWest().lng(), bounds.getNorthEast().lat(), bounds.getNorthEast().lng()]
-    $.get "/locations/search_by_bounding_box",
-      bounding_box: bb,
-      (response_data) ->
-  
-        $("#locations_search").autocomplete
-          source: response_data
-          select: (event, ui) ->
-            $("#location_id").val(ui.item.value)
-            $("#locations_search").val(ui.item.label)
