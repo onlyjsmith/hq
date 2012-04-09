@@ -37,6 +37,7 @@ class SightingsController < ApplicationController
   end
 
   def new
+    # TODO: Replace with dynamic centreing on currently selected camp (from session?)
     @camp_location = Camp.first.location_point
     
     @q = Sighting.search(params[:q]) 
