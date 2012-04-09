@@ -44,6 +44,10 @@ $(document).ready ->
   if $("#new_map").length
     initializeNewMap()
     
+  $(".species_photos").click ->
+    id = this.dataset.speciesId
+    # console.log 'clicked ' + this.dataset.speciesId + ' photo. well done'
+    $("#species_options").html("<li>Species_id = " + id + "</li>")
     
   # populateLocationSearch = (boundingbox) ->
   #   alert boundingbox

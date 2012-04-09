@@ -2,17 +2,25 @@
   <div class="row">
     <h1>Add new sighting</h1>
     <h3>Hey, what have you seen, and where have you seen it?</h3>   
+    <div class="row">
+      <div class="span9">
+        <% Species.all.each do |species| %>
+          <%= link_to (image_tag(species.get_photo_url, :title => "First picture we could find of #{species.common_name}", :class => "box-shadow species photo small_photo")), "#", :remote => true, :data => {species_id: species.id}, :class => 'species_photos' %>
+        <% end %>
+      </div>
+      <div class="span3">
+        <h3>Species options</h3>
+          <ul>
+            <div id="species_options">
+          </ul>
+        </div>
+      </div>
 
-    <% Species.all.each do |species| %>
-      <%= link_to image_tag(species.get_photo_url, :title => "First picture we could find of #{species.common_name}", 
-        :class => "box-shadow species photo small_photo"), "#" 
-      %>
-    <% end %>
 
 
     <div id="selector">
 
-      <label for="locations_search">Locations: </label>
+      <label for="locations_search">Locations search: </label>
       <input id="locations_search"/> 
       <input id="location_id" type="hidden">
       <!-- <input id="location_id"> -->
