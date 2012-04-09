@@ -167,8 +167,8 @@ initializeNewMap = () ->
   clearLocationVectors = ->
     map = window.NewMap
     console.log "Clearing vectors"
-    if window.Vector?
-      window.Vector.setMap(null)
+    if window.SelectedVector?
+      window.SelectedVector.setMap(null)
 
   loadLocationVectors = (ids) ->
     map = window.NewMap
@@ -179,7 +179,7 @@ initializeNewMap = () ->
       table: "locations"
       where: "loc_id = " + ids[0]
       scaleRange: [ 3, 20 ]
-      infoWindowTemplate: "<div>Location {ids}</div>"
+      # infoWindowTemplate: '<div>Location {ids}</div>'
       # infoWindowTemplate: "<div class=\"iw-content\"><h3>Location</h3><table class=\"condensed-table\"><tr><th>Diameter</th><td>{mh_dia} ft.</td></tr><tr><th>Depth</th><td>{mh_depth} ft.</td></tr><tr><th>Address</th><td>{street_add}</td></tr><tr><th>Flows To</th><td>{wwtp} WWTP</td></tr></table></div>"
       singleInfoWindow: true
       symbology: {
@@ -192,7 +192,7 @@ initializeNewMap = () ->
           }    
       }
     )
-    window.Vector = location_vector
+    window.SelectedVector = location_vector
     location_vector.setMap(map)
     console.log "Done loading. See any different?"
     
