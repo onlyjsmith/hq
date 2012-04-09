@@ -22,16 +22,21 @@ class Location < ActiveRecord::Base
   
   def self.search_by_bounding_box(bb)
     sql = "SELECT loc_id FROM locations where ST_Intersects(the_geom, ST_MakeEnvelope(#{bb[1]}, #{bb[0]}, #{bb[3]}, #{bb[2]}, 4326))"           
-    # sql = "SELECT loc_id FROM locations"           
-    # debugger
-    ids = CartoDB::Connection.query sql
-    puts ids  
+    response = CartoDB::Connection.query sql
     
     locations = []
-    
-    ids[:rows].each do |id|
-      loc = Location.find(id[:loc_id])
-      locations << { :label => loc.name, :value => loc.id }
+
+    response[:rows].each do |row|
+      id = row[:loc_id]
+      if Location.exists?(id)
+        value = Location.find(id).name
+      else
+        name = "Location doesn't exist in local DB"
+      end
+      loc = {:label => name, :value => id}
+      locations << loc
+      # loc = Location.find(id[:loc_id])
+      # locations << { :label => loc.name, :value => loc.id }
     end
     locations
   end

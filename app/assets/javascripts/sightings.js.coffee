@@ -50,7 +50,7 @@ $(document).ready ->
     $("#species_options").html("<li>Species_id = " + id + "</li>")
     
   # populateLocationSearch = (boundingbox) ->
-  #   alert boundingbox
+  #   console.log boundingbox
   #   $.get "/locations/search_by_bounding_box",
   #       bounding_box: bb,
   #       (response_data) ->
@@ -147,6 +147,8 @@ initializeNewMap = () ->
     google.maps.event.addListener m, "idle", (event) ->
       bounds = m.getBounds()
       bb = [bounds.getSouthWest().lat(), bounds.getSouthWest().lng(), bounds.getNorthEast().lat(), bounds.getNorthEast().lng()]
+      console.log "Now idle, searching for locations within " + bb  
+      # populateLocationSearch(bb)
       $.get "/locations/search_by_bounding_box",
         bounding_box: bb,
         (responseData) ->
@@ -161,12 +163,13 @@ initializeNewMap = () ->
     # console.log 'recentreing map to ' + center
     map.setCenter center
     
-  populateSearch = (data) ->
+  populateSearch = (responseData) ->
     $("#locations_search").autocomplete
-      source: response_data
+      source: responseData
       select: (event, ui) ->
-        $("#location_id").val(ui.item.value)
-        $("#locations_search").val(ui.item.label)
+        # $("#location_id").val(ui.item.value)
+        # $("#locations_search").val(ui.item.label)
+        $("#location_options}").html("<li>Location_id = " + ui.item.value + "</li>")
 
   clearLocationVectors = ->
     map = window.NewMap
@@ -200,28 +203,6 @@ initializeNewMap = () ->
     location_vector.setMap(map)
     console.log "Done loading. See any different?"
     
-    # click = [event.latLng.lat(), event.latLng.lng()]
-    # 
-    # all_loc_id =
-    #   $.getJSON "http://craigmills.cartodb.com/api/v2/sql"+ 
-    #   "?q=SELECT loc_id FROM locations WHERE ST_Intersects(ST_PointFromText('POINT("+ click[1] + " " + click[0] + " )', 4326), the_geom)"        
-    # 
-    # console.log "Got loc_id from cartodb :" + loc_id
-    # 
-    # console.log 'responding to click by refreshing locations tiles'
-  
-
-    # locationOptions =
-    #   getTileUrl: (coord, zoom) ->
-    #     base_url = "http://craigmills.cartodb.com/tiles/locations/" + zoom + "/" + coord.x + "/" + coord.y + ".png"
-    #     base_style = "?style=%23locations {line-color:%23333333;line-width:2;line-opacity:0.48;polygon-opacity:0.48;polygon-fill:%23FFFFB2}%23locations [loc_id="
-    #     loc_style = loc_id + "] {polygon-fill:%23B10026}"
-    #     url = base_url + base_style + loc_style
-    #     url
-    #   tileSize: new google.maps.Size(256, 256)
-    # locationMapType = new google.maps.ImageMapType(locationOptions)
-    # m.overlayMapTypes.insertAt 1, locationMapType
-
     
   # Set initial map options
   mapOptions =
@@ -237,6 +218,7 @@ initializeNewMap = () ->
   addLocationsOverlay(m)
   addSitesOverlay(m)
   addListeners(m)
+  populateSearch(m)
   window.NewMap = m
 
 

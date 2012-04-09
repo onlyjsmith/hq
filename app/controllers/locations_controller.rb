@@ -49,6 +49,7 @@ class LocationsController < ApplicationController
   end
   
   def search_by_bounding_box
+    # debugger
     locations = Location.search_by_bounding_box(params[:bounding_box])
     respond_to do |format|
       format.json { render json: locations }
