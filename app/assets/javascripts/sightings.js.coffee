@@ -163,7 +163,7 @@ initializeNewMap = () ->
   populateLocationOptionsFromSearch = (responseData) ->
     content = ""
     $.each responseData, (index, item) ->
-      content += "<li><a href='#' data-location-id=" + item.value + " class='location_option'>" + item.label + "</a></li>"
+      content += "<li><a href='#' data-location-id=" + item.value + " class='location_option'>" + item.label + " (#" + item.value + ")</a></li>"
     $("#location_options").html(content)
     $(".location_option").click ->
       $("#location_selection").html("<li>Location_id = " + this.dataset.locationId + "</li>")
@@ -186,7 +186,7 @@ initializeNewMap = () ->
       table: "locations"
       where: "loc_id = " + ids[0]
       scaleRange: [ 3, 20 ]
-      # infoWindowTemplate: '<div>Location {ids}</div>'
+      infoWindowTemplate: "<div>Location #{ids[0]}</div>"
       # infoWindowTemplate: "<div class=\"iw-content\"><h3>Location</h3><table class=\"condensed-table\"><tr><th>Diameter</th><td>{mh_dia} ft.</td></tr><tr><th>Depth</th><td>{mh_depth} ft.</td></tr><tr><th>Address</th><td>{street_add}</td></tr><tr><th>Flows To</th><td>{wwtp} WWTP</td></tr></table></div>"
       singleInfoWindow: true
       symbology: {
