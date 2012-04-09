@@ -57,10 +57,9 @@ class LocationsController < ApplicationController
 
   def find_by_coords
     location = Location.find_by_coords(params[:coords])
-    location = location[:rows].map{|x| x[:loc_id]}
     respond_to do |format|
       format.json {render json: location}
     end
   end
-  
+
 end

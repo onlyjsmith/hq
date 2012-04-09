@@ -40,11 +40,20 @@ class Location < ActiveRecord::Base
   def self.find_by_coords(coords)
     if coords
       sql = "SELECT loc_id FROM locations WHERE ST_Intersects(the_geom, ST_geomfromtext('POINT(#{coords[1]} #{coords[0]})', 4326))"
-      result = CartoDB::Connection.query sql
+      response = CartoDB::Connection.query sql
       # debugger
-      result
+      result = response[:rows].map{|x| x[:loc_id]}
+      
+      locations = []
+      result.each do |res|
+        locations << res
+      end
+      locations
     else
-      all
+      locations = []
+      all.each do |x|
+        locations << x.id
+      end
     end
   end
   

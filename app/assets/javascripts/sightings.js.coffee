@@ -133,6 +133,12 @@ initializeNewMap = () ->
       console.log clickCoords
       $.get "/locations/find_by_coords.json", {coords: clickCoords}, (responseData) ->
         console.log responseData
+        # $("#location_options").text(responseData)
+        responseText = ""
+        $.each responseData, (i,v) ->
+          responseText += "<li>Location_id = " + v + "</li>"
+          # console.log responseText
+        $("#location_options").html(responseText)
         # recenterMap(responseData)
     
     # Add changed bounds listener to repopulate search drop-down 
