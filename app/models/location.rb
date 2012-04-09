@@ -39,7 +39,7 @@ class Location < ActiveRecord::Base
   # Searches for a SINGLE location that falls under these coords
   def self.find_by_coords(coords)
     if coords
-      sql = "SELECT loc_id FROM locations WHERE ST_Intersects(the_geom, ST_geomfromtext('POINT(#{coords[0]} #{coords[1]})', 4326)) LIMIT 1"
+      sql = "SELECT loc_id FROM locations WHERE ST_Intersects(the_geom, ST_geomfromtext('POINT(#{coords[1]} #{coords[0]})', 4326))"
       result = CartoDB::Connection.query sql
       # debugger
       result

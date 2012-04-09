@@ -12,6 +12,7 @@ Hq::Application.routes.draw do
   resources :locations do
     post :post_polygon, :on => :collection  
     get :search_by_bounding_box, :on => :collection
+    get :find_by_coords, :on => :collection
   end
 
   resources :sightings do
