@@ -153,6 +153,7 @@ initializeNewMap = () ->
         bounding_box: bb,
         (responseData) ->
           populateSearch(responseData)
+          populateLocationOptionsFromSearch(responseData)
 
   # MAP FUNCTIONS
   recenterMap = (clickCoords) ->
@@ -167,10 +168,21 @@ initializeNewMap = () ->
     $("#locations_search").autocomplete
       source: responseData
       select: (event, ui) ->
-        # $("#location_id").val(ui.item.value)
+        $("#location_id").val(ui.item.value)
         # $("#locations_search").val(ui.item.label)
-        $("#location_options}").html("<li>Location_id = " + ui.item.value + "</li>")
+        $("#location_selection}").html("<li>Location_id = " + ui.item.value + "</li>")
 
+  populateLocationOptionsFromSearch = (responseData) ->
+    content = ""
+    $.each responseData, (index, item) ->
+      content += "<li><a href='#' data-location-id=" + item.value + " class='location_option'>" + item.label + "</a></li>"
+    $("#location_options").html(content)
+    $(".location_option").click ->
+      $("#location_selection").html("<li>Location_id = " + this.dataset.locationId + "</li>")
+
+    
+    
+    
   clearLocationVectors = ->
     map = window.NewMap
     console.log "Clearing vectors"
@@ -219,6 +231,7 @@ initializeNewMap = () ->
   addSitesOverlay(m)
   addListeners(m)
   populateSearch(m)
+  populateLocationOptionsFromSearch(m)
   window.NewMap = m
 
 
