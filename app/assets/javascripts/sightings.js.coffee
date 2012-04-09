@@ -49,18 +49,6 @@ $(document).ready ->
     # console.log 'clicked ' + this.dataset.speciesId + ' photo. well done'
     $("#species_options").html("<li>Species_id = " + id + "</li>")
     
-  # populateLocationSearch = (boundingbox) ->
-  #   console.log boundingbox
-  #   $.get "/locations/search_by_bounding_box",
-  #       bounding_box: bb,
-  #       (response_data) ->
-  # 
-  #         $("#locations_search").autocomplete
-  #           source: response_data
-  #           select: (event, ui) ->
-  #             $("#location_id").val(ui.item.value)
-  #             $("#locations_search").val(ui.item.label)
-  
   
 # INDEX page: map for sightings_index map tab
 initializeSightingsMap = () -> 
