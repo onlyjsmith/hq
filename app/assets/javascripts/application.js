@@ -18,6 +18,7 @@
 //= require autocomplete-rails
 //= require cartodb/cartodb-gmapsv3
 //= require wax/dist/wax.g
+//= require gvector
 //= require jquery.isotope
 //= require jquery.cookie  
 
