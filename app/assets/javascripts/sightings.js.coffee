@@ -130,8 +130,9 @@ initializeNewMap = () ->
     google.maps.event.addListener m, "click", (event) ->
       # console.log "Clicked at lat:" + event.latLng.lat() + ", lng:" + event.latLng.lng()
       clickCoords = [event.latLng.lat(), event.latLng.lng()]
-      $.get "/sightings/new.json", clickCoords, (data) ->
-        recenterMap(data)
+      console.log clickCoords
+      $.get "/sightings/new.json", {coords: clickCoords}, (responseData) ->
+        recenterMap(responseData)
     
     # Add changed bounds listener to repopulate search drop-down 
     google.maps.event.addListener m, "idle", (event) ->
