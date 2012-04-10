@@ -98,14 +98,16 @@ initializeSightingsMap = () ->
 initializeNewMap = () -> 
 
   # Add initial locations tiles overlay
-  addLocationsOverlay = (map) ->
+  addLocationsOverlay = (map, loc_id) ->
+    loc_id or= -1
     locationOptions =
-      getTileUrl: (coord, zoom, loc_id) ->
-        console.log 'adding initial locations tiles - shouldnt be coloured'
-        "http://craigmills.cartodb.com/tiles/locations/" + zoom + "/" + coord.x + "/" + coord.y + ".png"#"?style"+
-        # "=#locations {line-color:#333333; line-width:2; line-opacity:0.48; polygon-opacity:0.9;} #locations[loc_id=" + loc_id + "]{polygon-fill:#F1EEF6}"
+      getTileUrl: (coord, zoom) ->
+        "http://craigmills.cartodb.com/tiles/locations/" + zoom + "/" + coord.x + "/" + coord.y + ".png" + 
+        "?style=%23locations {line-color:%23b56937; line-width:2; line-opacity:0.48; polygon-opacity:0.9; polygon-fill:%2399D8C9} %23locations[loc_id=" + loc_id + "]{polygon-fill:%23ff944d}"
       tileSize: new google.maps.Size(256, 256)
     locationMapType = new google.maps.ImageMapType(locationOptions)
+    # window.NewMap.locationsLayer = locationMapType
+    map.overlayMapTypes.removeAt 1
     map.overlayMapTypes.insertAt 1, locationMapType
 
   # Add sites tiles overlay
@@ -184,27 +186,31 @@ initializeNewMap = () ->
         console.log "done creating from point"
     else
       console.log 'Starting to load vector layer'
-      location_vector = new gvector.CartoDB(
-        user: "craigmills"
-        table: "locations"
-        where: "loc_id = " + ids[0]
-        scaleRange: [ 3, 20 ]
-        # infoWindowTemplate: "<div>Here</div>"
-        infoWindowTemplate: "<div><a href='#' data-location-id=#{ids[0]} class='location_option_popup'>Location: ##{ids[0]}</a></div>"
-        singleInfoWindow: true
-        symbology: {
-            type: "single", # Defines the symbology as a single type of representation for all features
-            vectorOptions: { # Google maps vector options for all features
-                fillColor: "#46461f",
-                fillOpacity: 0.5,
-                strokeWeight: 4,
-                strokeColor: "#ff7800"
-            }    
-        }
-      )
-      window.SelectedVector = location_vector
-      location_vector.setMap(map)
-      console.log "Done vector layer loading. See any different?"
+      
+      # Adding vector layer to highlight selected location
+      addLocationsOverlay(window.NewMap,ids[0])
+
+      # location_vector = new gvector.CartoDB(
+      #   user: "craigmills"
+      #   table: "locations"
+      #   where: "loc_id = " + ids[0]
+      #   scaleRange: [ 3, 20 ]
+      #   # infoWindowTemplate: "<div>Here</div>"
+      #   infoWindowTemplate: "<div><a href='#' data-location-id=#{ids[0]} class='location_option_popup'>Location: ##{ids[0]}</a></div>"
+      #   singleInfoWindow: true
+      #   symbology: {
+      #       type: "single", # Defines the symbology as a single type of representation for all features
+      #       vectorOptions: { # Google maps vector options for all features
+      #           fillColor: "#46461f",
+      #           fillOpacity: 0.5,
+      #           strokeWeight: 4,
+      #           strokeColor: "#ff7800"
+      #       }    
+      #   }
+      # )
+      # window.SelectedVector = location_vector
+      # location_vector.setMap(map)
+      # console.log "Done vector layer loading. See any different?"
     
     
   # Set initial map options
