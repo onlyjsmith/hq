@@ -104,7 +104,7 @@ initializeNewMap = () ->
         "http://craigmills.cartodb.com/tiles/locations/" + zoom + "/" + coord.x + "/" + coord.y + ".png"
       tileSize: new google.maps.Size(256, 256)
     locationMapType = new google.maps.ImageMapType(locationOptions)
-    map.overlayMapTypes.insertAt 1, locationMapType
+    map.overlayMapTypes.insertAt 0, locationMapType
 
   # Add sites tiles overlay
   addSitesOverlay = (map) ->
@@ -113,7 +113,7 @@ initializeNewMap = () ->
         "http://craigmills.cartodb.com/tiles/sites/" + zoom + "/" + coord.x + "/" + coord.y + ".png"
       tileSize: new google.maps.Size(256, 256)
     siteMapType = new google.maps.ImageMapType(siteOptions)
-    m.overlayMapTypes.insertAt 2, siteMapType
+    m.overlayMapTypes.insertAt 1, siteMapType
 
   # Add LISTENERS
   addListeners = (map) ->
@@ -128,33 +128,30 @@ initializeNewMap = () ->
     google.maps.event.addListener m, "idle", (event) ->
       bounds = m.getBounds()
       bb = [bounds.getSouthWest().lat(), bounds.getSouthWest().lng(), bounds.getNorthEast().lat(), bounds.getNorthEast().lng()]
-      console.log "Now idle, searching for locations within " + bb  
-      # populateLocationSearch(bb)
       searchFromBoundingBox(bb)
 
   # MAP FUNCTIONS
 
   searchFromClick = (clickCoords) ->
     $.get "/locations/search.json", {coords: clickCoords}, (responseData) ->
-      console.log responseData
       responseText = ""
       $.each responseData, (i,v) ->
         responseText += "<li>Location_id = " + v + "</li>"
       $("#location_options").html(responseText)
-      # clearLocationVectors()
       decideFromClick(responseData, clickCoords)
 
   decideFromClick = (responseData, coords) ->
-    console.log "Deciding vectors for: "
     if responseData.length == 0
-      console.log "creating from point"
-      $.post "/locations.json", {coords: coords}, (data) ->
-        id = data.id 
-        console.log "created point id=" + data.id
-        loadAndSelectLocation(id)
+      window.NewMap.overlayMapTypes.removeAt 0
+      addLocationsOverlay(window.NewMap)
+      createFromPoint(coords)
     else
       id = responseData[0]
       loadAndSelectLocation(id)
+
+  createFromPoint = (coords) ->
+    $.post "/locations.json", {coords: coords}, (data) ->
+      loadAndSelectLocation(data.id)
 
   searchFromBoundingBox = (bb) ->
     $.get "/locations/search.json",
@@ -165,10 +162,7 @@ initializeNewMap = () ->
 
   recenterMap = (clickCoords) ->
     map = window.NewMap
-    # console.log 'clickCoords = ' + clickCoords
-    # center = new google.maps.LatLng(22.69788, -19.02071)
     center = new google.maps.LatLng(clickCoords[1], clickCoords[0])
-    # console.log 'recentreing map to ' + center
     map.setCenter center
     
   populateSearch = (responseData) ->
@@ -244,5 +238,3 @@ initializeNewMap = () ->
   populateSearch(m)
   populateLocationOptionsFromSearch(m)
   window.NewMap = m
-
-
