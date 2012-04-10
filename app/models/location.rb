@@ -6,9 +6,10 @@ class Location < ActiveRecord::Base
   # TODO: Location <-> Camp should be a location-based association, dynamic
   has_many :camps
 
+  attr_accessor :from_point
   validates :name, :presence => true
 
-  after_initialize :default_values
+  # after_initialize :default_values
   before_save :update_geom_to_cartodb
   after_save :update_ids_to_cartodb
 
@@ -63,6 +64,24 @@ class Location < ActiveRecord::Base
   end
   
 
+  # Creates a new location on CartoDB, with default buffer, from point coords
+  def create_from_point(coords)
+    # debugger
+
+    buffer = 0.01 # degrees
+    name = "Buffered point site"
+    sql = "INSERT INTO locations (the_geom, loc_id, name) 
+      VALUES (ST_Multi(ST_Buffer(ST_SetSRID(ST_Point(#{coords[1]}, #{coords[0]}),4326),#{buffer}, 2)), -1, '#{name}')
+      RETURNING cartodb_id"
+
+    response = CartoDB::Connection.query q
+    cartodb_id = response[:rows][0][:cartodb_id]
+    self.cartodb_id = cartodb_id
+    self.name = "Buffered point site"
+    self.save
+    # Location.create()
+  end
+
   
   def geom 
     result = CartoDB::Connection.query "SELECT the_geom FROM locations where loc_id = '#{self.id}'", :page => 1
@@ -73,14 +92,14 @@ class Location < ActiveRecord::Base
   
   protected
   def update_geom_to_cartodb
-     
-    #check hex is there already then update or insert accordingly
-    # Including name in INSERT just for debugging and development
-    q = "INSERT INTO locations (the_geom) VALUES (ST_SetSRID(ST_GeomFromGeoJSON('#{self.polygon}'), 4326)) RETURNING cartodb_id;"      
-    response = CartoDB::Connection.query q
-    self.cartodb_id = response[:rows][0][:cartodb_id]
-    self.polygon = nil
-    
+    if from_point?
+    else
+      # TODO: Add hex stuff back in
+      q = "INSERT INTO locations (the_geom) VALUES (ST_SetSRID(ST_GeomFromGeoJSON('#{self.polygon}'), 4326)) RETURNING cartodb_id;"      
+      response = CartoDB::Connection.query q
+      self.cartodb_id = response[:rows][0][:cartodb_id]
+      self.polygon = nil
+    end
   end
   
   def update_ids_to_cartodb
