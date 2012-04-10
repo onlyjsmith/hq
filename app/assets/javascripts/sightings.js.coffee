@@ -119,18 +119,19 @@ initializeNewMap = () ->
 
   # Add LISTENERS
   addListeners = (map) ->
+    
     # On click, searches for locations under click
     google.maps.event.addListener m, "click", (event) ->
       clickCoords = [event.latLng.lat(), event.latLng.lng()]
-      # console.log clickCoords
-      $.get "/locations/find_by_coords.json", {coords: clickCoords}, (responseData) ->
+      console.log clickCoords
+      $.get "/locations/search.json", {coords: clickCoords}, (responseData) ->
         # console.log responseData
         responseText = ""
         $.each responseData, (i,v) ->
           responseText += "<li>Location_id = " + v + "</li>"
         $("#location_options").html(responseText)
         clearLocationVectors()
-        loadLocationVectors(responseData)
+        loadOrCreateVectorLayer(responseData, clickCoords)
     
     # Add IDLE listener to repopulate search drop-down - waits until zooming, panning finished
     google.maps.event.addListener m, "idle", (event) ->
@@ -138,7 +139,7 @@ initializeNewMap = () ->
       bb = [bounds.getSouthWest().lat(), bounds.getSouthWest().lng(), bounds.getNorthEast().lat(), bounds.getNorthEast().lng()]
       console.log "Now idle, searching for locations within " + bb  
       # populateLocationSearch(bb)
-      $.get "/locations/search_by_bounding_box",
+      $.get "/locations/search.json",
         bounding_box: bb,
         (responseData) ->
           populateSearch(responseData)
@@ -175,31 +176,35 @@ initializeNewMap = () ->
     if window.SelectedVector?
       window.SelectedVector.setMap(null)
 
-  loadLocationVectors = (ids) ->
+  loadOrCreateVectorLayer = (ids, coords) ->
     map = window.NewMap
     console.log "Loading vectors for: " + ids
-    
-    location_vector = new gvector.CartoDB(
-      user: "craigmills"
-      table: "locations"
-      where: "loc_id = " + ids[0]
-      scaleRange: [ 3, 20 ]
-      # infoWindowTemplate: "<div>Here</div>"
-      infoWindowTemplate: "<div><a href='#' data-location-id=#{ids[0]} class='location_option_popup'>Location: ##{ids[0]}</a></div>"
-      singleInfoWindow: true
-      symbology: {
-          type: "single", # Defines the symbology as a single type of representation for all features
-          vectorOptions: { # Google maps vector options for all features
-              fillColor: "#46461f",
-              fillOpacity: 0.5,
-              strokeWeight: 4,
-              strokeColor: "#ff7800"
-          }    
-      }
-    )
-    window.SelectedVector = location_vector
-    location_vector.setMap(map)
-    console.log "Done loading. See any different?"
+    if ids.length == 0
+      $.post "/locations/create_from_point", {coords: coords}, (data) ->
+        console.log "done creating from point"
+    else
+      console.log 'Starting to load vector layer'
+      location_vector = new gvector.CartoDB(
+        user: "craigmills"
+        table: "locations"
+        where: "loc_id = " + ids[0]
+        scaleRange: [ 3, 20 ]
+        # infoWindowTemplate: "<div>Here</div>"
+        infoWindowTemplate: "<div><a href='#' data-location-id=#{ids[0]} class='location_option_popup'>Location: ##{ids[0]}</a></div>"
+        singleInfoWindow: true
+        symbology: {
+            type: "single", # Defines the symbology as a single type of representation for all features
+            vectorOptions: { # Google maps vector options for all features
+                fillColor: "#46461f",
+                fillOpacity: 0.5,
+                strokeWeight: 4,
+                strokeColor: "#ff7800"
+            }    
+        }
+      )
+      window.SelectedVector = location_vector
+      location_vector.setMap(map)
+      console.log "Done vector layer loading. See any different?"
     
     
   # Set initial map options
