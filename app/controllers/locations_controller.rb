@@ -48,19 +48,39 @@ class LocationsController < ApplicationController
     end
   end
   
-  def search_by_bounding_box
-    # debugger
-    locations = Location.search_by_bounding_box(params[:bounding_box])
+  def search
+    if params[:bounding_box]
+      locations = Location.search_by_bounding_box(params[:bounding_box])
+    end
+    if params[:coords]
+      locations = Location.find_by_coords(params[:coords])
+    end
     respond_to do |format|
-      format.json { render json: locations }
+      format.json { render json: locations}
     end
   end
+  
+  # def search_by_bounding_box
+  #   # debugger
+  #   locations = Location.search_by_bounding_box(params[:bounding_box])
+  #   respond_to do |format|
+  #     format.json { render json: locations }
+  #   end
+  # end
 
-  def find_by_coords
-    location = Location.find_by_coords(params[:coords])
-    respond_to do |format|
-      format.json {render json: location}
-    end
+  # def find_by_coords
+  #   location = Location.find_by_coords(params[:coords])
+  #   respond_to do |format|
+  #     format.json {render json: location}
+  #   end
+  # end
+
+  def create_from_point
+    # debugger
+    @location = Location.new 
+    @location.from_point = true
+    @location.create_from_point(params[:coords])
+    
   end
 
 end

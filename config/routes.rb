@@ -11,9 +11,8 @@ Hq::Application.routes.draw do
      
   resources :locations do
     post :post_polygon, :on => :collection  
-    get :search_by_bounding_box, :on => :collection
-    get :find_by_coords, :on => :collection
-    get :create_from_point, :on => :collection
+    get :search, :on => :collection
+    # post :create_from_point, :on => :collection
   end
 
   resources :sightings do
