@@ -9,13 +9,18 @@ class LocationsController < ApplicationController
   end
   
   def create
-    debugger
-    @location = Location.new(params[:location])
     # debugger
+    if params[:location]
+      @location = Location.new(params[:location])
+    elsif params[:coords]
+      @location = Location.create_from_point(params['coords'])
+    end
+    
     respond_to do |wants|
       if @location.save
         flash[:notice] = 'Location was successfully created.'
         wants.html { redirect_to(@location) }
+        wants.json { render json: @location }
       else
         wants.html { render :action => "new" }
       end
@@ -52,8 +57,7 @@ class LocationsController < ApplicationController
   def search
     if params[:bounding_box]
       locations = Location.search_by_bounding_box(params[:bounding_box])
-    end
-    if params[:coords]
+    elsif params[:coords]
       locations = Location.find_by_coords(params[:coords])
     end
     respond_to do |format|
@@ -61,12 +65,4 @@ class LocationsController < ApplicationController
     end
   end
   
-  def create_from_point
-    # debugger
-    @location = Location.new 
-    @location.from_point = true
-    @location.create_from_point(params[:coords])
-    
-  end
-
 end

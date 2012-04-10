@@ -6,9 +6,9 @@ class Location < ActiveRecord::Base
   # TODO: Location <-> Camp should be a location-based association, dynamic
   has_many :camps
 
-  attr_accessor :from_point
   validates :name, :presence => true
-
+  attr_accessor :from_point
+  
   # after_initialize :default_values
   before_save :update_geom_to_cartodb
   after_save :update_ids_to_cartodb
@@ -21,6 +21,7 @@ class Location < ActiveRecord::Base
     end
   end
   
+  # Search for all records within bounding box
   def self.search_by_bounding_box(bb)
     sql = "SELECT loc_id FROM locations where ST_Intersects(the_geom, ST_MakeEnvelope(#{bb[1]}, #{bb[0]}, #{bb[3]}, #{bb[2]}, 4326))"           
     response = CartoDB::Connection.query sql
@@ -42,7 +43,7 @@ class Location < ActiveRecord::Base
     locations
   end
   
-  # Searches for a SINGLE location that falls under these coords
+  # Search for all locations under coords
   def self.find_by_coords(coords)
     if coords
       sql = "SELECT loc_id FROM locations WHERE ST_Intersects(the_geom, ST_geomfromtext('POINT(#{coords[1]} #{coords[0]})', 4326))"
@@ -63,9 +64,9 @@ class Location < ActiveRecord::Base
     end
   end
   
-
   # Creates a new location on CartoDB, with default buffer, from point coords
-  def create_from_point(coords)
+  def self.create_from_point(coords)
+    location = Location.new
     # debugger
 
     buffer = 0.01 # degrees
@@ -73,13 +74,11 @@ class Location < ActiveRecord::Base
     sql = "INSERT INTO locations (the_geom, loc_id, name) 
       VALUES (ST_Multi(ST_Buffer(ST_SetSRID(ST_Point(#{coords[1]}, #{coords[0]}),4326),#{buffer}, 2)), -1, '#{name}')
       RETURNING cartodb_id"
-
-    response = CartoDB::Connection.query q
-    cartodb_id = response[:rows][0][:cartodb_id]
-    self.cartodb_id = cartodb_id
-    self.name = "Buffered point site"
-    self.save
-    # Location.create()
+    response = CartoDB::Connection.query sql
+    location.cartodb_id = response[:rows][0][:cartodb_id]
+    location.name = "Buffered point site"
+    location.polygon = nil
+    location
   end
 
   
@@ -88,12 +87,10 @@ class Location < ActiveRecord::Base
     result[:rows][0][:the_geom].as_json
   end
   
- 
-  
   protected
   def update_geom_to_cartodb
-    if from_point?
-    else
+    # FIXME: Following line is very brittle
+    unless self.name == "Buffered point site"
       # TODO: Add hex stuff back in
       q = "INSERT INTO locations (the_geom) VALUES (ST_SetSRID(ST_GeomFromGeoJSON('#{self.polygon}'), 4326)) RETURNING cartodb_id;"      
       response = CartoDB::Connection.query q
@@ -109,14 +106,6 @@ class Location < ActiveRecord::Base
     response = CartoDB::Connection.query q
     
   end
-  
-  
-  
-  private
-  
-  def default_values
-  end
-
   
   
 end
