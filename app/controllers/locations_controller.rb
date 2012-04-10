@@ -9,6 +9,7 @@ class LocationsController < ApplicationController
   end
   
   def create
+    debugger
     @location = Location.new(params[:location])
     # debugger
     respond_to do |wants|
@@ -60,21 +61,6 @@ class LocationsController < ApplicationController
     end
   end
   
-  # def search_by_bounding_box
-  #   # debugger
-  #   locations = Location.search_by_bounding_box(params[:bounding_box])
-  #   respond_to do |format|
-  #     format.json { render json: locations }
-  #   end
-  # end
-
-  # def find_by_coords
-  #   location = Location.find_by_coords(params[:coords])
-  #   respond_to do |format|
-  #     format.json {render json: location}
-  #   end
-  # end
-
   def create_from_point
     # debugger
     @location = Location.new 
