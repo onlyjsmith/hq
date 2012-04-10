@@ -159,11 +159,6 @@ initializeNewMap = () ->
       (responseData) ->
         populateSearch(responseData)
         populateLocationOptionsFromSearch(responseData)
-
-  recenterMap = (clickCoords) ->
-    map = window.NewMap
-    center = new google.maps.LatLng(clickCoords[1], clickCoords[0])
-    map.setCenter center
     
   populateSearch = (responseData) ->
     $("#locations_search").autocomplete
@@ -180,6 +175,11 @@ initializeNewMap = () ->
     $("#location_options").html(content)
     $(".location_option").click ->
       $("#location_selection").html("<li>Location_id = " + this.dataset.locationId + "</li>")
+
+  recenterMap = (clickCoords) ->
+    map = window.NewMap
+    center = new google.maps.LatLng(clickCoords[1], clickCoords[0])
+    map.setCenter center
       
   clearLocationVectors = ->
     map = window.NewMap
@@ -224,10 +224,10 @@ initializeNewMap = () ->
   mapOptions =
     # Defaulting to location of first camp for now
     center: new google.maps.LatLng(-19.02071, 22.69788)
-    disableDefaultUI: true
-    # zoom: 13
-    zoom: 11
-    mapTypeId: google.maps.MapTypeId.TERRAIN
+    # disableDefaultUI: true
+    zoom: 13
+    # zoom: 11
+    mapTypeId: google.maps.MapTypeId.SATELLITE
     noClear: true
 
   # Create new map, add locations overlay, and export to global variable
