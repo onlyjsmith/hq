@@ -59,6 +59,8 @@ class LocationsController < ApplicationController
       locations = Location.search_by_bounding_box(params[:bounding_box])
     elsif params[:coords]
       locations = Location.find_by_coords(params[:coords])
+    # else
+    #   locations = Location.all.map{|x| {:value => x.name, :label => x.id}}
     end
     respond_to do |format|
       format.json { render json: locations}
