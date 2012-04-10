@@ -31,15 +31,16 @@ class Location < ActiveRecord::Base
     response[:rows].each do |row|
       id = row[:loc_id]
       if Location.exists?(id)
-        value = Location.find(id).name
+        name = Location.find(id).name
       else
         name = "Location doesn't exist in local DB"
       end
-      loc = {:label => name, :value => id}
+      loc = {:label => name, :id => id}
       locations << loc
       # loc = Location.find(id[:loc_id])
       # locations << { :label => loc.name, :value => loc.id }
     end
+    # debugger
     locations
   end
   
