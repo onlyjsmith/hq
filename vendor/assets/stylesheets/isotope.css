@@ -27,9 +27,10 @@ body {
   position: relative;
   background: #888;
   color: #fff;
-  -webkit-border-top-right-radius: 10px;
+/*  -webkit-border-top-right-radius: 10px;
       -moz-border-radius-topright: 10px;
           border-top-right-radius: 10px;
+*/
 }
 
 .headline.width2 { width: 140px; }
