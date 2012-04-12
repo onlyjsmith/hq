@@ -52,46 +52,58 @@ $(document).ready ->
   
 # INDEX page: map for sightings_index map tab
 initializeSightingsMap = () -> 
-  url = "http://a.tiles.mapbox.com/v3/onlyjsmith.wildspot-map.jsonp"
-  wax.tilejson url, (tilejson) ->
-    m = new google.maps.Map(document.getElementById("sightings_map"),
-      center: new google.maps.LatLng(-15.9, 28.0)
-      disableDefaultUI: true
-      zoom: 5
-      # mapTypeId: google.maps.MapTypeId.ROADMAP
-    )
-    m.mapTypes.set "mb", new wax.g.connector(tilejson)
-    m.setMapTypeId "mb"
-    # wax.g.interaction().map(m).tilejson(tilejson).on wax.tooltip().parent(map.getDiv()).events()
+  mapOptions =
+    # Defaulting to location of first camp for now
+    center: new google.maps.LatLng(-15.9, 28.0)
+    # disableDefaultUI: true
+    zoom: 13
+    # zoom: 11
+    mapTypeId: google.maps.MapTypeId.TERRAIN
+    noClear: true
 
-    google.maps.event.addListener m, "click", (event) ->
-      console.log "Clicked at lat:" + event.latLng.lat() + ", lng:" + event.latLng.lng()
+  # Create new map, add locations overlay, and export to global variable
+  m = new google.maps.Map document.getElementById("sightings_map"), mapOptions
 
-    locationOptions =
-      getTileUrl: (coord, zoom) ->
-        "http://craigmills.cartodb.com/tiles/locations/" + zoom + "/" + coord.x + "/" + coord.y + ".png"
+  # url = "http://a.tiles.mapbox.com/v3/onlyjsmith.wildspot-map.jsonp"
+  # wax.tilejson url, (tilejson) ->
+  #   m = new google.maps.Map(document.getElementById("sightings_map"),
+  #     center: new google.maps.LatLng(-15.9, 28.0)
+  #     disableDefaultUI: true
+  #     zoom: 5
+  #     # mapTypeId: google.maps.MapTypeId.ROADMAP
+  #   )
+  #   m.mapTypes.set "mb", new wax.g.connector(tilejson)
+  #   m.setMapTypeId "mb"
+  #   # wax.g.interaction().map(m).tilejson(tilejson).on wax.tooltip().parent(map.getDiv()).events()
 
-      tileSize: new google.maps.Size(256, 256)
+  google.maps.event.addListener m, "click", (event) ->
+    console.log "Clicked at lat:" + event.latLng.lat() + ", lng:" + event.latLng.lng()
 
-    locationMapType = new google.maps.ImageMapType(locationOptions)
-    m.overlayMapTypes.insertAt 0, locationMapType
+  locationOptions =
+    getTileUrl: (coord, zoom) ->
+      "http://craigmills.cartodb.com/tiles/locations/" + zoom + "/" + coord.x + "/" + coord.y + ".png"
 
-    siteOptions =
-      getTileUrl: (coord, zoom) ->
-        "http://craigmills.cartodb.com/tiles/sites/" + zoom + "/" + coord.x + "/" + coord.y + ".png"
+    tileSize: new google.maps.Size(256, 256)
 
-      tileSize: new google.maps.Size(256, 256)
+  locationMapType = new google.maps.ImageMapType(locationOptions)
+  m.overlayMapTypes.insertAt 0, locationMapType
 
-    siteMapType = new google.maps.ImageMapType(siteOptions)
-    m.overlayMapTypes.insertAt 2, siteMapType
-    
+  siteOptions =
+    getTileUrl: (coord, zoom) ->
+      "http://craigmills.cartodb.com/tiles/sites/" + zoom + "/" + coord.x + "/" + coord.y + ".png"
+
+    tileSize: new google.maps.Size(256, 256)
+
+  siteMapType = new google.maps.ImageMapType(siteOptions)
+  m.overlayMapTypes.insertAt 2, siteMapType
 
 
-    $("#tabs").bind 'tabsshow', (event, ui) -> 
-      if ui.panel.id is "map_panel" 
-        google.maps.event.trigger(m, 'resize')
-        centre = new google.maps.LatLng(-15.9, 28.0)
-        m.setCenter centre 
+
+  $("#tabs").bind 'tabsshow', (event, ui) -> 
+    if ui.panel.id is "map_panel" 
+      google.maps.event.trigger(m, 'resize')
+      centre = new google.maps.LatLng(-15.9, 28.0)
+      m.setCenter centre 
 
         
 # NEW page: map for new_sighting page
