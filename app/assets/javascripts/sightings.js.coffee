@@ -152,6 +152,8 @@ initializeNewMap = () ->
   createFromPoint = (coords) ->
     $.post "/locations.json", {coords: coords}, (data) ->
       loadAndSelectLocation(data.id)
+      map.overlayMapTypes.removeAt 0
+      addLocationsOverlay()
 
   searchFromBoundingBox = (bb) ->
     $.get "/locations/search.json",
@@ -202,15 +204,16 @@ initializeNewMap = () ->
       where: "loc_id = " + id
       scaleRange: [ 3, 20 ]
       # infoWindowTemplate: "<div>Here</div>"
-      infoWindowTemplate: "<div><a href='#' data-location-id=#{id} class='location_option_popup'>Location: ##{id}</a></div>"
+      infoWindowTemplate: null
+      # infoWindowTemplate: "<div><a href='#' data-location-id=#{id} class='location_option_popup'>Location: ##{id}</a></div>"
       singleInfoWindow: true
       symbology: {
           type: "single", # Defines the symbology as a single type of representation for all features
           vectorOptions: { # Google maps vector options for all features
-              fillColor: "#46461f",
-              fillOpacity: 0.5,
-              strokeWeight: 4,
-              strokeColor: "#ff7800"
+              fillColor: "#dca37d",
+              fillOpacity: 0.8,
+              strokeWeight: 3,
+              strokeColor: "#d18655"
           }    
       }
     )
@@ -227,7 +230,7 @@ initializeNewMap = () ->
     # disableDefaultUI: true
     zoom: 13
     # zoom: 11
-    mapTypeId: google.maps.MapTypeId.SATELLITE
+    mapTypeId: google.maps.MapTypeId.TERRAIN
     noClear: true
 
   # Create new map, add locations overlay, and export to global variable

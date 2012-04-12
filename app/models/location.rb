@@ -70,7 +70,7 @@ class Location < ActiveRecord::Base
     location = Location.new
     # debugger
 
-    buffer = 0.01 # degrees
+    buffer = 0.001 # degrees
     name = "Buffered point site"
     sql = "INSERT INTO locations (the_geom, loc_id, name) 
       VALUES (ST_Multi(ST_Buffer(ST_SetSRID(ST_Point(#{coords[1]}, #{coords[0]}),4326),#{buffer}, 2)), -1, '#{name}')
