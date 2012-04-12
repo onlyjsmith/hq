@@ -20,4 +20,11 @@ class CampsController < ApplicationController
     # TODO: Add the following line back in to redirect to sightings_index with search terms
     # redirect_to sightings_path("q[camp_id_eq]" => @camp.id)
   end
+  
+  # def search
+  #   @camp = Camp.search(params[:search])
+  #   respond_to do |format|
+  #     format.json { render json: @camp}
+  #   end
+  # end
 end
