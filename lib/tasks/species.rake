@@ -13,5 +13,17 @@ namespace :species do
       print "+"
     end
   end
+  
+  desc "Imports common Southern African species with scientific names"
+  task :import_sa_species => :environment do
+    puts "Loading data"
+    file = File.open(File.join(Rails.root, "lib", "data", "species_sa_import.csv"), 'r')
+    data = CSV.parse file
+    data.each do |d|  
+      print "."
+      Species.create(:binomial => d[0], :common_name => d[1])
+    end
+    puts "Completed loading #{data.count} species"
+  end
 end
   
