@@ -15,8 +15,10 @@ namespace :species do
   end
   
   desc "Imports common Southern African species with scientific names"
-  task :import_sa_species => :environment do
-    puts "Loading data"
+  task :clear_and_import_sa_species => :environment do
+    puts "Destroying all species"
+    Species.destroy_all
+    puts "Loading species list for Southern Africa"
     file = File.open(File.join(Rails.root, "lib", "data", "species_sa_import.csv"), 'r')
     data = CSV.parse file
     data.each do |d|  
