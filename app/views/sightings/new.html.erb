@@ -5,7 +5,9 @@
     <div class="row">
       <div class="span9">
         <% Species.all.each do |species| %>
-          <%= link_to (image_tag(species.get_photo_url, :title => "First picture we could find of #{species.common_name}", :class => "box-shadow species photo small_photo")), "#", :remote => true, :data => {species_id: species.id}, :class => 'species_photos' %>
+          <% unless species.photos.count == 0 %>
+            <%= link_to (image_tag(species.get_photo_url, :title => "First picture we could find of #{species.common_name}", :class => "box-shadow species photo small_photo")), "#", :remote => true, :data => {species_id: species.id}, :class => 'species_photos' %>
+          <% end %>
         <% end %>
       </div>
       <div class="span3">

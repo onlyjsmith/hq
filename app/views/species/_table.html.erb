@@ -18,9 +18,11 @@
         <%= species.binomial %>
       </td>
       <td>
-        <%= link_to image_tag(species.get_photo_url, :title => "First picture we could find of #{species.common_name}", 
-          :class => "box-shadow species photo small_photo"), species_path(species) 
-        %>
+        <% unless species.photos.count == 0 %>
+          <%= link_to image_tag(species.get_photo_url, :title => "First picture we could find of #{species.common_name}", 
+            :class => "box-shadow species photo small_photo"), species_path(species) 
+          %>
+        <% end %>
       </td>
       <td>
         <%= link_to "Details", edit_species_path(species), :class => "btn btn-mini btn-warning" %>
