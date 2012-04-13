@@ -35,6 +35,7 @@ group :development do
   gem 'irbtools-more'
   # gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'debugger'
+  gem 'faker'
 end
   
 gem 'jquery-rails'
