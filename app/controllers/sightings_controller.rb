@@ -6,18 +6,10 @@ class SightingsController < ApplicationController
   autocomplete :location, :name, :full => true
   
   def index
-    # @user = User.first
-    # 
-    # @camp = Camp.find(params[:camp_id])    if params[:camp_id]         
-    # 
-    # debugger
+
     @q = Sighting.search(params[:q]) 
-    @sightings = @q.result(:distinct => true)
-    # debugger
-    # @sightings = @sightings.by_camp(@camp) if @camp
-    # @sightings = @sightings.filter_time(params[:filter_time])
-    # 
-    # 
+    @sightings = @q.result(:distinct => true).paginate(:page => params[:page])
+
     # @drive_count = @sightings.map{|x| x.drive}.uniq.count
     # @species = @sightings.map{|x| x.species}.uniq
     
