@@ -11,12 +11,16 @@ namespace :populate do
 
     # Species
     Rake::Task["species:clear_and_import_sa_species"].execute
-    
+    Rake::Task["species:get_all_species_photos"].execute
     
     # Geo
+    Rake::Task["populate:destroy_buffered_points"].execute
+    Rake::Task["populate:generate_random_camp_locations"].execute
+    Rake::Task["populate:sightings"].execute
+    
   end
 
-  desc "Populate Company and User"
+  desc "Destroy and Populate Company and User"
   task :static => :environment do
     Company.destroy_all
     5.times do 
@@ -24,6 +28,7 @@ namespace :populate do
       Company.create(:name => name)
     end
     
+    User.destroy_all
     20.times do
       f = Faker::Name.first_name
       l = Faker::Name.last_name
