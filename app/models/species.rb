@@ -9,7 +9,7 @@ class Species < ActiveRecord::Base
     unless self.photos.blank?
       return self.photos.first.url
     end
-
+    # debugger
     FlickRaw.api_key = APP_CONFIG['FlickRaw_api_key']
     FlickRaw.shared_secret = APP_CONFIG['FlickRaw_shared_secret']
 
@@ -17,15 +17,17 @@ class Species < ActiveRecord::Base
       :license => '1,2,3,4,5,6,7', 
       :privacy_filter => "1", 
       :sort => "interestingness-desc",
-      :per_page => 10, 
+      :per_page => 1, 
       :extras => "url_s")
-    results.each do |result|
-      if result.respond_to?(:url_s) && result.url_s
-        photo = self.photos.create(:url => result.url_s)
-        break
+    unless results.blank?
+      results.each do |result|
+        if result.respond_to?(:url_s) && result.url_s
+          photo = self.photos.create(:url => result.url_s)
+          break
+        end
       end
+    # return self.photos.first.url
     end
-    return self.photos.first.url
   end
   
   def get_better_photo
