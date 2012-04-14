@@ -4,7 +4,9 @@
       <div id="stats" class="span12">
         <h2>Headline Company Stats</h2>
         <ul>
-          <li><%= pluralize(@company.camps.count, 'camp') %></li>
+          <li>
+            <%= link_to pluralize(@company.camps.count, 'camp'), company_camps_path(@company) %>
+          </li>
           <% if @sightings %>
             <li><%= pluralize(@sightings.count, 'sighting') %> since <%= @sightings.first.try(:record_time) %></li>
             <li>

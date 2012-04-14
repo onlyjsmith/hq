@@ -9,7 +9,7 @@
     <% @companies.each do |company| %>
     <tr>
       <td>
-        <%= link_to company.name, company_path(company) %>
+        <%= link_to "#{company.name} (#{company.camps.count})", company_path(company) %>
         <%# link_to "(list camps)", company_camps_path(company) %> 
       </td>
       <td>
