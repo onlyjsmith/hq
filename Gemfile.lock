@@ -236,6 +236,7 @@ GEM
     unicode-display_width (0.1.1)
     warden (1.1.1)
       rack (>= 1.0)
+    will_paginate (3.0.3)
     wirb (0.4.1)
     zucker (12.1)
 
@@ -263,3 +264,4 @@ DEPENDENCIES
   simple_form
   uglifier (>= 1.0.3)
   underscore-rails
+  will_paginate (~> 3.0)

@@ -18,7 +18,7 @@ gem 'rails3-jquery-autocomplete'
 gem 'flickraw'
 gem 'cartodb-rb-client', :git => 'git@github.com:craigmmills/cartodb-rb-client.git'
 gem "ransack"
-
+gem 'will_paginate', '~> 3.0'
 
 # Gems used only for assets and not required
 # in production environments by default.
