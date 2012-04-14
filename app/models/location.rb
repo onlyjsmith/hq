@@ -65,13 +65,13 @@ class Location < ActiveRecord::Base
     end
   end
   
-  # Creates a new location on CartoDB, with default buffer, from point coords
+  # Creates a new location on CartoDB, with default buffer, from point coords (lat, lng)
   def self.create_from_point(coords)
     location = Location.new
-    # debugger
 
+    name = "Buffered point"
+    
     buffer = 0.001 # degrees
-    name = "Buffered point site"
     sql = "INSERT INTO locations (the_geom, loc_id, name) 
       VALUES (ST_Multi(ST_Buffer(ST_SetSRID(ST_Point(#{coords[1]}, #{coords[0]}),4326),#{buffer}, 2)), -1, '#{name}')
       RETURNING cartodb_id"
@@ -86,6 +86,24 @@ class Location < ActiveRecord::Base
   def geom 
     result = CartoDB::Connection.query "SELECT the_geom FROM locations where loc_id = '#{self.id}'", :page => 1
     result[:rows][0][:the_geom].as_json
+  end
+  
+
+  def self.random_from_camp(camp_id)
+    require "#{::Rails.root.to_s}/lib/geolibs/geoipsum"
+    # debugger
+    camp = Camp.find(camp_id)
+    start_coords =  camp.location_point["coordinates"]
+    bearing = rand(360) # random direction from camp
+    distance = rand(0.01) + 0.01 # 
+    
+    # ll_from_dist_bearing returns (lng, lat) wants (lat, lng)
+    new_coords = Geoipsum::Geoipsum.ll_from_dist_bearing(distance, bearing, start_coords[1], start_coords[0])
+
+    # create_from_point wants (lat, lng)
+    location = Location.create_from_point([new_coords[1], new_coords[0]])
+    location.save
+    print "."
   end
   
   protected

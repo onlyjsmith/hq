@@ -25,9 +25,11 @@
         <a href='#'><%= sighting.record_time.nil? ? "no time" : distance_of_time_in_words(Time.now, sighting.record_time) %></a> ago
       </td>
       <td>
-        <%= link_to image_tag(sighting.species.get_photo_url, :title => "First picture we could find of #{sighting.species.common_name}", 
-          :class => "photo small_photo"), species_path(sighting.species) 
-        %>
+        <% unless sighting.species.photos.count == 0 %>
+          <%= link_to image_tag(sighting.species.get_photo_url, :title => "First picture we could find of #{sighting.species.common_name}", 
+            :class => "photo small_photo"), species_path(sighting.species) 
+          %>
+        <% end %>
       </td>
       <td>
         <%= link_to edit_sighting_path(sighting), :class => 'btn btn-warning' do %>

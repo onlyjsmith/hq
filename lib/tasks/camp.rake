@@ -3,7 +3,7 @@ namespace :camp do
   task :import_sites_from_cartodb => :environment do
     puts "Destroying all existing camps"
     Camp.destroy_all
-    result = CartoDB::Connection.query "SELECT cartodb_id, name FROM sites"
+    result = CartoDB::Connection.query "SELECT cartodb_id, name FROM sites WHERE company IS NOT null"
     result[:rows].each do |row|
       offset = rand(Company.count)
       company = Company.first(:offset => offset)
