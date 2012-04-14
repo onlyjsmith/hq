@@ -5,7 +5,7 @@ class SpeciesController < ApplicationController
 
   def show
     @species = Species.find(params[:id])
-    @sightings = Sighting.where(:species_id => @species.id)
+    @sightings = Sighting.where(:species_id => @species.id).paginate(:page => params[:page], :per_page => 20)
   end
 
   def edit

@@ -30,12 +30,12 @@ class SightingsController < ApplicationController
 
   def new
     @camp_location = Camp.first.location_point
+    @species = Species.paginate(:page => params[:page], :per_page => 20)
     
     @q = Sighting.search(params[:q]) 
     @sightings = @q.result(:distinct => true)
     
     @sighting = Sighting.new(params[:details])
-    
     respond_to do |format|
       format.html
       format.json {render json: @camp_location['coordinates']}

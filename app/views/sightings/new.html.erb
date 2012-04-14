@@ -4,7 +4,8 @@
     <h3>Hey, what have you seen, and where have you seen it?</h3>   
     <div class="row">
       <div class="span9">
-        <% Species.all.each do |species| %>
+        <%= will_paginate @species %>
+        <% @species.each do |species| %>
           <% unless species.photos.count == 0 %>
             <%= link_to (image_tag(species.get_photo_url, :title => "First picture we could find of #{species.common_name}", :class => "box-shadow species photo small_photo")), "#", :remote => true, :data => {species_id: species.id}, :class => 'species_photos' %>
           <% end %>
@@ -36,18 +37,18 @@
       <div class="span3">
         <div class="row">
           <div class="span3">
-            <h3>Location options</h3>
+            <h3>Location selection</h3>
               <ul>
-                <div id="location_options">
+                <div id="location_selection">
                 </div>
               </ul>
           </div>
         </div>
         <div class="row">
           <div class="span3">
-            <h3>Location selection</h3>
+            <h3>Location options</h3>
               <ul>
-                <div id="location_selection">
+                <div id="location_options">
                 </div>
               </ul>
           </div>

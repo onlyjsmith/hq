@@ -3,8 +3,7 @@ require 'SecureRandom'
 class Location < ActiveRecord::Base
   has_many :sightings
   has_many :tribes
-  # TODO: Location <-> Camp should be a location-based association, dynamic
-  has_many :camps
+  # has_many :camps
 
   validates :name, :presence => true
   attr_accessor :from_point
@@ -12,6 +11,11 @@ class Location < ActiveRecord::Base
   # after_initialize :default_values
   before_save :update_geom_to_cartodb
   after_save :update_ids_to_cartodb
+
+  def camps
+    # TODO: Search by distance from location.  
+    Camp.all
+  end
 
   def self.search(search)
     if search
