@@ -1,8 +1,25 @@
 namespace :populate do
+  desc "Do all"
+  task :all => :environment do
+    # Static
+    Rake::Task["populate:static"].execute
+
+    # Camps
+    Rake::Task["camp:import_sites_from_cartodb"].execute
+    Rake::Task["camp:destroy_camp_buffers"].execute
+    Rake::Task["camp:create_buffers"].execute
+
+    # Species
+    Rake::Task["species:clear_and_import_sa_species"].execute
+    
+    
+    # Geo
+  end
+
   desc "Populate Company(10) and User(50)"
   task :static => :environment do
     Company.destroy_all
-    10.times do 
+    500.times do 
       name = Faker::Company.name
       Company.create(:name => name)
     end

@@ -5,12 +5,21 @@ namespace :camp do
     Camp.destroy_all
     result = CartoDB::Connection.query "SELECT cartodb_id, name FROM sites"
     result[:rows].each do |row|
-      Camp.create(:name => row[:name], :cartodb_id => row[:cartodb_id])
+      offset = rand(Company.count)
+      company = Company.first(:offset => offset)
+
+      Camp.create(:name => row[:name], :cartodb_id => row[:cartodb_id], :company_id => company.id)
       print "."
     end
     puts "Created #{result[:rows].count} Camps from cartodb"
   end
   
+  desc "Destroy buffered locations for camps in cartodb"
+  task :destroy_camp_buffers => :environment do
+    CartoDB::Connection.query "DELETE FROM locations WHERE camp_id IS NOT null"
+    puts "Destroyed camp buffers"
+  end
+
   desc "Create buffered Locations in cartodb for each Camp"
   task :create_buffers => :environment do
     count = 0
@@ -32,11 +41,5 @@ namespace :camp do
       count += 1
       break if count > 100
     end
-  end
-  
-  desc "Destroy buffered locations created for camps in cartodb"
-  task :destroy_camp_buffers => :environment do
-    CartoDB::Connection.query "DELETE FROM locations WHERE camp_id IS NOT null"
-    puts "Done"
   end
 end
