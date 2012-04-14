@@ -1,6 +1,6 @@
 class SpeciesController < ApplicationController
   def index
-    @species = Species.all
+    @species = Species.paginate(:page => params[:page], :per_page => 20)
   end
 
   def show
