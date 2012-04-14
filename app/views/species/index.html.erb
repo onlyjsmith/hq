@@ -10,7 +10,9 @@
       </div>
     </div>
   </div>
-  <%= will_paginate @species %>
+  <div class="digg_pagination">
+    <%= will_paginate @species %>
+  </div>
   <div class="row">
     <div class="span9">
       <%= render :partial => 'table' %>
