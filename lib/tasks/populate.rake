@@ -1,5 +1,5 @@
 namespace :populate do
-  desc "Do all"
+  desc "Do all - WARNING, trashes database. But then fills it with nice things."
   task :all => :environment do
     # Static
     Rake::Task["populate:static"].execute
