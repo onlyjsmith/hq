@@ -56,8 +56,8 @@ namespace :populate do
     # TODO Add sightings task.
     date = Time.now - 60.days
     Camp.all.each do |camp|
-      puts "Creating sighting for camp #{camp.id}"
-      100.times do
+      puts "Creating sightings for camp #{camp.id}"
+      30.times do
         # Random species
         offset = rand(Species.count)
         species_id = Species.first(:offset => offset).id
@@ -73,10 +73,10 @@ namespace :populate do
         user_id = User.first(:offset => offset).id
         
         time_step_hrs = rand(12)
-        date = date - time_step_hrs.hours
+        date = date + time_step_hrs.hours
         record_time = date
 
-        sighting = Sighting.create(:species_id => species_id, :location_id => location_id, :description => description, :user_id => user_id, :record_time => record_time)
+        sighting = Sighting.create(:camp_id => camp.id, :species_id => species_id, :location_id => location_id, :description => description, :user_id => user_id, :record_time => record_time)
         print "."
       end
       # break
