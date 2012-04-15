@@ -29,13 +29,22 @@ namespace :populate do
     end
     
     User.destroy_all
-    roles = %w(Guide Client)
+    # Add clients
     20.times do
       f = Faker::Name.first_name
       l = Faker::Name.last_name
       e = Faker::Internet.email(f + " " + l)
-      # TODO: Change rake task - this adds a massive amount of guides!
-      r = roles[rand(2)]
+      r = 'Client'
+      u = User.new(:first_name => f, :surname => l, :email => e)
+      u.save!(:validate => false)
+    end
+
+    # Add guides
+    5.times do
+      f = Faker::Name.first_name
+      l = Faker::Name.last_name
+      e = Faker::Internet.email(f + " " + l)
+      r = 'Guide'
       u = User.new(:first_name => f, :surname => l, :email => e)
       u.save!(:validate => false)
     end
