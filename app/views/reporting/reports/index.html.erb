@@ -6,6 +6,13 @@
     </div>
     <div class="span6">
       <h1>Filters and search</h1>
+      <%= search_form_for @q do |f| %>
+        <%= f.label :species_id_eq %>
+        <%= f.text_field :species_id_eq %>
+        <%= f.label :camp_id_eq %>
+        <%= f.text_field :camp_id_eq %>
+        <%= f.submit %>
+      <% end %>
     </div>
   </div>
 </div>

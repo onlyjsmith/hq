@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="span8">
+      <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>Camp Name</th>
+          </tr>
+        </thead>
+        <% @camps.each do |camp| %>
+        <tbody>
+          <tr>
+            <td>
+              <%= link_to camp.name, reporting_camp_path(camp.id, :format => :json) %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

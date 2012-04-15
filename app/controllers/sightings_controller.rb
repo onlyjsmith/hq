@@ -96,10 +96,10 @@ class SightingsController < ApplicationController
     sightings = Sighting.all
     csv_string = CSV.generate do |csv| 
       # TODO - move this 'view' stuff out of controller
-      csv << %w(When What Where)
+      csv << %w(When CommonName Binomial Camp LocationName UserEmail)
       sightings.each do |s|
         # debugger
-        csv << [s.record_time, s.species.common_name, s.location.name]
+        csv << [s.record_time, s.species.common_name, s.species.binomial, s.camp.name, s.location.name, s.user.email]
       end
     end
     send_data csv_string, :type => "text/plain", 
