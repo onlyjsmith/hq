@@ -37,6 +37,7 @@ Hq::Application.routes.draw do
     resources :sightings, :only => [:index]
   end
   
+  resources :users
   
   # get "company/:id/camps", :as => :company_camps, :controller => :companies, :action => :camps_index
   # get "sightings/index"

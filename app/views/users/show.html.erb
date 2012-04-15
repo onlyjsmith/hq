@@ -1,0 +1,17 @@
+<div class='container'>
+  <h1>Hello <%= @user.first_name %>!</h1>
+  
+  <% if @user.sightings != 0 %>
+    <p>You've been busy :-) You've made <%= @sightings.count %> sightings in the past 60 days</p>
+  <% else %>
+    <p>What have you seen? Where have you been? Try adding a sighting.</p>
+  <% end %>
+    
+  <div class="row">
+    <div class="span9">
+      <div class="row">
+        <%= render :partial => 'sightings/table'%>
+      </div>
+    </div>
+  </div>
+</div>
