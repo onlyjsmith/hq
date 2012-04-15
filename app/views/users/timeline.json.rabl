@@ -14,8 +14,8 @@ child @user => :timeline do
       "#{sighting.species.common_name}"
     end
     node :text do |sighting|
-      "You saw a #{sighting.species.common_name} (#{sighting.species.binomial.downcase}). Well done you."
-      "By the way, it was at #{sighting.location.name} - and we can map that..."
+      "You saw a #{sighting.species.common_name} (#{sighting.species.binomial.downcase}). Well done you. </br> 
+      By the way, it was at #{sighting.location.name} #{sighting.location.id} - and we can map that..."
     end
 
     child(:species => :asset) do |asset|
