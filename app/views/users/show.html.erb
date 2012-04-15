@@ -1,3 +1,4 @@
+<link href="http://veritetimeline.appspot.com/latest/timeline.css" rel="stylesheet">
 <div class='container'>
   <h1>
     Hello <%= @user.first_name %>!
@@ -12,9 +13,20 @@
   <div class="row">
     <div class="span9">
       <div class="row">
-        <div id="timeline">
-          
-        </div>
+
+        <div id="timeline-embed"></div>
+        <script type="text/javascript">
+        	var timeline_config = {
+        		width: 900, // OPTIONAL
+        		height: 700, // OPTIONAL
+        		// maptype: "watercolor", // OPTIONAL
+        		// css: 'path_to_file/timeline.css', // OPTIONAL
+        		// js: 'path_to_file/timeline.js', // OPTIONAL
+        		source: 'Your data source goes here'
+        	}
+        </script>
+        <script type="text/javascript" src="http://veritetimeline.appspot.com/latest/timeline-embed.js"></script>
+
       </div>  
       <div class="row">
         <h3>Sightings list</h3>
