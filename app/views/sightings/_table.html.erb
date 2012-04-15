@@ -15,7 +15,10 @@
         <h3>
           <%= sighting.description %>
         </h3>
-        <a href="#"><%= sighting.try(:user).email %></a> saw
+        <a href="#">
+          <%= link_to sighting.user.email, user_path(sighting.user) %>
+          <%# sighting.try(:user).email %>
+        </a> saw
         <%= link_to sighting.species.common_name, species_path(sighting.species) %></a> from
         <% if sighting.tribe.try(:name) %> 
           <%= link_to sighting.tribe.name, species_tribe_path(sighting.tribe.species, sighting.tribe) %>
