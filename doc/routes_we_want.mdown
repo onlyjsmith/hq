@@ -21,3 +21,9 @@ Y  /sightings/!CRUD              CRUD sightings
 Y  /species/!CRUD                CRUD species
 Y  /species/:id/tribes/!CRUD     CRUD species_tribes
 Y  /locations/!CRUD              CRUD locations
+
+
+# REPORTING
+  /reporting/
+  /reporting/camps              index camps in company
+  /reporting/sightings          return JSON for tables

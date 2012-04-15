@@ -1,0 +1,49 @@
+# Structure for company/camp/marketing feedback
+
+FILTERS
+
+Camp:
+* name
+
+Guide:
+* name
+
+Species:
+- common_name
+- binomial
+
+Tribe:
+- name
+
+Location:
+* name
+- near camp
+
+Time:
+- year
+- range
+
+RESULTS (table/list)
+- species
+- date
+- sighting detail
+- location (coords + name if exists)
+- 
+
+SUMMARY
+- total number of sightings per year per camp
+- number of unique species
+- sightings per guide
+- verified sightings per guide
+- sightings per camp
+
+
+ADD TO MODELS:
+
+Sighting: 
+- number of animals 
+
+New model: Verification
+- verified
+- by
+- time/date

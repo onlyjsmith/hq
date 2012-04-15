@@ -41,6 +41,10 @@ Hq::Application.routes.draw do
     get :timeline
   end
   
+  namespace :reporting do
+    resources :sightings
+  end
+  
   # get "company/:id/camps", :as => :company_camps, :controller => :companies, :action => :camps_index
   # get "sightings/index"
   # 
