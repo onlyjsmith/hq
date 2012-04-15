@@ -42,7 +42,9 @@ Hq::Application.routes.draw do
   end
   
   namespace :reporting do
+    resources :reports
     resources :sightings
+    resources :users
   end
   
   # get "company/:id/camps", :as => :company_camps, :controller => :companies, :action => :camps_index

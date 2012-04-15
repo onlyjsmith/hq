@@ -15,5 +15,5 @@ class Reporting::SightingsController < ApplicationController
         }
     end
   end
-
+  
 end
