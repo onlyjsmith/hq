@@ -15,6 +15,8 @@ Hq::Application.routes.draw do
     # post :create_from_point, :on => :collection
   end
 
+  get "sightings/digitise", :controller => :sightings, :action => :digitise
+
   resources :sightings do
     get :download, :on => :collection                  
     get :headlines, :on => :collection

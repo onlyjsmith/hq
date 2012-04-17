@@ -111,6 +111,11 @@ class SightingsController < ApplicationController
     @sightings = Sighting.all
   end
   
+  def digitise
+    debugger
+    @sighting = Sighting.new
+  end
+  
   # def filter
   #   @q = Sighting.search(params[:q]) 
   #   @sightings = @q.result(:distinct => true)
