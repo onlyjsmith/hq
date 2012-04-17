@@ -1,5 +1,8 @@
 $(document).ready -> 
   $("input:text:visible:first").focus()
+
+  $('.dropdown-toggle').dropdown()
+
   $("#home_search").catcomplete
     delay: 0
     source: "/home/auto_search.json"

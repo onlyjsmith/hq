@@ -24,7 +24,6 @@
       <%= link_to "WildSpot HQ - beta", root_path, :class => 'brand' %> 
       <div class="nav-collapse">
         <ul class="nav">
-          <li><%= link_to "Reporting", reporting_reports_path %></li>
           <li><%= link_to "Companies", companies_path %></li>
           <li><%= link_to "Camps", camps_path %></li>
           <li><%= link_to "Sightings", sightings_path %></li>
@@ -32,6 +31,17 @@
           <li><%= link_to "Tribes", tribes_path %></li>
           <li><%= link_to "Locations", locations_path %></li>
           <!-- <li><%= link_to "Stuff Tester", home_tester_path %></li> -->
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Special<b class="cartet"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </li>
+          <li><%= link_to "REPORTING", reports_path %></li>
           <li><%= link_to "ADMIN", rails_admin.dashboard_path %></li>
         </ul>
 
