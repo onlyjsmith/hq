@@ -4,7 +4,7 @@ class Reporting::SightingsController < ApplicationController
     @sightings = @q.result(:distinct => true).paginate(:per_page => 5, :page => params[:page])
 
     respond_to do |format|
-      format.html
+      format.html { render '/reporting/sightings' }
       format.json  { 
         render :json => {
           :current_page => @sightings.current_page,

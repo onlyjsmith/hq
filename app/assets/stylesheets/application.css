@@ -16,7 +16,11 @@
 */     
 
 body {
-  font-family: 'Signika Negative', sans-serif;      
+  font-family: 'Helvetica Neue', serif;
   font-size: 13px;  
   margin: 15px;
+}
+
+h1 {
+  font-family: 'Signika Negative', sans-serif;      
 }
