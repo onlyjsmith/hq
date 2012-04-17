@@ -1,7 +1,7 @@
 $(document).ready -> 
   $("input:text:visible:first").focus()
 
-  $('.dropdown-toggle').dropdown()
+  $(".dropdown-toggle").dropdown()
 
   $("#home_search").catcomplete
     delay: 0
