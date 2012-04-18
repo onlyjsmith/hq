@@ -15,6 +15,8 @@ Hq::Application.routes.draw do
     # post :create_from_point, :on => :collection
   end
 
+  get "sightings/digitise", :controller => :sightings, :action => :digitise
+
   resources :sightings do
     get :download, :on => :collection                  
     get :headlines, :on => :collection
@@ -39,6 +41,13 @@ Hq::Application.routes.draw do
   
   resources :users do
     get :timeline
+  end
+  
+  resources :reports do
+    # resources :reports
+    # resources :sightings
+    # resources :users
+    # resources :camps
   end
   
   # get "company/:id/camps", :as => :company_camps, :controller => :companies, :action => :camps_index

@@ -14,12 +14,13 @@
 //= require global
 //= require jquery_ujs
 //= require jquery-ui
+//= require bootstrap-dropdown
+//= require bootstrap-button
 //= require underscore
 //= require autocomplete-rails
 //= require cartodb/cartodb-gmapsv3
 //= require wax/dist/wax.g
 //= require gvector
-// = require timeline-embed
 //= require jquery.isotope
 //= require jquery.cookie  
 

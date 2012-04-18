@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <h1>Sightings feeds for camps</h1>
+    <p>The links below point to 'machine-readable' feeds of the most recent sightings from each camp. They can be integrated into your existing website, for example to provide an up-to-date list of the sightings at each camp. </p>
+    <p>There will also be embeddable maps and summary panels to present the information.</p>
+    <p>All of the information you collect is always immediately accessible, transparent - for you to manage as you want.</p>
+    <div class="span8">
+      <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>Camp Name</th>
+          </tr>
+        </thead>
+        <% @camps.each do |camp| %>
+        <tbody>
+          <tr>
+            <td>
+              <%= link_to camp.name, reporting_camp_path(camp.id, :format => :json) %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
