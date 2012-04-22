@@ -2,7 +2,17 @@
   <div class="row">
     <h1>Add new sighting</h1>
     <h3>Hey, what have you seen, and where have you seen it?</h3>
-    
+  </div>        
+  <div class="row" style="height: 150px; overflow: scroll">
+    <h2>Images of species - select one</h2>
+    <% @species.each do |species| %>
+      <%= link_to image_tag(species.get_photo_url, :title => "First picture we could find of #{species.common_name}",
+        :remote => true,
+        :class => "box-shadow species photo small_photo"), species_path(species) 
+      %>
+    <% end %>
+  </div>
+  <div class="row">
     <%= form_tag sightings_path, :controller => :sightings, :action => :create, :method => 'post' do %>
 
         <%= label_tag 'Use this "OmniEnter" box to search for everything!' %>
@@ -11,21 +21,12 @@
         <%= hidden_field_tag(:tribe_id) %>
         <%= hidden_field_tag(:location_id) %>
         <%= hidden_field_tag(:time_id) %>    
-        
-        <div class="row" style="height: 150px; overflow: scroll">
-          <h2>Images of species - select one</h2>
-          <% @species.each do |species| %>
-            <%= link_to image_tag(species.get_photo_url, :title => "First picture we could find of #{species.common_name}",
-              :remote => true,
-              :class => "box-shadow species photo small_photo"), species_path(species) 
-            %>
-          <% end %>
-        </div>
         <%= label_tag "Describe what you saw:" %>
         <%= text_field_tag :description, nil, :placeholder => "ugly but working description box" %>
         <%= submit_tag "Add this!", :name => nil %>
 
-    <% end %>
+      <% end %>
+  </div>
     
       <div class="span3 model_results species">
         <ul>
