@@ -112,8 +112,9 @@ class SightingsController < ApplicationController
   end
   
   def digitise
-    debugger
+    # debugger
     @sighting = Sighting.new
+    @species = Species.all.select{|x| x if x.photos.count != 0}
   end
   
   # def filter

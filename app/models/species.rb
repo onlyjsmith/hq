@@ -5,6 +5,10 @@ class Species < ActiveRecord::Base
 
   accepts_nested_attributes_for :tribes, :allow_destroy => true  
   
+  def self.photoed
+    all.select{|x| x if x.photos.count !=0}
+  end
+  
   def get_photo_url
     unless self.photos.blank?
       return self.photos.first.url
