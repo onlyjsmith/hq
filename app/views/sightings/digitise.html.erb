@@ -12,12 +12,15 @@
         <%= hidden_field_tag(:location_id) %>
         <%= hidden_field_tag(:time_id) %>    
         
-        <p>IMAGES OF SPECIES</p>
-        <% Species.all.each do |species| %>
-          <%= link_to image_tag(species.get_photo_url, :title => "First picture we could find of #{species.common_name}", 
-            :class => "box-shadow species photo small_photo"), species_path(species) 
-          %>
-        <% end %>
+        <div class="row" style="height: 150px; overflow: scroll">
+          <p>IMAGES OF SPECIES</p>
+          <% @species.each do |species| %>
+            <%= link_to image_tag(species.get_photo_url, :title => "First picture we could find of #{species.common_name}",
+              :remote => true,
+              :class => "box-shadow species photo small_photo"), species_path(species) 
+            %>
+          <% end %>
+        </div>
         <%= label_tag "Describe what you saw:" %>
         <%= text_field_tag :description, nil, :placeholder => "ugly but working description box" %>
         <%= submit_tag "Add this!", :name => nil %>
