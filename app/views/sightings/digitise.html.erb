@@ -13,7 +13,7 @@
         <%= hidden_field_tag(:time_id) %>    
         
         <div class="row" style="height: 150px; overflow: scroll">
-          <p>IMAGES OF SPECIES</p>
+          <h2>Images of species - select one</h2>
           <% @species.each do |species| %>
             <%= link_to image_tag(species.get_photo_url, :title => "First picture we could find of #{species.common_name}",
               :remote => true,
