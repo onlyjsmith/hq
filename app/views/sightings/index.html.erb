@@ -12,18 +12,18 @@
     <div class="span9">
       <div id="tabs">
       	<ul>
-      		<li id="headlines_tab"><a href="#headlines_panel">Headlines</a></li>
-      		<li id="map_tab"><a href="#map_panel">Map</a></li>
+          <!-- <li id="headlines_tab"><a href="#headlines_panel">Headlines</a></li> -->
       		<li id="list_tab"><a href="#list_panel">List (<%= @sightings.count %>)</a></li>
+      		<li id="map_tab"><a href="#map_panel">Map</a></li>
       	</ul>
-        <div id="headlines_panel">
-          <%= render :partial => 'headlines' %>
+        <!-- <div id="headlines_panel">
+          <%# render :partial => 'headlines' %>
+        </div> -->
+        <div id="list_panel">
+          <%= render :partial => 'table' %>
         </div>
         <div id="map_panel" class="map">
           <%= render :partial => 'map' %>
-        </div>
-        <div id="list_panel">
-          <%= render :partial => 'table' %>
         </div>
       </div>      
     </div>
