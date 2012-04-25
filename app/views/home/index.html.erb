@@ -9,7 +9,15 @@
   <% end %>
   
 
-  <div>
+  <!-- <div>
     <a href="/sightings">All sightings</a>
-  </div>
+  </div> -->
 </div>
+
+<div id="lower_box" class="overlayBoxLower">
+  <%= link_to "Mobile App Demo", "#", :class => 'btn btn-large four_buttons' %>
+  <%= link_to "Digitise Sightings Book" , sightings_digitise_path, :class => 'btn btn-large four_buttons'  %>
+  <%= link_to "Slidey Share Page", user_path(56), :class => 'btn btn-large four_buttons'  %>
+  <%= link_to "Management Reports", reports_path, :class => 'btn btn-large four_buttons'  %>
+</div>
+
