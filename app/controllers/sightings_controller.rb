@@ -35,6 +35,8 @@ class SightingsController < ApplicationController
   end
 
   def new
+    
+    
     @camp_location = Camp.first.location_point
     @species = Species.paginate(:page => params[:page], :per_page => 20)
     

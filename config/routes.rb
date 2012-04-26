@@ -16,7 +16,7 @@ Hq::Application.routes.draw do
   end
 
   get "sightings/digitise", :controller => :sightings, :action => :digitise
-  get "sightings/mobile", :controller => :sightings, :action => :mobile
+  
 
   resources :sightings do
     get :download, :on => :collection                  
@@ -50,6 +50,13 @@ Hq::Application.routes.draw do
     # resources :users
     # resources :camps
   end
+  
+  #adding route for mobile sub folder
+  scope "mobile", :as => "mobile" do
+    resources :sightings, :controller => "mobile/sightings"
+  end
+  
+  
   
   # get "company/:id/camps", :as => :company_camps, :controller => :companies, :action => :camps_index
   # get "sightings/index"
