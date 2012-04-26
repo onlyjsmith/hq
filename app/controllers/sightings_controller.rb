@@ -19,6 +19,12 @@ class SightingsController < ApplicationController
       format.js
     end
   end
+  
+  
+  def mobile
+    
+  end
+  
 
   def show
     @sighting = Sighting.find(params[:id])
@@ -112,7 +118,7 @@ class SightingsController < ApplicationController
   end
   
   def digitise
-    debugger
+    #debugger
     @sighting = Sighting.new
   end
   

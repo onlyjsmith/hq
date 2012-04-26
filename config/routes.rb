@@ -16,6 +16,7 @@ Hq::Application.routes.draw do
   end
 
   get "sightings/digitise", :controller => :sightings, :action => :digitise
+  get "sightings/mobile", :controller => :sightings, :action => :mobile
 
   resources :sightings do
     get :download, :on => :collection                  
