@@ -1,7 +1,14 @@
 <div class="container">
   <div class="row">
     <div class="span6">
-      <h1>Results table</h1>
+      <h1 id="reports_available">Reports available</h1>
+      <ul>
+        <li><%= link_to "Species report", "#" %></li>
+        <li><%= link_to "Tribes report", "#" %></li>
+        <li><%= link_to "Camps report", "#" %></li>
+        <li><%= link_to "Users report", "#" %></li>
+      </ul>
+      <h3>Sightings table</h3>
       <%= render partial: 'table' %>
     </div>
     <div class="span6">

@@ -1,7 +1,8 @@
 class Reporting::ReportsController < ApplicationController
   def index
     @q = Sighting.search(params[:q])
-    @sightings = @q.result(:distinct => true).paginate(:per_page => 5, :page => params[:page])
+    # @sightings = @q.result(:distinct => true).paginate(:per_page => 5, :page => params[:page])
+    @sightings = Sighting.all.paginate(:per_page => 5, :page => params[:page])
 
     respond_to do |format|
       format.html
