@@ -1,0 +1,44 @@
+
+     
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>  
+    <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+    
+    <script type="text/javascript">
+      $(document).ready(function() {
+        // Handler for .ready() called.
+     
+        var myOptions = {
+          center: new google.maps.LatLng(-34.397, 150.644),
+          zoom: 8,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map_canvas"),
+            myOptions);
+       });
+    </script>
+    
+        <div id="map_canvas" style="width:500px; height:300px; "></div>
+    
+    
+        <div data-role="page" id="page1">
+            <div data-role="content">
+                
+                <div class="ui-grid-b">
+                    <div class="ui-block-a">
+                        <div style="width: 100%; height: 100px; position: relative; background-color: #fbfbfb; border: 1px solid #b8b8b8;">
+                            
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div style="width: 100%; height: 100px; position: relative; background-color: #fbfbfb; border: 1px solid #b8b8b8;">
+                            <img src="http://codiqa.com/static/images/v2/image.png" alt="image" style="position: absolute; top: 50%; left: 50%; margin-left: -16px; margin-top: -18px" />
+                        </div>
+                    </div>
+                    <div class="ui-block-c">
+                        <div style="width: 100%; height: 100px; position: relative; background-color: #fbfbfb; border: 1px solid #b8b8b8;">
+                            <img src="http://codiqa.com/static/images/v2/image.png" alt="image" style="position: absolute; top: 50%; left: 50%; margin-left: -16px; margin-top: -18px" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
