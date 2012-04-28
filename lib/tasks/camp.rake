@@ -1,7 +1,7 @@
 namespace :camp do
   desc "Destroy all then import sites from existing cartodb table"
   task :import_sites_from_cartodb => :environment do
-    load "#{::Rails.root.to_s}/lib/cartodb_connect.rb"
+    require "#{::Rails.root.to_s}/lib/cartodb_connect.rb"
     puts "Destroying all existing camps"
     Camp.destroy_all
 
