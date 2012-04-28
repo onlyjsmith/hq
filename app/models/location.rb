@@ -1,4 +1,4 @@
-require 'SecureRandom'
+# require 'SecureRandom'
 
 class Location < ActiveRecord::Base
   has_many :sightings
