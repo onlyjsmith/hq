@@ -37,9 +37,9 @@ group :development do
   gem 'irbtools-more'
   # gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'debugger'
-  gem 'faker'
 end
   
+gem 'faker'
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
