@@ -1,6 +1,7 @@
 namespace :camp do
   desc "Destroy all then import sites from existing cartodb table"
   task :import_sites_from_cartodb => :environment do
+    require 'cartodb-rb-client'
     puts "Destroying all existing camps"
     Camp.destroy_all
     result = CartoDB::Connection.query "SELECT cartodb_id, name FROM sites WHERE company IS NOT null"
