@@ -26,6 +26,7 @@ namespace :populate do
     Rake::Task["populate:static"].execute
 
     # Camps
+    puts "Doing camp import from cartodb"
     Rake::Task["camp:import_sites_from_cartodb"].execute
     # Rake::Task["camp:destroy_camp_buffers"].execute
     # Rake::Task["camp:create_buffers"].execute
@@ -86,6 +87,7 @@ namespace :populate do
   
   desc "Delete Geo: locations for camps"
   task :destroy_buffered_points => :environment do
+    require 'cartodb_connect'
     CartoDB::Connection.query "DELETE FROM locations WHERE name ILIKE '%Buffered%'"
     puts "Destroyed camp buffers"
   end
