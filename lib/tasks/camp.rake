@@ -5,6 +5,13 @@ namespace :camp do
     puts "Destroying all existing camps"
     Camp.destroy_all
     debugger
+
+    # Try to figure out of deploying to heroku or not...
+    if FileTest.exists?('config/config.yml')
+      APP_CONFIG = YAML.load_file(Rails.root.join("config/config.yml"))
+      CartoDB::Init.start(YAML.load_file(Rails.root.join('config/cartodb_config.yml')))
+    end
+
     result = CartoDB::Connection.query "SELECT cartodb_id, name FROM sites WHERE company IS NOT null"
     result[:rows].each do |row|
       offset = rand(Company.count)
