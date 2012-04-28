@@ -20,6 +20,28 @@ namespace :populate do
     
   end
 
+  desc "Populate Heroku only"
+  task :heroku => :environment do
+    # Static
+    Rake::Task["populate:static"].execute
+
+    # Camps
+    Rake::Task["camp:import_sites_from_cartodb"].execute
+    # Rake::Task["camp:destroy_camp_buffers"].execute
+    # Rake::Task["camp:create_buffers"].execute
+
+    # Species
+    Rake::Task["species:clear_and_import_sa_species"].execute
+    Rake::Task["species:get_all_species_photos"].execute
+    
+    # Geo
+    # Rake::Task["populate:destroy_buffered_points"].execute
+    # Rake::Task["populate:generate_random_camp_locations"].execute
+    Rake::Task["populate:sightings"].execute
+    
+  end
+
+  
   desc "Destroy and Populate Company and User"
   task :static => :environment do
     Company.destroy_all
