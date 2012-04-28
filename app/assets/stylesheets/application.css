@@ -10,10 +10,12 @@
  *
  *= require_self
  *= require bootstrap
- *= require wax/theme/controls 
- *= require isotope
  *= require_tree .
 */     
+
+/* removed wax/theme/controls AND isotope from above
+*/
+
 
 body {
   font-family: 'Helvetica Neue', serif;
