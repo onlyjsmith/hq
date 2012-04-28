@@ -87,7 +87,7 @@ namespace :populate do
   
   desc "Delete Geo: locations for camps"
   task :destroy_buffered_points => :environment do
-    load 'cartodb_connect'
+    load "#{::Rails.root.to_s}/lib/cartodb_connect"
     CartoDB::Connection.query "DELETE FROM locations WHERE name ILIKE '%Buffered%'"
     puts "Destroyed camp buffers"
   end

@@ -1,12 +1,11 @@
 namespace :camp do
   desc "Destroy all then import sites from existing cartodb table"
   task :import_sites_from_cartodb => :environment do
-    load 'cartodb_connect'
+    load "#{::Rails.root.to_s}/lib/cartodb_connect"
     puts "Destroying all existing camps"
     Camp.destroy_all
 
     # Try to figure out if deploying to heroku or not...
-    require 'cartodb_connect'
     
     result = CartoDB::Connection.query "SELECT cartodb_id, name FROM sites WHERE company IS NOT null"
     result[:rows].each do |row|
@@ -21,7 +20,7 @@ namespace :camp do
   
   desc "Destroy buffered locations for camps in cartodb"
   task :destroy_camp_buffers => :environment do
-    load 'cartodb_connect'
+    load "#{::Rails.root.to_s}/lib/cartodb_connect"
     CartoDB::Connection.query "DELETE FROM locations WHERE camp_id IS NOT null"
     puts "Destroyed camp buffers"
   end
@@ -29,7 +28,7 @@ namespace :camp do
 
   desc "Create buffered Locations in cartodb for each Camp"
   task :create_buffers => :environment do
-    load 'cartodb_connect'
+    load "#{::Rails.root.to_s}/lib/cartodb_connect"
     100.times do 
       result = CartoDB::Connection.query "SELECT lng, lat, cartodb_id, name FROM sites"
       result[:rows].each do |row|
