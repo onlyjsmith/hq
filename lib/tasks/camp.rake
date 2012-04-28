@@ -1,7 +1,7 @@
 namespace :camp do
   desc "Destroy all then import sites from existing cartodb table"
   task :import_sites_from_cartodb => :environment do
-    require 'cartodb-rb-client'
+    load 'cartodb-rb-client'
     puts "Destroying all existing camps"
     Camp.destroy_all
 
@@ -21,7 +21,7 @@ namespace :camp do
   
   desc "Destroy buffered locations for camps in cartodb"
   task :destroy_camp_buffers => :environment do
-    require 'cartodb_connect'
+    load 'cartodb_connect'
     CartoDB::Connection.query "DELETE FROM locations WHERE camp_id IS NOT null"
     puts "Destroyed camp buffers"
   end
@@ -29,7 +29,7 @@ namespace :camp do
 
   desc "Create buffered Locations in cartodb for each Camp"
   task :create_buffers => :environment do
-    require 'cartodb_connect'
+    load 'cartodb_connect'
     100.times do 
       result = CartoDB::Connection.query "SELECT lng, lat, cartodb_id, name FROM sites"
       result[:rows].each do |row|
