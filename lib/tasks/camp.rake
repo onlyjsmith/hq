@@ -4,6 +4,7 @@ namespace :camp do
     require 'cartodb-rb-client'
     puts "Destroying all existing camps"
     Camp.destroy_all
+    debugger
     result = CartoDB::Connection.query "SELECT cartodb_id, name FROM sites WHERE company IS NOT null"
     result[:rows].each do |row|
       offset = rand(Company.count)
