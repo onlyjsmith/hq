@@ -12,6 +12,6 @@ You'll need to create a cartodb_config.yml file and place it into `config` direc
   
 ## Flickr
 
-You'll need to create a config.ym file and place it into the `config` directory:
+You'll need to create a config.yml file and place it into the `config` directory:
  FlickRaw_api_key: 'Flickr api key'
  FlickRaw_shared_secret: 'Flickr api secret'
