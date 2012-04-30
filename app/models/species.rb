@@ -26,6 +26,7 @@ class Species < ActiveRecord::Base
     unless results.blank?
       results.each do |result|
         if result.respond_to?(:url_s) && result.url_s
+#          debugger 
           photo = self.photos.create(:url => result.url_s)
           break
         end
