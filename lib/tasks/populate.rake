@@ -37,7 +37,7 @@ namespace :populate do
     
     # Geo
     # Rake::Task["populate:destroy_buffered_points"].execute
-    # Rake::Task["populate:generate_random_camp_locations"].execute
+    Rake::Task["populate:generate_random_camp_locations"].execute
     Rake::Task["populate:sightings"].execute
     
   end
