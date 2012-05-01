@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  http_basic_authenticate_with :name => "ws", :password => "ws"
   def index
   end
   
